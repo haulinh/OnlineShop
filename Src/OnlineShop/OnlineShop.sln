@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.539
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop", "OnlineShop\OnlineShop.csproj", "{62FC134F-2EC4-4C26-9FB3-CC4F11EADA94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop.Tests", "OnlineShop.Tests\OnlineShop.Tests.csproj", "{E2117561-2170-4056-A75B-EC0D610CC5DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{FC0A011F-32B1-4AFE-938A-027C3C211F7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{62FC134F-2EC4-4C26-9FB3-CC4F11EADA94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62FC134F-2EC4-4C26-9FB3-CC4F11EADA94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62FC134F-2EC4-4C26-9FB3-CC4F11EADA94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62FC134F-2EC4-4C26-9FB3-CC4F11EADA94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2117561-2170-4056-A75B-EC0D610CC5DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2117561-2170-4056-A75B-EC0D610CC5DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2117561-2170-4056-A75B-EC0D610CC5DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2117561-2170-4056-A75B-EC0D610CC5DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC0A011F-32B1-4AFE-938A-027C3C211F7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC0A011F-32B1-4AFE-938A-027C3C211F7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC0A011F-32B1-4AFE-938A-027C3C211F7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC0A011F-32B1-4AFE-938A-027C3C211F7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {47179DD1-AF3F-4238-9EA7-F9DDA663FD4A}
+	EndGlobalSection
+EndGlobal
