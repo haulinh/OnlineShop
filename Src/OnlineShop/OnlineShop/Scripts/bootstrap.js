@@ -1,9 +1,14 @@
-/*!
+﻿/*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under the MIT license
  */
-
+//custom Bootstrap Alert cho website
+function() {
+    $('AlertBox').removeClass('hide');
+    //thời gian hiển thị bootstrap là 2.5s sau đó biến mất
+    $('AlertBox').delay(2500).slideUp(500);
+}
 if (typeof jQuery === 'undefined') {
   throw new Error('Bootstrap\'s JavaScript requires jQuery')
 }

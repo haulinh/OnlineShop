@@ -28,13 +28,21 @@
         </div>
     </div>
     <div class="container body-content">
+        @* xét điều kiện để hiển thị BootstrapAlert *@
+        @if (TempData["AlertMessage"] != null)
+        {
+            <div id="" class="alert @TempData["AlertType"] hide">
+                @TempData["AlertMessage"]
+            </div>
+        }
         @RenderBody()
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
-
+    @* Thêm custom JavaSript *@
+    <script src="~/Scripts/bootstrap.js">    </script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
