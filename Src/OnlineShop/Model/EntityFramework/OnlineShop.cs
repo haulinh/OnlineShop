@@ -34,6 +34,8 @@ namespace Model.EntityFramework
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
+        public virtual DbSet<Slide> Slides { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
@@ -166,6 +168,14 @@ namespace Model.EntityFramework
 
             modelBuilder.Entity<Setting>()
                 .Property(e => e.Id)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Slide>()
+                .Property(e => e.Url)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Slide>()
+                .Property(e => e.Target)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Tag>()

@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dao\UserDao.cs" />
     <Compile Include="EntityFramework\Action.cs" />
     <Compile Include="EntityFramework\Advertisement.cs" />
     <Compile Include="EntityFramework\AdvertisementPage.cs" />
@@ -79,13 +80,13 @@
     <Compile Include="EntityFramework\ProductLink.cs" />
     <Compile Include="EntityFramework\Role.cs" />
     <Compile Include="EntityFramework\Setting.cs" />
+    <Compile Include="EntityFramework\Slide.cs" />
+    <Compile Include="EntityFramework\sysdiagram.cs" />
     <Compile Include="EntityFramework\Tag.cs" />
     <Compile Include="EntityFramework\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dao\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

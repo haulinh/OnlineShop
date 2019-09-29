@@ -1,0 +1,127 @@
+﻿@model OnlineShop.Areas.Admin.Models.LoginModel
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Meta and Title -->
+    <meta charset="utf-8">
+    <title>Đăng nhập</title>
+    <meta name="keywords" content="HTML5, Bootstrap 3, Admin Template, UI Theme" />
+    <meta name="description" content="AdminK - A Responsive HTML5 Admin UI Framework">
+    <meta name="author" content="ThemeREX">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/admin/img/favicon.png">
+    <!-- Angular material -->
+    <link rel="stylesheet" type="text/css" href="/assets/admin/skin/css/angular-material.min.css">
+    <!-- Icomoon -->
+    <link rel="stylesheet" type="text/css" href="/assets/admin/fonts/icomoon/icomoon.css">
+    <!-- AnimatedSVGIcons -->
+    <link rel="stylesheet" type="text/css" href="/assets/admin/fonts/animatedsvgicons/css/codropsicons.css">
+    <!-- CSS - allcp forms -->
+    <link rel="stylesheet" type="text/css" href="/assets/admin/allcp/forms/css/forms.css">
+    <!-- Plugins -->
+    <link rel="stylesheet" type="text/css" href="/assets/admin/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css">
+    <!-- CSS - theme -->
+    <link rel="stylesheet" type="text/css" href="/assets/admin/skin/default_skin/less/theme.css">
+</head>
+<body class="utility-page sb-l-c sb-r-c">
+    <!-- Body Wrap -->
+    <div id="main" class="animated fadeIn">
+        <!-- Main Wrapper -->
+        <section id="content_wrapper">
+            <div id="canvas-wrapper">
+                <canvas id="demo-canvas"></canvas>
+            </div>
+            <!-- Content -->
+            <section id="content">
+                <!-- Login Form -->
+                <div class="allcp-form theme-primary mw320" id="login">
+                    <div class="bg-primary mw600 text-center mb20 br3 pt15 pb10">
+                        <!-- <img src="/assets/admin/img/logo.png" alt=""/> -->
+                        <div class="logo-widget">
+                            <a class="logo-image mtn" href="index.html">
+                                <!-- <img src="/assets/admin/img/logo.png" alt="" class="img-responsive"> -->
+                            </a>
+                            <div class="logo-slogan mtn">
+                                <div>MicroOffice<span class="text-info"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel mw320">
+
+                        <div class="panel-body pn mv10">
+                            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                            {
+                                @Html.ValidationSummary(false, "", "error");
+                                <div class="section">
+                                    <label for="username" class="field prepend-icon">
+                                        @*<input type="text" name="username" id="username" class="gui-input"
+                                            placeholder="Username">*@
+                                        @Html.TextBoxFor(model => model.UserName, new { @id = "username", @class = "gui-input", @autofocus = "@autofocus", @placeholder = "Username" })
+                                        <span class="field-icon">
+                                            <i class="fa fa-user"></i>
+                                        </span>
+                                    </label>
+                                </div>
+                                <!-- /section -->
+                                <div class="section">
+                                    <label for="password" class="field prepend-icon">
+                                        @*<input type="text" name="password" id="password" class="gui-input"
+                                            placeholder="Password">*@
+                                        @Html.TextBoxFor(model => model.PassWord, new { @id = "password", @class = "gui-input", placeholder = "Password" })
+                                        <span class="field-icon">
+                                            <i class="fa fa-lock"></i>
+                                        </span>
+                                    </label>
+                                </div>
+                                <!-- /section -->
+                                <div class="section">
+                                    @*<div class="bs-component pull-left pt5">
+                                        <div class="radio-custom radio-primary mb5 lh25">
+                                            <input type="radio" id="remember" name="remember">
+                                            <label for="remember">Remember me</label>
+                                        </div>
+                                    </div>*@
+                                    <button type="submit" class="btn btn-bordered btn-primary ">Log in</button>
+                                </div>
+                            }
+
+                            <!-- /section -->
+                        </div>
+                        <!-- /Form -->
+
+                    </div>
+                    <!-- /Panel -->
+                </div>
+                <!-- /Spec Form -->
+            </section>
+            <!-- /Content -->
+        </section>
+        <!-- /Main Wrapper -->
+    </div>
+    <!-- /Body Wrap  -->
+    <!-- Scripts -->
+    <!-- jQuery -->
+    <script src="/assets/admin/js/jquery/jquery-1.12.3.min.js"></script>
+    <script src="/assets/admin/js/jquery/jquery_ui/jquery-ui.min.js"></script>
+    <!-- AnimatedSVGIcons -->
+    <script src="/assets/admin/fonts/animatedsvgicons/js/snap.svg-min.js"></script>
+    <script src="/assets/admin/fonts/animatedsvgicons/js/svgicons-config.js"></script>
+    <script src="/assets/admin/fonts/animatedsvgicons/js/svgicons.js"></script>
+    <script src="/assets/admin/fonts/animatedsvgicons/js/svgicons-init.js"></script>
+    <!-- Scroll -->
+    <script src="/assets/admin/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- HighCharts Plugin -->
+    <script src="/assets/admin/js/plugins/highcharts/highcharts.js"></script>
+    <!-- CanvasBG JS -->
+    <script src="/assets/admin/js/plugins/canvasbg/canvasbg.js"></script>
+    <!-- Theme Scripts -->
+    <script src="/assets/admin/js/utility/utility.js"></script>
+
+    <script src="/assets/admin/js/main.js"></script>
+    <script src="/assets/admin/js/demo/widgets_sidebar.js"></script>
+    <script src="/assets/admin/js/pages/dashboard_init.js"></script>
+    <!-- /Scripts -->
+</body>
+</html>
+
