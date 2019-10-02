@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model.EntityFramework;
+using Model.ViewModel;
+
 namespace Model.Dao
 {
    public class UserDao
@@ -20,11 +22,24 @@ namespace Model.Dao
             return entity.Id;
         }
 
-        public async Task<List<User>> GetListUsers()
+        public IEnumerable<UserViewModel> GetListUsers()
         {
-            var myTask = Task.Run(() => db.Users.ToList());
-            List<User> user = await myTask;
-            return user;
+
+            List<User> users = db.Users.ToList();
+            List<Role> roles = db.Roles.ToList();
+            List<UserRole> userRoles = db.UserRoles.ToList();
+            var userViewModel = from u in users
+                                join ur in userRoles
+                                on u.Id equals ur.UserId
+                                join r in roles
+                                on ur.UserRoleID equals r.Id
+                                select new UserViewModel
+                                {
+                                    user = u,
+                                    userRole = r,
+                                };
+
+            return userViewModel;
         }
 
 

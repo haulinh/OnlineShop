@@ -85,7 +85,9 @@
     <Compile Include="EntityFramework\sysdiagram.cs" />
     <Compile Include="EntityFramework\Tag.cs" />
     <Compile Include="EntityFramework\User.cs" />
+    <Compile Include="EntityFramework\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

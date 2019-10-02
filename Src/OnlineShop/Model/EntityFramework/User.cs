@@ -12,7 +12,7 @@ namespace Model.EntityFramework
         public User()
         {
             Permissions = new HashSet<Permission>();
-            Roles = new HashSet<Role>();
+            UserRoles = new HashSet<UserRole>();
         }
 
         public int Id { get; set; }
@@ -49,6 +49,6 @@ namespace Model.EntityFramework
         public virtual ICollection<Permission> Permissions { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

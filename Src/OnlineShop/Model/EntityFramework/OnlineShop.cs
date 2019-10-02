@@ -37,6 +37,7 @@ namespace Model.EntityFramework
         public virtual DbSet<Slide> Slides { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -162,9 +163,9 @@ namespace Model.EntityFramework
                 .HasForeignKey(e => e.LinkedProductId);
 
             modelBuilder.Entity<Role>()
-                .HasMany(e => e.Users)
-                .WithMany(e => e.Roles)
-                .Map(m => m.ToTable("UserRoles").MapLeftKey("RoleId").MapRightKey("UserId"));
+                .HasMany(e => e.UserRoles)
+                .WithRequired(e => e.Role)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Setting>()
                 .Property(e => e.Id)
@@ -184,6 +185,11 @@ namespace Model.EntityFramework
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.Permissions)
+                .WithRequired(e => e.User)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.UserRoles)
                 .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
         }

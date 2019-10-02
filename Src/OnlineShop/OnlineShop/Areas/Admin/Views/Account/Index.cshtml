@@ -1,4 +1,5 @@
-﻿@model List<Model.EntityFramework.User>
+﻿@model IEnumerable<Model.ViewModel.UserViewModel>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
@@ -156,7 +157,7 @@
                         <th title="Field #5">Email</th>
                         <th title="Field #6">Ngày sinh</th>
                         <th title="Field #7">Địa chỉ</th>
-                        <th title="Field #8">Ngày đăng ký</th>
+                        <th title="Field #8">Quyền</th>
                         <th title="Field #9">Last Accect</th>
                         <th title="Field #10">Status</th>
                     </tr>
@@ -165,16 +166,16 @@
                     @foreach (var item in Model)
                     {
                     <tr>
-                        <td>@item.Id</td>
-                        <td>@item.UserName</td>
-                        <td>@item.Password</td>
-                        <td>@item.FullName</td>
-                        <td>@item.Email</td>
-                        <td>@item.Birthday</td>
-                        <td>@item.Address</td>
-                        <td>@item.RegisteredDate</td>
-                        <td align="right">2</td>
-                        @if (item.Status==true)
+                        <td>@item.user.Id</td>
+                        <td>@item.user.UserName</td>
+                        <td>@item.user.Password</td>
+                        <td>@item.user.FullName</td>
+                        <td>@item.user.Email</td>
+                        <td>@item.user.Birthday</td>
+                        <td>@item.user.Address</td>
+                        <td>@item.userRole.Name</td>
+                        <td>@item.user.LastLoginDate</td>
+                        @if (item.user.Status == true)
                         {
                             <td align="right">1</td>
                         }

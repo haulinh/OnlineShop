@@ -10,10 +10,10 @@ namespace OnlineShop.Areas.Admin.Controllers
     public class AccountController : Controller
     {
         // GET: Admin/Account
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             var dao= new UserDao();
-            var listUser = await dao.GetListUsers();
+            var listUser = dao.GetListUsers();
             return View(listUser);
         }
     }
