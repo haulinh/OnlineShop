@@ -5,3 +5,7 @@ Src/OnlineShop/.vs/OnlineShop/v15/Server/sqlite3/storage.ide-wal
 Src/OnlineShop/.vs/OnlineShop/v15/Server/sqlite3/db.lock
 Src/OnlineShop/.vs/OnlineShop/v15/.suo
 Src/OnlineShop/.vs/OnlineShop/v15/.suo
+Src/OnlineShop/.vs/OnlineShop/v15/Server/sqlite3/storage.ide-shm
+Src/OnlineShop/.vs/OnlineShop/v15/Server/sqlite3/storage.ide
+Src/OnlineShop/.vs/OnlineShop/v15/Server/sqlite3/storage.ide-shm
+*.ide-shm

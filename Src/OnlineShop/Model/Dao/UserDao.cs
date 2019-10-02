@@ -19,7 +19,15 @@ namespace Model.Dao
             await db.SaveChangesAsync();
             return entity.Id;
         }
-    
+
+        public async Task<List<User>> GetListUsers()
+        {
+            var myTask = Task.Run(() => db.Users.ToList());
+            List<User> user = await myTask;
+            return user;
+        }
+
+
         public User GetByName(string userName)
         {
            // return db.Users.FirstOrDefault(x => x.UserName == userName);

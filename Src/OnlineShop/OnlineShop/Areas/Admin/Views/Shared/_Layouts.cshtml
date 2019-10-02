@@ -1886,7 +1886,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
                 <!-- end:: Header -->
                 <h1 class="kt-header">
-                    @RenderSection("header", required: true)
+                    @RenderSection("header", required: false)
                 </h1>
                 @RenderBody()
                 <!-- begin:: Footer -->
@@ -2713,7 +2713,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--ENd:: Chat-->
     <!-- begin::Global Config(global config for global JS sciprts) -->
     <script>
-    var KTAppOptions = {
+        var KTAppOptions = {
             "colors": {
                 "state": {
                     "brand": "#5d78ff",
@@ -2866,6 +2866,9 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--begin::Page Scripts(used by this page) -->
     <script src="/assets/admin/js/pages/dashboard.js" type="text/javascript"></script>
     <!--end::Page Scripts -->
+    @RenderSection("jsFooter", required: false)
+  
+
 </body>
 <!-- end::Body -->
 </html>
