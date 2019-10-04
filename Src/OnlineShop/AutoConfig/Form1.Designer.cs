@@ -67,6 +67,7 @@
             this.tb1.ReadOnly = true;
             this.tb1.Size = new System.Drawing.Size(400, 22);
             this.tb1.TabIndex = 4;
+            this.tb1.TextChanged += new System.EventHandler(this.tb1_TextChanged);
             // 
             // panel1
             // 
@@ -107,7 +108,6 @@
             this.tb2.Name = "tb2";
             this.tb2.Size = new System.Drawing.Size(776, 250);
             this.tb2.TabIndex = 6;
-
             // 
             // Form1
             // 
@@ -120,7 +120,7 @@
             this.Controls.Add(this.tb1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "Lazy Config";
             this.panel1.ResumeLayout(false);

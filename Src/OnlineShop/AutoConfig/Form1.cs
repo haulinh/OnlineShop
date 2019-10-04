@@ -109,9 +109,11 @@ namespace AutoConfig
                 this.serverName = sqlserverfullname;
                 tb1.Text = this.serverName;
             }
+
         }
         private void btn1_Click(object sender, EventArgs e)
         {
+         
             if (tb1.Text=="")
             {
                 label1.Text = "Cant get server name please enter your server name below";
@@ -127,5 +129,13 @@ namespace AutoConfig
             }    
         }
 
+        private void tb1_TextChanged(object sender, EventArgs e)
+        {
+            if (!tb1.ReadOnly)
+            {
+                this.serverName = tb1.Text;
+            }
+          
+        }
     }
 }
