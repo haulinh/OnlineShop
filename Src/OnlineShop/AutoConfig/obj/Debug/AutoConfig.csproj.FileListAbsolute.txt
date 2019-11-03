@@ -1,0 +1,10 @@
+D:\hoc\ASP.net\oad\New folder\OnlineShop\Src\OnlineShop\AutoConfig\bin\Debug\AutoConfig.exe.config
+D:\hoc\ASP.net\oad\New folder\OnlineShop\Src\OnlineShop\AutoConfig\bin\Debug\AutoConfig.exe
+D:\hoc\ASP.net\oad\New folder\OnlineShop\Src\OnlineShop\AutoConfig\bin\Debug\AutoConfig.pdb
+D:\hoc\ASP.net\oad\New folder\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.csprojAssemblyReference.cache
+D:\hoc\ASP.net\oad\New folder\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.Form1.resources
+D:\hoc\ASP.net\oad\New folder\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.Properties.Resources.resources
+D:\hoc\ASP.net\oad\New folder\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.csproj.GenerateResource.cache
+D:\hoc\ASP.net\oad\New folder\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.csproj.CoreCompileInputs.cache
+D:\hoc\ASP.net\oad\New folder\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.exe
+D:\hoc\ASP.net\oad\New folder\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.pdb

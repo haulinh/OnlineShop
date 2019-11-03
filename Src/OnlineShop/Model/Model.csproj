@@ -56,7 +56,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dao\CategoriesDao.cs" />
+    <Compile Include="Dao\PostDao.cs" />
     <Compile Include="Dao\RolesDao.cs" />
+    <Compile Include="Dao\TagDao.cs" />
     <Compile Include="Dao\UserDao.cs" />
     <Compile Include="EntityFramework\Action.cs" />
     <Compile Include="EntityFramework\Advertisement.cs" />
