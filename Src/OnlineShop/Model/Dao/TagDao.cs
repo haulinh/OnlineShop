@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Model.EntityFramework;
 using Model.ViewModel;
+using PagedList;
 
 namespace Model.Dao
 {
@@ -15,18 +16,17 @@ namespace Model.Dao
         {
             db = new OnlineShopDbContext();
         }
-        public async Task<string> Insert(Tag entity)
+        public string Insert(Tag entity)
         {
             db.Tags.Add(entity);
             await db.SaveChangesAsync();
             return entity.Id;
         }
 
-        public List<Tag> ListAll()
+        public IEnumerable<Tag> ListAllPaging(int page, int pageSize)
         {
-            return db.Tags.OrderBy(x=>x.Id).ToList();
+            IOrderedQueryable<Tag> tags = db.Tags;
+            return tags.OrderByDescending(x => x.Id).ToPagedList(page, pageSize);
         }
-
-        
     }
 }
