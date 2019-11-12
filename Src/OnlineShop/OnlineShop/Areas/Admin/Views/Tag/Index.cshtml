@@ -78,7 +78,7 @@
                             </div>
                         </div>
                         &nbsp;
-                        <a href="#" class="btn btn-brand btn-elevate btn-icon-sm">
+                        <a href="/Admin/Tag/Create" class="btn btn-brand btn-elevate btn-icon-sm">
                             <i class="la la-plus"></i>
                             New Record
                         </a>
@@ -153,6 +153,7 @@
                     <tr>
                         <th title="Field #1">ID</th>
                         <th title="Field #2">Tên Tag</th>
+                       <th>#</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -161,6 +162,9 @@
                         <tr>
                             <td>@item.Id</td>
                             <td>@item.Name</td>
+                            <td>
+                                <a href="/Admin/Tag/Edit/@item.Id" class="btn btn-success btn-circle btn-sm">Sửa </a>
+                            </td>
                         </tr>
                     }
                 </tbody>

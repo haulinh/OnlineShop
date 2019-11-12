@@ -19,7 +19,7 @@ namespace Model.Dao
         public string Insert(Tag entity)
         {
             db.Tags.Add(entity);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
             return entity.Id;
         }
 
@@ -27,6 +27,27 @@ namespace Model.Dao
         {
             IOrderedQueryable<Tag> tags = db.Tags;
             return tags.OrderByDescending(x => x.Id).ToPagedList(page, pageSize);
+        }
+
+        public Tag TagDetail(string ID)
+        {
+            return db.Tags.Find(ID);
+        }
+
+        public bool Update(Tag entity)
+        {
+            try
+            {
+                var account = db.Tags.Find(entity.Id);
+                account.Name = entity.Name;
+             
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
