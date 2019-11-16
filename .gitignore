@@ -12,3 +12,6 @@ Src/OnlineShop/.vs/OnlineShop/v15/Server/sqlite3/storage.ide-shm
 Src/OnlineShop/.vs/OnlineShop/v15/Browse.VC.db
 Src/OnlineShop/.vs/OnlineShop/v15/Browse.VC.opendb
 *.ipch
+*.ide-wal
+*.lock
+*.ide
