@@ -6,15 +6,15 @@ namespace Model.EntityFramework
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Footer")]
-    public partial class Footer
+    [Table("Language")]
+    public partial class Language
     {
-        [StringLength(50)]
+        [StringLength(2)]
         public string ID { get; set; }
 
-        [Column(TypeName = "ntext")]
-        public string Content { get; set; }
+        [StringLength(50)]
+        public string Name { get; set; }
 
-        public bool? Status { get; set; }
+        public bool IsDefault { get; set; }
     }
 }

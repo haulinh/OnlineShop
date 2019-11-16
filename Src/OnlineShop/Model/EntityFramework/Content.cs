@@ -6,8 +6,8 @@ namespace Model.EntityFramework
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Category")]
-    public partial class Category
+    [Table("Content")]
+    public partial class Content
     {
         public long ID { get; set; }
 
@@ -17,12 +17,18 @@ namespace Model.EntityFramework
         [StringLength(250)]
         public string MetaTitle { get; set; }
 
-        public long? ParentID { get; set; }
-
-        public int? DisplayOrder { get; set; }
+        [StringLength(500)]
+        public string Description { get; set; }
 
         [StringLength(250)]
-        public string SeoTitle { get; set; }
+        public string Image { get; set; }
+
+        public long? CategoryID { get; set; }
+
+        [Column(TypeName = "ntext")]
+        public string Detail { get; set; }
+
+        public int? Warranty { get; set; }
 
         public DateTime? CreatedDate { get; set; }
 
@@ -40,9 +46,14 @@ namespace Model.EntityFramework
         [StringLength(250)]
         public string MetaDescriptions { get; set; }
 
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
 
-        public bool? ShowOnHome { get; set; }
+        public DateTime? TopHot { get; set; }
+
+        public int? ViewCount { get; set; }
+
+        [StringLength(500)]
+        public string Tags { get; set; }
 
         [StringLength(2)]
         public string Language { get; set; }

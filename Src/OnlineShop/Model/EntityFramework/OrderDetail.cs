@@ -6,20 +6,21 @@ namespace Model.EntityFramework
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class ProductAttribute
+    [Table("OrderDetail")]
+    public partial class OrderDetail
     {
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ProductId { get; set; }
+        public long ProductID { get; set; }
 
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int AttributeValueId { get; set; }
+        public long OrderID { get; set; }
 
-        public virtual AttributeValue AttributeValue { get; set; }
+        public int? Quantity { get; set; }
 
-        public virtual Product Product { get; set; }
+        public decimal? Price { get; set; }
     }
 }

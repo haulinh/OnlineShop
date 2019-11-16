@@ -6,25 +6,27 @@ namespace Model.EntityFramework
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    [Table("Order")]
     public partial class Order
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Order()
-        {
-            OrderItems = new HashSet<OrderItem>();
-        }
+        public long ID { get; set; }
 
-        public int Id { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
-        public DateTime? OrdersDate { get; set; }
+        public long? CustomerID { get; set; }
 
-        public int Status { get; set; }
+        [StringLength(50)]
+        public string ShipName { get; set; }
 
-        public int? CustomerId { get; set; }
+        [StringLength(50)]
+        public string ShipMobile { get; set; }
 
-        public virtual Customer Customer { get; set; }
+        [StringLength(50)]
+        public string ShipAddress { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderItem> OrderItems { get; set; }
+        [StringLength(50)]
+        public string ShipEmail { get; set; }
+
+        public int? Status { get; set; }
     }
 }

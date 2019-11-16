@@ -20,13 +20,13 @@ namespace Model.Dao
         {
             db.Tags.Add(entity);
             db.SaveChanges();
-            return entity.Id;
+            return entity.ID;
         }
 
         public IEnumerable<Tag> ListAllPaging(int page, int pageSize)
         {
             IOrderedQueryable<Tag> tags = db.Tags;
-            return tags.OrderByDescending(x => x.Id).ToPagedList(page, pageSize);
+            return tags.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
         }
 
         public Tag TagDetail(string ID)
@@ -38,7 +38,7 @@ namespace Model.Dao
         {
             try
             {
-                var account = db.Tags.Find(entity.Id);
+                var account = db.Tags.Find(entity.ID);
                 account.Name = entity.Name;
              
                 db.SaveChanges();

@@ -6,49 +6,46 @@ namespace Model.EntityFramework
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    [Table("User")]
     public partial class User
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
-        {
-            Permissions = new HashSet<Permission>();
-            UserRoles = new HashSet<UserRole>();
-        }
+        public long ID { get; set; }
 
-        public int Id { get; set; }
-
-        [Required]
         [StringLength(50)]
         public string UserName { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [StringLength(32)]
         public string Password { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string FullName { get; set; }
+        [StringLength(20)]
+        public string GroupID { get; set; }
 
-        [Required]
+        [StringLength(50)]
+        public string Name { get; set; }
+
+        [StringLength(50)]
+        public string Address { get; set; }
+
         [StringLength(50)]
         public string Email { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? Birthday { get; set; }
+        [StringLength(50)]
+        public string Phone { get; set; }
 
-        [StringLength(250)]
-        public string Address { get; set; }
+        public int? ProvinceID { get; set; }
 
-        public DateTime? RegisteredDate { get; set; }
+        public int? DistrictID { get; set; }
 
-        public DateTime? LastLoginDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
-        public bool? Status { get; set; }
+        [StringLength(50)]
+        public string CreatedBy { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Permission> Permissions { get; set; }
+        public DateTime? ModifiedDate { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserRole> UserRoles { get; set; }
+        [StringLength(50)]
+        public string ModifiedBy { get; set; }
+
+        public bool Status { get; set; }
     }
 }

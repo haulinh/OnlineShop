@@ -15,11 +15,11 @@ namespace Model.Dao
         {
             db = new OnlineShopDbContext();
         }
-        public async Task<long> Insert(User entity)
+        public long Insert(User entity)
         {
             db.Users.Add(entity);
-            await db.SaveChangesAsync();
-            return entity.Id;
+            db.SaveChanges();
+            return entity.ID;
         }
 
         public IEnumerable<UserViewModel> GetListUsers()
@@ -27,19 +27,20 @@ namespace Model.Dao
 
             List<User> users = db.Users.ToList();
             List<Role> roles = db.Roles.ToList();
-            List<UserRole> userRoles = db.UserRoles.ToList();
+   
             var userViewModel = from u in users
-                                join ur in userRoles
-                                on u.Id equals ur.UserId
-                                join r in roles
-                                on ur.UserRoleID equals r.Id
                                 select new UserViewModel
                                 {
                                     user = u,
-                                    userRole = r,
+                                    userRole = null,
                                 };
 
             return userViewModel;
+        }
+
+        public User ViewDetail(int id)
+        {
+            return db.Users.Find(id);
         }
 
 
@@ -61,6 +62,38 @@ namespace Model.Dao
             {
                 return false;   
             }
+        }
+
+        public bool ChangeStatus(long id)
+        {
+            var user = db.Users.Find(id);
+            user.Status = !user.Status;
+            db.SaveChanges();
+            return user.Status;
+        }
+        public bool Delete(int id)
+        {
+            try
+            {
+                var user = db.Users.Find(id);
+                db.Users.Remove(user);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+
+        public bool CheckUserName(string userName)
+        {
+            return db.Users.Count(x => x.UserName == userName) > 0;
+        }
+        public bool CheckEmail(string email)
+        {
+            return db.Users.Count(x => x.Email == email) > 0;
         }
     }
 }

@@ -6,23 +6,21 @@ namespace Model.EntityFramework
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Setting
+    [Table("SystemConfig")]
+    public partial class SystemConfig
     {
         [StringLength(50)]
-        public string Id { get; set; }
+        public string ID { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string Name { get; set; }
 
-        public int? ValueNumber { get; set; }
-
-        public bool? ValueBit { get; set; }
-
         [StringLength(50)]
-        public string ValueString { get; set; }
+        public string Type { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? ValueDate { get; set; }
+        [StringLength(250)]
+        public string Value { get; set; }
+
+        public bool? Status { get; set; }
     }
 }

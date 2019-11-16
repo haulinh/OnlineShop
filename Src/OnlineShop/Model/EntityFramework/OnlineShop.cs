@@ -8,190 +8,209 @@ namespace Model.EntityFramework
     public partial class OnlineShopDbContext : DbContext
     {
         public OnlineShopDbContext()
-            : base("name=OnlineShop")
+            : base("name=OnlineShop1")
         {
         }
 
-        public virtual DbSet<Action> Actions { get; set; }
-        public virtual DbSet<AdvertisementPage> AdvertisementPages { get; set; }
-        public virtual DbSet<AdvertisementPosition> AdvertisementPositions { get; set; }
-        public virtual DbSet<Advertisement> Advertisements { get; set; }
-        public virtual DbSet<Attribute> Attributes { get; set; }
-        public virtual DbSet<AttributeValue> AttributeValues { get; set; }
-        public virtual DbSet<Catalog> Catalogs { get; set; }
+        public virtual DbSet<About> Abouts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Comment> Comments { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Contact> Contacts { get; set; }
+        public virtual DbSet<Content> Contents { get; set; }
+        public virtual DbSet<ContentTag> ContentTags { get; set; }
+        public virtual DbSet<Credential> Credentials { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Footer> Footers { get; set; }
-        public virtual DbSet<Function> Functions { get; set; }
-        public virtual DbSet<OrderItem> OrderItems { get; set; }
+        public virtual DbSet<Language> Languages { get; set; }
+        public virtual DbSet<Menu> Menus { get; set; }
+        public virtual DbSet<MenuType> MenuTypes { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<Page> Pages { get; set; }
-        public virtual DbSet<Permission> Permissions { get; set; }
-        public virtual DbSet<Post> Posts { get; set; }
-        public virtual DbSet<ProductAttribute> ProductAttributes { get; set; }
-        public virtual DbSet<ProductLink> ProductLinks { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Setting> Settings { get; set; }
         public virtual DbSet<Slide> Slides { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<SystemConfig> SystemConfigs { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
-        public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserGroup> UserGroups { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Action>()
-                .Property(e => e.Code)
+            modelBuilder.Entity<About>()
+                .Property(e => e.MetaTitle)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Action>()
-                .HasMany(e => e.Permissions)
-                .WithRequired(e => e.Action)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Action>()
-                .HasMany(e => e.Functions)
-                .WithMany(e => e.Actions)
-                .Map(m => m.ToTable("ActionInFunctions").MapLeftKey("ActionId").MapRightKey("FunctionId"));
-
-            modelBuilder.Entity<AdvertisementPage>()
-                .Property(e => e.Id)
+            modelBuilder.Entity<About>()
+                .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AdvertisementPage>()
-                .HasMany(e => e.AdvertisementPositions)
-                .WithRequired(e => e.AdvertisementPage)
-                .HasForeignKey(e => e.PageId)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<AdvertisementPage>()
-                .HasMany(e => e.Advertisements)
-                .WithRequired(e => e.AdvertisementPage)
-                .HasForeignKey(e => e.PageId)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<AdvertisementPosition>()
-                .Property(e => e.Id)
+            modelBuilder.Entity<About>()
+                .Property(e => e.ModifiedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AdvertisementPosition>()
-                .Property(e => e.PageId)
-                .IsUnicode(false);
+            modelBuilder.Entity<About>()
+                .Property(e => e.MetaDescriptions)
+                .IsFixedLength();
 
-            modelBuilder.Entity<AdvertisementPosition>()
-                .HasMany(e => e.Advertisements)
-                .WithRequired(e => e.AdvertisementPosition)
-                .HasForeignKey(e => e.PositionId)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Advertisement>()
-                .Property(e => e.PositionId)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Advertisement>()
-                .Property(e => e.PageId)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<AttributeValue>()
-                .HasMany(e => e.ProductAttributes)
-                .WithRequired(e => e.AttributeValue)
-                .HasForeignKey(e => e.ProductId)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Catalog>()
-                .Property(e => e.SeoAlias)
+            modelBuilder.Entity<Category>()
+                .Property(e => e.MetaTitle)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Category>()
-                .Property(e => e.SeoAlias)
+                .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Category>()
-                .HasMany(e => e.Categories1)
-                .WithOptional(e => e.Category1)
-                .HasForeignKey(e => e.ParentId);
+                .Property(e => e.ModifiedBy)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Category>()
-                .HasMany(e => e.Posts)
-                .WithMany(e => e.Categories)
-                .Map(m => m.ToTable("PostInCategories").MapLeftKey("CategoryId").MapRightKey("PostId"));
+                .Property(e => e.MetaDescriptions)
+                .IsFixedLength();
+
+            modelBuilder.Entity<Category>()
+                .Property(e => e.Language)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Content>()
+                .Property(e => e.MetaTitle)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Content>()
+                .Property(e => e.CreatedBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Content>()
+                .Property(e => e.ModifiedBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Content>()
+                .Property(e => e.MetaDescriptions)
+                .IsFixedLength();
+
+            modelBuilder.Entity<Content>()
+                .Property(e => e.Language)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ContentTag>()
+                .Property(e => e.TagID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Credential>()
+                .Property(e => e.UserGroupID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Credential>()
+                .Property(e => e.RoleID)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Footer>()
+                .Property(e => e.ID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Language>()
+                .Property(e => e.ID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Order>()
+                .Property(e => e.ShipMobile)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<OrderDetail>()
+                .Property(e => e.Price)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<Product>()
                 .Property(e => e.Code)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Function>()
-                .HasMany(e => e.Functions1)
-                .WithOptional(e => e.Function1)
-                .HasForeignKey(e => e.ParentId);
-
-            modelBuilder.Entity<Function>()
-                .HasMany(e => e.Permissions)
-                .WithRequired(e => e.Function)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Order>()
-                .HasMany(e => e.OrderItems)
-                .WithRequired(e => e.Order)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Post>()
-                .HasMany(e => e.Tags)
-                .WithMany(e => e.Posts)
-                .Map(m => m.ToTable("PostInTags").MapLeftKey("PostId").MapRightKey("TagId"));
+            modelBuilder.Entity<Product>()
+                .Property(e => e.MetaTitle)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Product>()
-                .HasMany(e => e.OrderItems)
-                .WithRequired(e => e.Product)
-                .WillCascadeOnDelete(false);
+                .Property(e => e.Price)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<Product>()
-                .HasMany(e => e.ProductAttributes)
-                .WithRequired(e => e.Product)
-                .WillCascadeOnDelete(false);
+                .Property(e => e.PromotionPrice)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<Product>()
-                .HasMany(e => e.ProductLinks)
-                .WithOptional(e => e.Product)
-                .HasForeignKey(e => e.ProductId);
+                .Property(e => e.CreatedBy)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Product>()
-                .HasMany(e => e.ProductLinks1)
-                .WithOptional(e => e.Product1)
-                .HasForeignKey(e => e.LinkedProductId);
+                .Property(e => e.ModifiedBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Product>()
+                .Property(e => e.MetaDescriptions)
+                .IsFixedLength();
+
+            modelBuilder.Entity<ProductCategory>()
+                .Property(e => e.MetaTitle)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ProductCategory>()
+                .Property(e => e.CreatedBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ProductCategory>()
+                .Property(e => e.ModifiedBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ProductCategory>()
+                .Property(e => e.MetaDescriptions)
+                .IsFixedLength();
 
             modelBuilder.Entity<Role>()
-                .HasMany(e => e.UserRoles)
-                .WithRequired(e => e.Role)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Setting>()
-                .Property(e => e.Id)
+                .Property(e => e.ID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Slide>()
-                .Property(e => e.Url)
+                .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Slide>()
-                .Property(e => e.Target)
+                .Property(e => e.ModifiedBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<SystemConfig>()
+                .Property(e => e.ID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<SystemConfig>()
+                .Property(e => e.Type)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Tag>()
-                .Property(e => e.Id)
+                .Property(e => e.ID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()
-                .HasMany(e => e.Permissions)
-                .WithRequired(e => e.User)
-                .WillCascadeOnDelete(false);
+                .Property(e => e.UserName)
+                .IsUnicode(false);
 
             modelBuilder.Entity<User>()
-                .HasMany(e => e.UserRoles)
-                .WithRequired(e => e.User)
-                .WillCascadeOnDelete(false);
+                .Property(e => e.Password)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.GroupID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.CreatedBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.ModifiedBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<UserGroup>()
+                .Property(e => e.ID)
+                .IsUnicode(false);
         }
     }
 }

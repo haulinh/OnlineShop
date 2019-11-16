@@ -16,16 +16,16 @@ namespace Model.Dao
             db = new OnlineShopDbContext();
         }
 
-        public int Insert(Category entity)
+        public long Insert(Category entity)
         {
             db.Categories.Add(entity);
             db.SaveChanges();
-            return entity.Id;
+            return entity.ID;
         }
 
         public List<Category> ListAll()
         {
-            return db.Categories.OrderBy(x => x.Id).ToList();
+            return db.Categories.OrderBy(x => x.ID).ToList();
         }
         public Category CategoryDetail(int ID)
         {
@@ -36,17 +36,16 @@ namespace Model.Dao
         {
             try
             {
-                var account = db.Categories.Find(entity.Id);
+                var account = db.Categories.Find(entity.ID);
                 account.Name = entity.Name;
-                account.ParentId = entity.ParentId;
-                account.ShowInHome = entity.ShowInHome;
-                account.ShowInMenu = entity.ShowInMenu;
-                account.SortOrder = entity.SortOrder;
-                account.Thumbnail = entity.Thumbnail;
-                account.SiteTitle = entity.SiteTitle;
-                account.SeoAlias = entity.SeoAlias;
+                account.Language = entity.Language;
+                account.ShowOnHome = entity.ShowOnHome;
+       
+                account.Status = entity.Status;
+                account.SeoTitle = entity.SeoTitle;
                 account.MetaKeywords = entity.MetaKeywords;
-                account.MetaDescription = entity.MetaDescription;
+                account.MetaDescriptions = entity.MetaDescriptions;
+                account.MetaTitle = entity.MetaTitle;
                 db.SaveChanges();
                 return true;
             }

@@ -15,16 +15,16 @@ namespace Model.Dao
             db = new OnlineShopDbContext();
         }
 
-        public async Task<int> Insert(Post entity)
+        public async Task<long> Insert(Content entity)
         {
-            db.Posts.Add(entity);
+            db.Contents.Add(entity);
             await db.SaveChangesAsync();
-            return entity.Id;
+            return entity.ID;
         }
 
-        public List<Post> ListAll()
+        public List<Content> ListAll()
         {
-            return db.Posts.OrderBy(x => x.Id).ToList();
+            return db.Contents.OrderBy(x => x.ID).ToList();
         }
     }
 }

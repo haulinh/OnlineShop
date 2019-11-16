@@ -6,22 +6,17 @@ namespace Model.EntityFramework
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class OrderItem
+    [Table("ContentTag")]
+    public partial class ContentTag
     {
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int OrderId { get; set; }
+        public long ContentID { get; set; }
 
         [Key]
         [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ProductId { get; set; }
-
-        public int Quanity { get; set; }
-
-        public virtual Order Order { get; set; }
-
-        public virtual Product Product { get; set; }
+        [StringLength(50)]
+        public string TagID { get; set; }
     }
 }

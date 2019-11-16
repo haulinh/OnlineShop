@@ -6,15 +6,13 @@ namespace Model.EntityFramework
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Footer")]
-    public partial class Footer
+    [Table("UserGroup")]
+    public partial class UserGroup
     {
-        [StringLength(50)]
+        [StringLength(20)]
         public string ID { get; set; }
 
-        [Column(TypeName = "ntext")]
-        public string Content { get; set; }
-
-        public bool? Status { get; set; }
+        [StringLength(50)]
+        public string Name { get; set; }
     }
 }

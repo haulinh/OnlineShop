@@ -6,21 +6,23 @@ namespace Model.EntityFramework
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Slide")]
-    public partial class Slide
+    [Table("ProductCategory")]
+    public partial class ProductCategory
     {
-        public int ID { get; set; }
+        public long ID { get; set; }
 
         [StringLength(250)]
-        public string Image { get; set; }
+        public string Name { get; set; }
+
+        [StringLength(250)]
+        public string MetaTitle { get; set; }
+
+        public long? ParentID { get; set; }
 
         public int? DisplayOrder { get; set; }
 
         [StringLength(250)]
-        public string Link { get; set; }
-
-        [StringLength(50)]
-        public string Description { get; set; }
+        public string SeoTitle { get; set; }
 
         public DateTime? CreatedDate { get; set; }
 
@@ -32,6 +34,14 @@ namespace Model.EntityFramework
         [StringLength(50)]
         public string ModifiedBy { get; set; }
 
+        [StringLength(250)]
+        public string MetaKeywords { get; set; }
+
+        [StringLength(250)]
+        public string MetaDescriptions { get; set; }
+
         public bool? Status { get; set; }
+
+        public bool? ShowOnHome { get; set; }
     }
 }

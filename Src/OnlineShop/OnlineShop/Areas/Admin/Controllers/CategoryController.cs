@@ -15,8 +15,8 @@ namespace OnlineShop.Areas.Admin.Controllers
         {
             var dao = new CategoriesDao();
             SetViewBag();
-            var listTag = dao.ListAll();
-            return View(listTag);
+          //  var listTag = dao.ListAll();
+            return View();
         }
 
         [ValidateInput(false)]
@@ -37,7 +37,7 @@ namespace OnlineShop.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
 
-                int id = dao.Insert(tag);
+                long id = dao.Insert(tag);
                 if (id > 0)
                 {
 
