@@ -21,7 +21,31 @@ namespace Model.Dao
             db.SaveChanges();
             return entity.ID;
         }
+        public bool Update(User entity)
+        {
+            try
+            {
+                var user = db.Users.Find(entity.ID);
+                user.Name = entity.Name;
+                if (!string.IsNullOrEmpty(entity.Password))
+                {
+                    user.Password = entity.Password;
+                }
+                user.Address = entity.Address;
+                user.Email = entity.Email;
+                user.Phone = entity.Phone;
+                user.ModifiedBy = entity.ModifiedBy;
+                user.ModifiedDate = DateTime.Now;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //logging
+                return false;
+            }
 
+        }
         public IEnumerable<UserViewModel> GetListUsers()
         {
 
@@ -38,7 +62,7 @@ namespace Model.Dao
             return userViewModel;
         }
 
-        public User ViewDetail(int id)
+        public User ViewDetail(long id)
         {
             return db.Users.Find(id);
         }

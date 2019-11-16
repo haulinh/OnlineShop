@@ -13,5 +13,8 @@ namespace OnlineShop.Areas.Admin.Controllers
         {
             return View();
         }
+
+        //Set Bootstrap Alert cho website
+      
     }
 }

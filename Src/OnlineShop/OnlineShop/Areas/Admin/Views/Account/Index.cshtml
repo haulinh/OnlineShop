@@ -32,63 +32,16 @@
             </div>
             <div class="kt-portlet__head-toolbar">
                 <div class="kt-portlet__head-wrapper">
-                  
-                    
+
+
                     <div class="dropdown dropdown-inline">
-                        <button type="button" class="btn btn-brand btn-icon-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @*<button type="button" class="btn btn-brand btn-icon-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="flaticon2-plus"></i> Add New
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <ul class="kt-nav">
-                                <li class="kt-nav__section kt-nav__section--first">
-                                    <span class="kt-nav__section-text">Choose an action:</span>
-                                </li>
-                                <li class="kt-nav__item">
-                                    <a href="#" class="kt-nav__link">
-                                        <i class="kt-nav__link-icon flaticon2-open-text-book"></i>
-                                        <span class="kt-nav__link-text">Reservations</span>
-                                    </a>
-                                </li>
-                                <li class="kt-nav__item">
-                                    <a href="#" class="kt-nav__link">
-                                        <i class="kt-nav__link-icon flaticon2-calendar-4"></i>
-                                        <span class="kt-nav__link-text">Appointments</span>
-                                    </a>
-                                </li>
-                                <li class="kt-nav__item">
-                                    <a href="#" class="kt-nav__link">
-                                        <i class="kt-nav__link-icon flaticon2-bell-alarm-symbol"></i>
-                                        <span class="kt-nav__link-text">Reminders</span>
-                                    </a>
-                                </li>
-                                <li class="kt-nav__item">
-                                    <a href="#" class="kt-nav__link">
-                                        <i class="kt-nav__link-icon flaticon2-contract"></i>
-                                        <span class="kt-nav__link-text">Announcements</span>
-                                    </a>
-                                </li>
-                                <li class="kt-nav__item">
-                                    <a href="#" class="kt-nav__link">
-                                        <i class="kt-nav__link-icon flaticon2-shopping-cart-1"></i>
-                                        <span class="kt-nav__link-text">Orders</span>
-                                    </a>
-                                </li>
-                                <li class="kt-nav__separator kt-nav__separator--fit">
-                                </li>
-                                <li class="kt-nav__item">
-                                    <a href="#" class="kt-nav__link">
-                                        <i class="kt-nav__link-icon flaticon2-rocket-1"></i>
-                                        <span class="kt-nav__link-text">Projects</span>
-                                    </a>
-                                </li>
-                                <li class="kt-nav__item">
-                                    <a href="#" class="kt-nav__link">
-                                        <i class="kt-nav__link-icon flaticon2-chat-1"></i>
-                                        <span class="kt-nav__link-text">User Feedbacks</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        </button>*@
+
+                        @Html.ActionLink("Thêm tài khoản", "Create", "Account", null, new { @class = "flaticon2-plus btn btn-brand btn-icon-sm" })
+
+
                     </div>
                 </div>
             </div>
@@ -98,7 +51,7 @@
         <div class="kt-portlet__body">
 
             <!--begin: Search Form -->
-            <form class="kt-form kt-form--fit kt-margin-b-20">
+            <form class="kt-form kt-form--fit kt-margin-b-20" >
                 <div class="row kt-margin-b-20">
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Tên đăng nhập:</label>
@@ -118,9 +71,9 @@
                         <input type="email" class="form-control kt-input" placeholder="E.g: 37000-300" data-col-index="1">
                     </div>
                     @*<div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-            <label>Agent:</label>
-            <input type="text" class="form-control kt-input" placeholder="Agent ID or name" data-col-index="4">
-        </div>*@
+                            <label>Agent:</label>
+                            <input type="text" class="form-control kt-input" placeholder="Agent ID or name" data-col-index="4">
+                        </div>*@
                 </div>
                 <div class="row kt-margin-b-20">
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
@@ -178,6 +131,7 @@
                         <th>Email</th>
                         <th>Status</th>
                         <th>Type</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -192,6 +146,20 @@
                             <td>@item.user.Email</td>
                             <td>3</td>
                             <td>2</td>
+                            <td>
+                                <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Xem chi tiết">
+                                    <i class="la la-eye"></i>
+                                </a>
+
+
+                                <a  href="/Admin/Account/Edit/@item.user.ID" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Chỉnh sửa">
+                                    <i class="la la-edit"></i>
+                                </a>
+                            
+                                <a title="Kích hoạt" class="btn btn-sm btn-clean btn-icon btn-icon-md">
+                                    <i class="la la-check"></i>
+                                </a>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -205,6 +173,7 @@
                         <th>Email</th>
                         <th>Status</th>
                         <th>Type</th>
+                        <th>Action</th>
                     </tr>
                 </tfoot>
             </table>
@@ -212,7 +181,7 @@
             <!--end: Datatable -->
         </div>
     </div>
-  
+
 </div>
 
 <!-- end:: Content -->
