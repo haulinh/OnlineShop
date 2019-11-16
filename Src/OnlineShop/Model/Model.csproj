@@ -79,6 +79,7 @@
     <Compile Include="EntityFramework\ProductCategory.cs" />
     <Compile Include="EntityFramework\Role.cs" />
     <Compile Include="EntityFramework\Slide.cs" />
+    <Compile Include="EntityFramework\sysdiagram.cs" />
     <Compile Include="EntityFramework\SystemConfig.cs" />
     <Compile Include="EntityFramework\Tag.cs" />
     <Compile Include="EntityFramework\User.cs" />
