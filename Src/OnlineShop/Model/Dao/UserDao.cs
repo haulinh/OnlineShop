@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoConfig;
 using Model.EntityFramework;
 using Model.ViewModel;
 
@@ -76,9 +77,9 @@ namespace Model.Dao
                 userViewModel = userViewModel.Where(x => x.user.Email.Contains(email)).OrderByDescending(x => x.user.CreatedDate);
             }
 
-            if (status!=null)
+            if (status != null)
             {
-                userViewModel = userViewModel.Where(x => x.user.Status==status).OrderByDescending(x => x.user.CreatedDate);
+                userViewModel = userViewModel.Where(x => x.user.Status == status).OrderByDescending(x => x.user.CreatedDate);
             }
 
 
@@ -96,18 +97,56 @@ namespace Model.Dao
             // return db.Users.FirstOrDefault(x => x.UserName == userName);
             return db.Users.SingleOrDefault(x => x.UserName == userName);
         }
-        public bool Login(string userName, string passWord)
+        public int Login(string userName, string passWord, bool isAdminLogin = false)
         {
             // careful for sql injection with this code below
-            var result = db.Users.Count(x => x.UserName == userName
-             && x.Password == passWord);
-            if (result > 0)
+            var result = db.Users.SingleOrDefault(x => x.UserName == userName);
+            if (result == null)
             {
-                return true;
+                return 0;
             }
             else
             {
-                return false;
+                if (isAdminLogin == true)
+                {
+                    if (result.GroupID == Define.ADMIN_GROUP
+                        || result.GroupID == Define.MOD_GROUP)
+                    {
+                        if (result.Status == false)
+                        {
+                            return -1;
+                        }
+                        else
+                        {
+                            if (result.Password == passWord)
+                            {
+                                return 1;
+
+                            }
+                            else
+                            {
+                                return -2;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        return -3;
+                    }
+                }
+                else
+                {
+
+                    if (result.Password == passWord)
+                    {
+                        return 1;
+
+                    }
+                    else
+                    {
+                        return -2;
+                    }
+                }
             }
         }
 

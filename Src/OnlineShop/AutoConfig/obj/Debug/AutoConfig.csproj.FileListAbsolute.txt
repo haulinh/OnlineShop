@@ -8,3 +8,12 @@ D:\hoc\ASP.net\oad\New folder\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\Aut
 D:\hoc\ASP.net\oad\New folder\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.csproj.CoreCompileInputs.cache
 D:\hoc\ASP.net\oad\New folder\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.exe
 D:\hoc\ASP.net\oad\New folder\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.pdb
+C:\Users\buiqu\OneDrive\Documents\GitHub\OnlineShop\Src\OnlineShop\AutoConfig\bin\Debug\AutoConfig.exe.config
+C:\Users\buiqu\OneDrive\Documents\GitHub\OnlineShop\Src\OnlineShop\AutoConfig\bin\Debug\AutoConfig.exe
+C:\Users\buiqu\OneDrive\Documents\GitHub\OnlineShop\Src\OnlineShop\AutoConfig\bin\Debug\AutoConfig.pdb
+C:\Users\buiqu\OneDrive\Documents\GitHub\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.csprojAssemblyReference.cache
+C:\Users\buiqu\OneDrive\Documents\GitHub\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.Form1.resources
+C:\Users\buiqu\OneDrive\Documents\GitHub\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.Properties.Resources.resources
+C:\Users\buiqu\OneDrive\Documents\GitHub\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.csproj.GenerateResource.cache
+C:\Users\buiqu\OneDrive\Documents\GitHub\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.exe
+C:\Users\buiqu\OneDrive\Documents\GitHub\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.pdb

@@ -21,19 +21,35 @@ namespace OnlineShop.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var dao = new UserDao();
-                var result = dao.Login(model.UserName, model.PassWord);
-                if (result)
+                var result = dao.Login(model.UserName, model.PassWord, true);
+                if (result == 1)
                 {
                     var user = dao.GetByName(model.UserName);
                     var userSesstion = new UserLogin();
                     userSesstion.UserName = user.UserName;
                     userSesstion.UserID = user.ID;
                     Session.Add(CommonConstants.USER_SESSTION, userSesstion);
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction("Index", "Home");
+                }
+                else if (result==0)
+                {
+                    ModelState.AddModelError("", "Tài khoản không tồn tại");
+                }
+                else if(result==-1)
+                {
+                    ModelState.AddModelError("", "Tài khoản đang bị khóa");
+                }
+                else if (result == -2)
+                {
+                    ModelState.AddModelError("", "Mật khẩu không đúng");
+                }
+                else if (result == -3)
+                {
+                    ModelState.AddModelError("", "Tài khoản của bạn không có quyền đăng nhập");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Đăng nhập không đúng");
+                    ModelState.AddModelError("", "Đăng nhập lỗi");
                 }
             }
             return View("Index");
