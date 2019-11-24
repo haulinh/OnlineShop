@@ -311,6 +311,7 @@
     <Content Include="assets\admin\css\style.bundle.min.css" />
     <Content Include="assets\admin\css\style.bundle.rtl.css" />
     <Content Include="assets\admin\css\style.bundle.rtl.min.css" />
+    <Content Include="assets\admin\js\Controllers\accounts.js" />
     <Content Include="assets\admin\js\pages\builder.js" />
     <Content Include="assets\admin\js\pages\builder.min.js" />
     <Content Include="assets\admin\js\pages\components\base\dropdown.js" />
@@ -1624,6 +1625,7 @@
     <Content Include="Areas\Admin\Views\Shared\_SideBar.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ViewDetail.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

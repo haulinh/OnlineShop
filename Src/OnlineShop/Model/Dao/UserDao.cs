@@ -8,7 +8,7 @@ using Model.ViewModel;
 
 namespace Model.Dao
 {
-   public class UserDao
+    public class UserDao
     {
         OnlineShopDbContext db = null;
         public UserDao()
@@ -46,18 +46,41 @@ namespace Model.Dao
             }
 
         }
-        public IEnumerable<UserViewModel> GetListUsers()
+        public IEnumerable<UserViewModel> GetListUsers(string userName = null, string name = null, string sdt = null, string email = null, bool? status = null)
         {
 
             List<User> users = db.Users.ToList();
             List<Role> roles = db.Roles.ToList();
-   
             var userViewModel = from u in users
                                 select new UserViewModel
                                 {
                                     user = u,
                                     userRole = null,
                                 };
+            if (!string.IsNullOrEmpty(userName))
+            {
+                userViewModel = userViewModel.Where(x => x.user.UserName.Contains(userName)).OrderByDescending(x => x.user.CreatedDate);
+            }
+            if (!string.IsNullOrEmpty(name))
+            {
+                userViewModel = userViewModel.Where(x => x.user.Name.Contains(name)).OrderByDescending(x => x.user.CreatedDate);
+            }
+
+            if (!string.IsNullOrEmpty(sdt))
+            {
+                userViewModel = userViewModel.Where(x => x.user.Phone.Contains(sdt)).OrderByDescending(x => x.user.CreatedDate);
+            }
+
+            if (!string.IsNullOrEmpty(email))
+            {
+                userViewModel = userViewModel.Where(x => x.user.Email.Contains(email)).OrderByDescending(x => x.user.CreatedDate);
+            }
+
+            if (status!=null)
+            {
+                userViewModel = userViewModel.Where(x => x.user.Status==status).OrderByDescending(x => x.user.CreatedDate);
+            }
+
 
             return userViewModel;
         }
@@ -70,21 +93,21 @@ namespace Model.Dao
 
         public User GetByName(string userName)
         {
-           // return db.Users.FirstOrDefault(x => x.UserName == userName);
+            // return db.Users.FirstOrDefault(x => x.UserName == userName);
             return db.Users.SingleOrDefault(x => x.UserName == userName);
         }
-        public bool Login(string userName,string passWord)
+        public bool Login(string userName, string passWord)
         {
             // careful for sql injection with this code below
             var result = db.Users.Count(x => x.UserName == userName
              && x.Password == passWord);
-            if (result>0)
+            if (result > 0)
             {
                 return true;
             }
             else
             {
-                return false;   
+                return false;
             }
         }
 

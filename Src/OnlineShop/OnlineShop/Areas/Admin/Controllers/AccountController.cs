@@ -10,13 +10,29 @@ namespace OnlineShop.Areas.Admin.Controllers
 {
     public class AccountController : Controller
     {
+
         // GET: Admin/Account
-        public ActionResult Index()
+        public ActionResult Index(string userName, string name, string sdt, string email, bool? status)
         {
-            var dao= new UserDao();
-            var listUser = dao.GetListUsers();
+
+            SetStatusViewBag();
+            var dao = new UserDao();
+            var listUser = dao.GetListUsers(userName, name, sdt, email, status);
             return View(listUser);
         }
+
+
+        void SetStatusViewBag()
+        {
+                            ViewBag.Status = new SelectList(new[]
+                    {
+                                    new { ID="true", Status="Đã kích hoạt" },
+                                    new { ID="false", Status="Khóa" },
+                                }, "ID", "Status", true);
+
+        }
+
+
 
 
 
@@ -24,33 +40,48 @@ namespace OnlineShop.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-  
+
             return View();
         }
 
+        [HttpGet]
+        public ActionResult ViewDetail(long id)
+        {
 
- 
+            var account = new UserDao().ViewDetail(id);
+            return View(account);
+        }
+
         [HttpPost]
         public ActionResult Create(User user)
         {
+            SetStatusViewBag();
             var dao = new UserDao();
-            var result = dao.GetListUsers();
+
             if (ModelState.IsValid)
             {
-
-                long id = dao.Insert(user);
-                if (id > 0)
+                if (!dao.CheckUserName(user.UserName))
                 {
+                    long id = dao.Insert(user);
+                    if (id > 0)
+                    {
 
-                    // chuyển hướng trang về admin/User/index
-                 
-                    return RedirectToAction("Index", "Account", result);
+                        // chuyển hướng trang về admin/User/index
+                        var result = dao.GetListUsers();
+                        return RedirectToAction("Index", "Account", result);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Thêm Tag không thành công");
+                    }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Thêm Tag không thành công");
+                    ModelState.AddModelError("", "Tài khoản bị trùng");
                 }
+
             }
+
             return View("Create");
         }
 
@@ -67,6 +98,7 @@ namespace OnlineShop.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(User user)
         {
+            SetStatusViewBag();
             var dao = new UserDao();
             var model = dao.GetListUsers();
             if (ModelState.IsValid)
@@ -87,6 +119,16 @@ namespace OnlineShop.Areas.Admin.Controllers
         }
 
 
+
+        [HttpPost]
+        public JsonResult ChangeStatus(long id)
+        {
+            var result = new UserDao().ChangeStatus(id);
+            return Json(new
+            {
+                status = result
+            });
+        }
 
 
     }

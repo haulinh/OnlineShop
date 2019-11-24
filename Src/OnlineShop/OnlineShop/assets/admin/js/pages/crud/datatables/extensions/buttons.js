@@ -1,4 +1,4 @@
-"use strict";
+﻿"use strict";
 var KTDatatablesExtensionButtons = function() {
 
 	var initTable1 = function() {
@@ -23,8 +23,8 @@ var KTDatatablesExtensionButtons = function() {
 					targets: 6,
 					render: function(data, type, full, meta) {
 						var status = {
-							1: {'title': 'Pending', 'class': 'kt-badge--brand'},
-							2: {'title': 'Delivered', 'class': ' kt-badge--danger'},
+							1: {'title': 'Kích hoạt', 'class': 'kt-badge--brand'},
+							2: {'title': 'Đã khóa', 'class': ' kt-badge--danger'},
 							3: {'title': 'Canceled', 'class': ' kt-badge--primary'},
 							4: {'title': 'Success', 'class': ' kt-badge--success'},
 							5: {'title': 'Info', 'class': ' kt-badge--info'},
