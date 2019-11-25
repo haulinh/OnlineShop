@@ -29,8 +29,17 @@ namespace Model.EntityFramework
         [Column(TypeName = "xml")]
         public string MoreImages { get; set; }
 
+
+        [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
+
+        [DataType(DataType.Currency)]
+
         public decimal? Price { get; set; }
 
+
+        [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
+
+        [DataType(DataType.Currency)]
         public decimal? PromotionPrice { get; set; }
 
         public bool? IncludedVAT { get; set; }

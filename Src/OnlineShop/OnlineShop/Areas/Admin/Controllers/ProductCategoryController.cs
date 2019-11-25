@@ -18,7 +18,7 @@ namespace OnlineShop.Areas.Admin.Controllers
         {
             List<TreeViewNode> nodes = new List<TreeViewNode>();
             var dao = new ProductCategoryDao();
-            var entities = dao.GetListProductCategory(parentName);
+            var entities = dao.GetListProductCategory(parentName,childName);
 
 
             //Loop and add the Parent Nodes.

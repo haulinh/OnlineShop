@@ -20,6 +20,7 @@ namespace Model.Dao
         public List<ProductCategory> GetListProductCategory(string parent=null,string child=null)
         {
             var listCate = db.ProductCategories.ToList();
+            var temp = listCate;
             if (!string.IsNullOrEmpty(parent))
             {
                 var parrentEntity = listCate.FirstOrDefault(x => x.Name.Contains(parent));
@@ -32,15 +33,26 @@ namespace Model.Dao
                
 
             }
+
+            //dump code
             if (!string.IsNullOrEmpty(child))
             {
-                listCate = listCate.Where(x =>x.ParentID==null && x.Name.Contains(child)).ToList();
+               
+                listCate = listCate.Where(x =>x.ParentID!=null && x.Name.Contains(child)).ToList();
+              
                 foreach (var item in listCate)
                 {
-                    var parrentEntities = listCate.Where(x => x.ID ==item.ParentID);
+                    var parrentEntities = temp.FirstOrDefault(x => x.ID ==item.ParentID);
 
+                    if (parrentEntities!=null)
+                    {
+                        listCate.Add(parrentEntities);
+                        break;
+                    }  
                 }
-              
+             
+               
+
             }
 
                 return listCate.ToList();
