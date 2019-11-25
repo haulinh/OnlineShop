@@ -47,16 +47,19 @@ namespace Model.Dao
             }
 
         }
-        public IEnumerable<UserViewModel> GetListUsers(string userName = null, string name = null, string sdt = null, string email = null, bool? status = null)
+        public IEnumerable<UserViewModel> GetListUsers(string userName = null, string name = null, string sdt = null, string email = null, bool? status = null,string userGroup=null)
         {
 
             List<User> users = db.Users.ToList();
-            List<Role> roles = db.Roles.ToList();
+            List<UserGroup> groups = db.UserGroups.ToList();
             var userViewModel = from u in users
+                                join g in groups
+                                on u.GroupID equals g.ID into sr
+                                from x in sr.DefaultIfEmpty()
                                 select new UserViewModel
                                 {
                                     user = u,
-                                    userRole = null,
+                                    userGroup = x,
                                 };
             if (!string.IsNullOrEmpty(userName))
             {
@@ -82,7 +85,10 @@ namespace Model.Dao
                 userViewModel = userViewModel.Where(x => x.user.Status == status).OrderByDescending(x => x.user.CreatedDate);
             }
 
-
+            if (!string.IsNullOrEmpty(userGroup))
+            { 
+                userViewModel = userViewModel.Where(x =>x.userGroup!=null && x.userGroup.ID.Contains(userGroup)).OrderByDescending(x => x.user.CreatedDate);
+            }
             return userViewModel;
         }
 
@@ -100,7 +106,7 @@ namespace Model.Dao
         public int Login(string userName, string passWord, bool isAdminLogin = false)
         {
             // careful for sql injection with this code below
-            var result = db.Users.SingleOrDefault(x => x.UserName == userName);
+            var result = db.Users.FirstOrDefault(x => x.UserName == userName);
             if (result == null)
             {
                 return 0;
@@ -181,5 +187,8 @@ namespace Model.Dao
         {
             return db.Users.Count(x => x.Email == email) > 0;
         }
+
+
+       
     }
 }

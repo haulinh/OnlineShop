@@ -265,3 +265,4 @@ C:\Users\buiqu\OneDrive\Documents\GitHub\OnlineShop\Src\OnlineShop\OnlineShop\ob
 C:\Users\buiqu\OneDrive\Documents\GitHub\OnlineShop\Src\OnlineShop\OnlineShop\bin\AutoConfig.exe
 C:\Users\buiqu\OneDrive\Documents\GitHub\OnlineShop\Src\OnlineShop\OnlineShop\bin\AutoConfig.pdb
 C:\Users\buiqu\OneDrive\Documents\GitHub\OnlineShop\Src\OnlineShop\OnlineShop\bin\AutoConfig.exe.config
+D:\Git\OnlineShop\Src\OnlineShop\OnlineShop\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll

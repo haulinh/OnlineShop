@@ -112,7 +112,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "kt-form" }))
                             {
 
-                                @Html.ValidationSummary(false, "", "error");
+                                @Html.ValidationSummary(false, "", new { @class = "text-danger" });
                                 <div class="input-group">
                                     @Html.TextBoxFor(model => model.UserName, new { @id = "username", @class = "form-control", @autofocus = "@autofocus", @placeholder = "Username" })
                                 </div>

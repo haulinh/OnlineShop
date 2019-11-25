@@ -10,6 +10,6 @@ namespace Model.ViewModel
     public class UserViewModel
     {
         public User user { set; get; }
-        public Role userRole { set; get; }
+        public UserGroup userGroup { set; get; }
     }
 }

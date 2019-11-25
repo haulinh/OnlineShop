@@ -98,9 +98,10 @@
                     </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Type:</label>
-                        <select class="form-control kt-input" data-col-index="7">
+                        @Html.DropDownList("userGroup", new SelectList(ViewBag.UserGroups, "ID", "Name  "), "--Chọn nhóm --", htmlAttributes: new { @class = "form-control kt-input" })
+                        @*<select class="form-control kt-input" data-col-index="7">
                             <option value="">Select</option>
-                        </select>
+                        </select>*@
                     </div>
                 </div>
                 <div class="kt-separator kt-separator--md kt-separator--dashed"></div>
@@ -117,8 +118,8 @@
                             <i class="la la-close"></i>
                             <span>Reset</span>
                         </a>
-                            
-                   
+
+
                     </div>
                 </div>
             }
@@ -141,45 +142,50 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        <td>1</td>
-                        <td>@item.user.UserName</td>
-                        <td>@item.user.Password </td>
-                        <td>@item.user.Name</td>
-                        <td>@item.user.Phone</td>
-                        <td>@item.user.Email</td>
+                        <tr>
+                            <td>1</td>
+                            <td>@item.user.UserName</td>
+                            <td>@item.user.Password </td>
+                            <td>@item.user.Name</td>
+                            <td>@item.user.Phone</td>
+                            <td>@item.user.Email</td>
 
-                        @if (item.user.Status)
-                        {
+                            @if (item.user.Status)
+                            {
+                                <td>
+                                    <span class="kt-badge kt-badge--brand kt-badge--inline kt-badge--pill">Kích hoạt</span>
+
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill">Đã khóa</span>
+
+                                </td>
+                            }
+
                             <td>
-                                <span class="kt-badge kt-badge--brand kt-badge--inline kt-badge--pill">Kích hoạt</span>
-
+                                @if (item.userGroup != null)
+                                {
+                                    @item.userGroup.Name
+                                }
                             </td>
-                        }
-                        else
-                        {
                             <td>
-                                <span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill">Đã khóa</span>
+                                <a href="/Admin/Account/ViewDetail/@item.user.ID" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Xem chi tiết">
+                                    <i class="la la-eye"></i>
+                                </a>
 
+
+                                <a href="/Admin/Account/Edit/@item.user.ID" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Chỉnh sửa">
+                                    <i class="la la-edit"></i>
+                                </a>
+
+                                <a title="Kích hoạt" data-id="@item.user.ID" class="btn-active btn btn-sm btn-clean btn-icon btn-icon-md">
+                                    <i class="la la-check"></i>
+                                </a>
                             </td>
-                        }
-
-                        <td>2</td>
-                        <td>
-                            <a href="/Admin/Account/ViewDetail/@item.user.ID" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Xem chi tiết">
-                                <i class="la la-eye"></i>
-                            </a>
-
-
-                            <a href="/Admin/Account/Edit/@item.user.ID" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Chỉnh sửa">
-                                <i class="la la-edit"></i>
-                            </a>
-
-                            <a   title="Kích hoạt" data-id="@item.user.ID" class="btn-active btn btn-sm btn-clean btn-icon btn-icon-md">
-                                <i class="la la-check"></i>
-                            </a>
-                        </td>
-                    </tr>
+                        </tr>
                     }
                 </tbody>
                 <tfoot>

@@ -12,12 +12,12 @@ namespace OnlineShop.Areas.Admin.Controllers
     {
 
         // GET: Admin/Account
-        public ActionResult Index(string userName, string name, string sdt, string email, bool? status)
+        public ActionResult Index(string userName, string name, string sdt, string email,string userGroup, bool? status)
         {
-
+            SetUserGroupViewBag();
             SetStatusViewBag();
             var dao = new UserDao();
-            var listUser = dao.GetListUsers(userName, name, sdt, email, status);
+            var listUser = dao.GetListUsers(userName, name, sdt, email, status, userGroup);
             return View(listUser);
         }
 
@@ -32,6 +32,11 @@ namespace OnlineShop.Areas.Admin.Controllers
 
         }
 
+        void SetUserGroupViewBag()
+        {
+            var dao = new UserGroupDao();
+            ViewBag.UserGroups = dao.GetUserGroups().ToList();
+        }
 
 
 
@@ -72,7 +77,7 @@ namespace OnlineShop.Areas.Admin.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Thêm Tag không thành công");
+                        ModelState.AddModelError("", "Thêm User không thành công");
                     }
                 }
                 else
