@@ -6,12 +6,15 @@ using System.Web.Mvc;
 using Model.Dao;
 using Model.EntityFramework;
 using System.Threading.Tasks;
+using OnlineShop.Common;
+
 namespace OnlineShop.Areas.Admin.Controllers
 {
     public class AccountController : Controller
     {
 
         // GET: Admin/Account
+        [HaveCredential(RoleID ="VIEW_USER")]
         public ActionResult Index(string userName, string name, string sdt, string email,string userGroup, bool? status)
         {
             SetUserGroupViewBag();
@@ -21,7 +24,7 @@ namespace OnlineShop.Areas.Admin.Controllers
             return View(listUser);
         }
 
-
+        [HaveCredential(RoleID = "EDIT_USER")]
         void SetStatusViewBag()
         {
                             ViewBag.Status = new SelectList(new[]
@@ -31,7 +34,7 @@ namespace OnlineShop.Areas.Admin.Controllers
                                 }, "ID", "Status", true);
 
         }
-
+        [HaveCredential(RoleID = "EDIT_USER")]
         void SetUserGroupViewBag()
         {
             var dao = new UserGroupDao();
@@ -40,9 +43,17 @@ namespace OnlineShop.Areas.Admin.Controllers
 
 
 
+        [HttpGet]
+        [HaveCredential(RoleID = "DEL_USER")]
+        public ActionResult Delete(int id)
+        {
+            new UserDao().Delete(id);
+            return RedirectToAction("index");
+        }
 
 
         [HttpGet]
+        [HaveCredential(RoleID = "ADD_USER")]
         public ActionResult Create()
         {
 
@@ -50,6 +61,7 @@ namespace OnlineShop.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [HaveCredential(RoleID = "VIEW_USER")]
         public ActionResult ViewDetail(long id)
         {
 
@@ -58,6 +70,7 @@ namespace OnlineShop.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [HaveCredential(RoleID = "ADD_USER")]
         public ActionResult Create(User user)
         {
             SetStatusViewBag();
@@ -93,6 +106,7 @@ namespace OnlineShop.Areas.Admin.Controllers
 
 
         [HttpGet]
+        [HaveCredential(RoleID = "EDIT_USER")]
         public ActionResult Edit(long id)
         {
             var account = new UserDao().ViewDetail(id);
@@ -101,6 +115,7 @@ namespace OnlineShop.Areas.Admin.Controllers
 
 
         [HttpPost]
+        [HaveCredential(RoleID = "EDIT_USER")]
         public ActionResult Edit(User user)
         {
             SetStatusViewBag();

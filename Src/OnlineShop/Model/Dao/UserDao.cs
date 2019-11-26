@@ -47,7 +47,7 @@ namespace Model.Dao
             }
 
         }
-        public IEnumerable<UserViewModel> GetListUsers(string userName = null, string name = null, string sdt = null, string email = null, bool? status = null,string userGroup=null)
+        public IEnumerable<UserViewModel> GetListUsers(string userName = null, string name = null, string sdt = null, string email = null, bool? status = null, string userGroup = null)
         {
 
             List<User> users = db.Users.ToList();
@@ -86,8 +86,8 @@ namespace Model.Dao
             }
 
             if (!string.IsNullOrEmpty(userGroup))
-            { 
-                userViewModel = userViewModel.Where(x =>x.userGroup!=null && x.userGroup.ID.Contains(userGroup)).OrderByDescending(x => x.user.CreatedDate);
+            {
+                userViewModel = userViewModel.Where(x => x.userGroup != null && x.userGroup.ID.Contains(userGroup)).OrderByDescending(x => x.user.CreatedDate);
             }
             return userViewModel;
         }
@@ -188,7 +188,24 @@ namespace Model.Dao
             return db.Users.Count(x => x.Email == email) > 0;
         }
 
+        public List<string> GetListCredential(string userName)
+        {
+            var user = db.Users.Single(x => x.UserName == userName);
+            var data = (from a in db.Credentials
+                       join b in db.UserGroups on a.UserGroupID equals b.ID
+                       join c in db.Roles on a.RoleID equals c.ID
+                       where b.ID == user.GroupID
+                       select new
+                       {
+                           RoleID = a.RoleID,
+                           UserGroupID = a.UserGroupID
+                       }).AsEnumerable().Select(x=>new Credential()
+                       {
+                           RoleID = x.RoleID,
+                           UserGroupID = x.UserGroupID
+                       });
+            return data.Select(x=>x.RoleID).ToList();
+        }
 
-       
     }
 }

@@ -147,6 +147,7 @@
     <Compile Include="Areas\Admin\Controllers\UserGroupController.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
     <Compile Include="Common\CommonConstants.cs" />
+    <Compile Include="Common\HaveCredentialAttribute.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1657,6 +1658,7 @@
     <Content Include="Areas\Admin\Views\UserGroup\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ProductCategory\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\401.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1712,6 +1714,10 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoConfig\AutoConfig.csproj">
+      <Project>{c5b82823-1a7e-4e0e-8ea6-b9a59b31a1d7}</Project>
+      <Name>AutoConfig</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{fc0a011f-32b1-4afe-938a-027c3c211f7b}</Project>
       <Name>Model</Name>

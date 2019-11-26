@@ -26,8 +26,14 @@ namespace OnlineShop.Areas.Admin.Controllers
                 {
                     var user = dao.GetByName(model.UserName);
                     var userSesstion = new UserLogin();
+                   
+                    var listCredential = dao.GetListCredential(model.UserName);
+
                     userSesstion.UserName = user.UserName;
                     userSesstion.UserID = user.ID;
+                    userSesstion.GroupID = user.GroupID;
+
+                    Session.Add(CommonConstants.USER_CREDENTIAL, listCredential);
                     Session.Add(CommonConstants.USER_SESSTION, userSesstion);
                     return RedirectToAction("Index", "Home");
                 }
