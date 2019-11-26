@@ -3,6 +3,8 @@
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
 }
+
+
 @using (Html.BeginForm("Create", "Account", FormMethod.Post, new { @class = "kt-form kt-form--label-right" }))
 {
     @Html.AntiForgeryToken()
@@ -21,11 +23,11 @@
                 </div>
 
 
-            
+
                 <div class="kt-portlet__body">
                     <div class="kt-section kt-section--first">
                         <div class="kt-section__body">
-                         
+
                             <div class="row">
                                 <label class="col-xl-3"></label>
                                 <div class="col-lg-9 col-xl-6">
@@ -122,7 +124,7 @@
                                 @*<button class="btn btn-secondary" onclick="history.back()">
                                         Cancel
                                     </button>*@
-                                  @Html.ActionLink("Cancel", "Index", "Account", null, new { @class = "btn btn-secondary" })
+                                @Html.ActionLink("Cancel", "Index", "Account", null, new { @class = "btn btn-secondary" })
 
                             </div>
                         </div>
