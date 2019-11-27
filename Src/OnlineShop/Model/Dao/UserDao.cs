@@ -77,7 +77,7 @@ namespace Model.Dao
 
             if (!string.IsNullOrEmpty(email))
             {
-                userViewModel = userViewModel.Where(x => x.user.Email.Contains(email)).OrderByDescending(x => x.user.CreatedDate);
+                userViewModel = userViewModel.Where(x => x.user.Email != null && x.user.Email.Contains(email)).OrderByDescending(x => x.user.CreatedDate);
             }
 
             if (status != null)
