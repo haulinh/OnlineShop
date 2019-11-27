@@ -15,75 +15,8 @@
 
                     <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
 
-                        <div class="item" style="background-image: url(https://cdn.tgdd.vn/2019/10/banner/dong-ho-thoi-trang-800-300-800x300.png);">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-offset-3 col-md-5">
-                                        <div class="caption vertical-center text-left">
-                                            <div class="hero-1 fadeInDown-1">
-                                                The New <br> Standard
-                                            </div>
-
-                                            <div class="hero-subtitle fadeInDown-2">
-                                                under favorable smartwatches
-                                            </div>
-                                            <div class="hero-v2-price fadeInDown-3">
-                                                from <br><span>$749</span>
-                                            </div>
-                                            <div class="hero-action-btn fadeInDown-4">
-                                                <a href="single-product.html" class="big le-button ">Start Buying</a>
-                                            </div>
-                                        </div><!-- /.caption -->
-                                    </div>
-                                </div>
-                            </div><!-- /.container -->
-                        </div><!-- /.item -->
-
-
-                        <div class="item" style="background-image: url(assets/client/images/slider/banner-1.jpg);">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-offset-3 col-md-5">
-                                        <div class="caption vertical-center text-left">
-                                            <div class="hero-subtitle-v2 fadeInDown-1">
-                                                shop to get what you loves
-                                            </div>
-
-                                            <div class="hero-2 fadeInDown-2">
-                                                Timepieces that make a statement up to <strong>40% Off</strong>
-                                            </div>
-
-                                            <div class="hero-action-btn fadeInDown-3">
-                                                <a href="single-product.html" class="big le-button ">Start Buying</a>
-                                            </div>
-                                        </div><!-- /.caption -->
-                                    </div>
-                                </div>
-                            </div><!-- /.container -->
-                        </div><!-- /.item -->
-
-                        <div class="item" style="background-image: url(assets/client/images/slider/banner-3.jpg);">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-offset-3 col-md-5">
-                                        <div class="caption vertical-center text-left">
-                                            <div class="hero-subtitle-v2 fadeInLeft-1">
-                                                shop to get what you loves
-                                            </div>
-
-                                            <div class="hero-2 fadeInRight-1">
-                                                Timepieces that make a statement up to <strong>40% Off</strong>
-                                            </div>
-
-                                            <div class="hero-action-btn fadeInLeft-2">
-                                                <a href="single-product.html" class="big le-button ">Start Buying</a>
-                                            </div>
-                                        </div><!-- /.caption -->
-                                    </div>
-                                </div>
-                            </div><!-- /.container -->
-                        </div><!-- /.item -->
-
+                        @{Html.RenderAction("Slide", "Home");}
+                      
 
                     </div><!-- /.owl-carousel -->
                     <!-- ========================================= SECTION – HERO : END ========================================= -->
@@ -846,7 +779,7 @@
                                         <span class="deal-end-date" style="display:none;">2016-12-31</span>
                                         <div id="deal-countdown" class="countdown"></div>
                                         <script>
-    // set the date we're counting down to
+                                            // set the date we're counting down to
                                             var deal_end_date = document.querySelector(".deal-end-date").textContent;
                                             var target_date = new Date(deal_end_date).getTime();
 

@@ -1,6 +1,7 @@
 ﻿using Model.Dao;
 using Model.EntityFramework;
 using Model.Extend;
+using Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,27 +18,29 @@ namespace OnlineShop.Areas.Admin.Controllers
         public ActionResult Index()
         {
             List<TreeViewNode> nodes = new List<TreeViewNode>();
-            var dao = new ProductCategoryDao();
-            var entities = dao.GetListProductCategory();
+   
+            var dao = new UserGroupDao();
+            var entities = dao.GetUserGroups();
             
 
             //Loop and add the Parent Nodes.
-            foreach (ProductCategory type in entities)
+            foreach (UserGroup type in entities)
             {
-                if (type.ParentID == null)
-                {
-                    nodes.Add(new TreeViewNode { id = type.ID.ToString(), parent = "#", text = type.Name });
-                }
+        
+                   nodes.Add(new TreeViewNode { id = type.ID.ToString(), parent = "#", text = type.Name });
+                
             }
 
-            //Loop and add the Child Nodes.
-            foreach (ProductCategory subType in entities)
+
+            var childEntity = dao.GetRoleByGroup();
+
+            // Loop and add the Child Nodes.
+            foreach (UserRoleByGroupModel subType in childEntity)
             {
-                if (subType.ParentID!=null)
-                {
-                    nodes.Add(new TreeViewNode { id = subType.ParentID.ToString() + "-" + subType.ID.ToString(), parent = subType.ParentID.ToString(), text = subType.Name });
-                }
-             
+            
+              nodes.Add(new TreeViewNode { id = subType.userGroup.ID.ToString() + "-" + subType.role.ID.ToString(), parent = subType.userGroup.ID.ToString(), text = subType.role.Name });
+           
+
             }
 
             //Serialize to JSON string.

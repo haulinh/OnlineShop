@@ -1,4 +1,5 @@
 ﻿using Model.EntityFramework;
+using Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +20,33 @@ namespace Model.Dao
         {
             return db.UserGroups.ToList();
         }
+
+
+        public List<UserRoleByGroupModel> GetRoleByGroup()
+        {
+
+            List<Credential> credentials = db.Credentials.ToList();
+            List<UserGroup> groups = db.UserGroups.ToList();
+            List<Role> role = db.Roles.ToList();
+
+
+            var userViewModel = from r in role
+                                join c in credentials
+                                on r.ID equals c.RoleID
+                                join g in groups
+                                on c.UserGroupID equals g.ID
+
+                                select new UserRoleByGroupModel
+                                {
+                                    userGroup = g,
+                                    role=r,
+                                };
+
+
+            return userViewModel.ToList();
+        }
+
+
+
     }
 }

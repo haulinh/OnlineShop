@@ -23,5 +23,12 @@ namespace OnlineShop.Controllers
             var model = new MenuDao().ListByGroupId(1);
             return PartialView(model);
         }
+
+        [ChildActionOnly]
+        public ActionResult Slide()
+        {
+            var model = new SlideDao().ListAll();
+            return PartialView(model);
+        }
     }
 }
