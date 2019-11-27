@@ -13,10 +13,12 @@ namespace OnlineShop.Areas.Admin.Controllers
         // GET: Admin/Category
         public ActionResult Index()
         {
-            var dao = new CategoriesDao();
+            SetUserGroupViewBag();
             SetViewBag();
-          //  var listTag = dao.ListAll();
-            return View();
+            SetStatusViewBag();
+            var dao = new CategoriesDao();
+            var listCategory = dao.ListAll();
+            return View(listCategory);
         }
 
         [ValidateInput(false)]
@@ -47,7 +49,7 @@ namespace OnlineShop.Areas.Admin.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Thêm Tag không thành công");
+                    ModelState.AddModelError("", "Thêm danh muc không thành công");
                 }
             }
             return View("Create");
@@ -57,8 +59,7 @@ namespace OnlineShop.Areas.Admin.Controllers
         public void SetViewBag(int? selectedid = null)
         {
             var dao1 = new CategoriesDao();
-
-            ViewBag.ParentId = new SelectList(dao1.ListAll(), "ID", "Name", selectedid);
+            ViewBag.ParentID = new SelectList(dao1.ListAll(), "ID", "Name", selectedid);
         }
 
         [HttpGet]
@@ -91,6 +92,20 @@ namespace OnlineShop.Areas.Admin.Controllers
                 }
             }
             return View("Edit");
+        }
+        void SetStatusViewBag()
+        {
+            ViewBag.Status = new SelectList(new[]
+             {
+                     new { ID="true", Status="Đã kích hoạt" },
+                     new { ID="false", Status="Khóa" },
+             }, "ID", "Status", true);
+
+        }
+        void SetUserGroupViewBag()
+        {
+            var dao = new UserGroupDao();
+            ViewBag.UserGroups = dao.GetUserGroups().ToList();
         }
 
     }

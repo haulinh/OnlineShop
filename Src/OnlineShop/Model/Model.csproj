@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -59,7 +59,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dao\AboutDao.cs" />
     <Compile Include="Dao\CategoriesDao.cs" />
+    <Compile Include="Dao\ContactDao.cs" />
     <Compile Include="Dao\PostDao.cs" />
     <Compile Include="Dao\ProduceDao.cs" />
     <Compile Include="Dao\ProductCategoryDao.cs" />
