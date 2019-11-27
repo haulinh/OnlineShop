@@ -141,6 +141,7 @@ namespace OnlineShop.Areas.Admin.Controllers
 
 
         [HttpPost]
+        [HaveCredential(RoleID = "ACTIVE_USER")]
         public JsonResult ChangeStatus(long id)
         {
             var result = new UserDao().ChangeStatus(id);
