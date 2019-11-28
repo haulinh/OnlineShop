@@ -57,5 +57,10 @@ namespace Model.Dao
 
                 return listCate.ToList();
         }
+
+        public ProductCategory ViewDetail(long id)
+        {
+            return db.ProductCategories.Find(id);
+        }
     }
 }

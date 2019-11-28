@@ -152,10 +152,13 @@
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\HaveCredentialAttribute.cs" />
     <Compile Include="Common\UserLogin.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2059,12 +2062,14 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\MainMenu.cshtml" />
     <Content Include="Views\Home\Slide.cshtml" />
+    <Content Include="Views\Product\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="assets\admin\plugins\general\ion-rangeslider\img\" />
-    <Folder Include="Models\" />
+    <Folder Include="Views\Cart\" />
+    <Folder Include="Views\Produce\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

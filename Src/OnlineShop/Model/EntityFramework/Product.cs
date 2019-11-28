@@ -74,5 +74,10 @@ namespace Model.EntityFramework
         public DateTime? TopHot { get; set; }
 
         public int? ViewCount { get; set; }
+
+        [Column(TypeName = "ntext")]
+        public string Content { get; set; }
+
+
     }
 }
