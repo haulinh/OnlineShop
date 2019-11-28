@@ -1,0 +1,45 @@
+﻿@model List<OnlineShop.Models.CartItem>
+<li class="nav-item dropdown">
+    <a href="cart.html" class="nav-link" data-toggle="dropdown">
+        <i class="ec ec-shopping-bag"></i>
+        <span class="cart-items-count count">@Model.Count()</span>
+        <span class="cart-items-total-price total-price"><span class="amount">&#36;@(Model.Sum(x=>x.Product.Price*x.Quantity))</span></span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-mini-cart">
+        <li>
+            <div class="widget_shopping_cart_content">
+
+                <ul class="cart_list product_list_widget ">
+
+                    @foreach (var item in Model)
+                    {
+                        <li class="mini_cart_item">
+                            <a title="Remove this item" class="remove" href="#">×</a>
+                            <a href="single-product.html">
+                                <img class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" src="@item.Product.Image" alt="">@item.Product.Name&nbsp;
+                            </a>
+
+                            <span class="quantity">@item.Quantity × <span class="amount">@item.Product.Price</span></span>
+                        </li>
+
+                    }
+
+
+                
+
+                </ul><!-- end product list -->
+
+
+                <p class="total"><strong>Subtotal:</strong> <span class="amount">£969.98</span></p>
+
+
+                <p class="buttons">
+                    <a class="button wc-forward" href="/gio-hang">Giỏ hàng</a>
+                    <a class="button checkout wc-forward" href="checkout.html">Checkout</a>
+                </p>
+
+
+            </div>
+        </li>
+    </ul>
+</li>

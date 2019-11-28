@@ -1769,6 +1769,7 @@
     <Content Include="assets\client\images\temp\slider-v2.jpg" />
     <Content Include="assets\client\js\bootstrap-hover-dropdown.min.js" />
     <Content Include="assets\client\js\bootstrap.min.js" />
+    <Content Include="assets\client\js\Controller\cartController.js" />
     <Content Include="assets\client\js\echo.min.js" />
     <Content Include="assets\client\js\electro.js" />
     <Content Include="assets\client\js\electro.min.js" />
@@ -2064,6 +2065,7 @@
     <Content Include="Views\Home\Slide.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Shared\HomeCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

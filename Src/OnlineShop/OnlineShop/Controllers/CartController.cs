@@ -5,17 +5,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OnlineShop.Common;
+using System.Web.Script.Serialization;
 
 namespace OnlineShop.Controllers
 {
     public class CartController : Controller
     {
 
-        private const string CartSession = "CartSession";
+     
         // GET: Cart
         public ActionResult Index()
         {
-            var cart = Session[CartSession];
+            var cart = Session[Common.CommonConstants.CartSession];
             var list = new List<CartItem>();
             if (cart != null)
             {
@@ -30,7 +32,7 @@ namespace OnlineShop.Controllers
         public ActionResult AddItem(long productId,int quantity)
         {
             var product = new ProductDao().ViewDetail(productId);
-            var cart = Session[CartSession];
+            var cart = Session[Common.CommonConstants.CartSession];
             if (cart != null)
             {
                 var list = (List<CartItem>)cart;
@@ -62,11 +64,41 @@ namespace OnlineShop.Controllers
                 item.Quantity = quantity;
                 var list = new List<CartItem>();
                 list.Add(item);
-                Session[CartSession] = list;
+                Session[Common.CommonConstants.CartSession] = list;
             }
 
 
             return RedirectToAction("Index");
+        }
+
+        public JsonResult Delete(long id)
+        {
+            var sessionCart = (List<CartItem>)Session[Common.CommonConstants.CartSession];
+            sessionCart.RemoveAll(x => x.Product.ID == id);
+            Session[Common.CommonConstants.CartSession] = sessionCart;
+            return Json(new
+            {
+                status = true
+            });
+        }
+        public JsonResult Update(string cartModel)
+        {
+            var jsonCart = new JavaScriptSerializer().Deserialize<List<CartItem>>(cartModel);
+            var sessionCart = (List<CartItem>)Session[Common.CommonConstants.CartSession];
+
+            foreach (var item in sessionCart)
+            {
+                var jsonItem = jsonCart.SingleOrDefault(x => x.Product.ID == item.Product.ID);
+                if (jsonItem != null)
+                {
+                    item.Quantity = jsonItem.Quantity;
+                }
+            }
+            Session[Common.CommonConstants.CartSession] = sessionCart;
+            return Json(new
+            {
+                status = true
+            });
         }
     }
 }
