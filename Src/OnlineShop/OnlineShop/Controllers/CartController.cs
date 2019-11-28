@@ -1,4 +1,5 @@
-﻿using OnlineShop.Models;
+﻿using Model.Dao;
+using OnlineShop.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,27 +22,25 @@ namespace OnlineShop.Controllers
 
                  list = (List<CartItem>)cart;
             }
-            else
-            {
-
-            }
+   
                 return View(list);
         }
 
 
-        public ActionResult AddItem(long produceId,int quantity)
+        public ActionResult AddItem(long productId,int quantity)
         {
+            var product = new ProductDao().ViewDetail(productId);
             var cart = Session[CartSession];
             if (cart != null)
             {
                 var list = (List<CartItem>)cart;
 
 
-                if (list.Exists(x=>x.ProductID==produceId))
+                if (list.Exists(x=>x.Product.ID==productId))
                 {
                     foreach (var item in list)
                     {
-                        if (item.ProductID == produceId)
+                        if ( item.Product.ID == productId)
                         {
                             item.Quantity += quantity;
                         }
@@ -50,7 +49,7 @@ namespace OnlineShop.Controllers
                 else
                 {
                     var item = new CartItem();
-                    item.ProductID = produceId;
+                    item.Product = product;
                     item.Quantity = quantity;
                     list.Add(item);
                 }
@@ -59,9 +58,10 @@ namespace OnlineShop.Controllers
             else
             {
                 var item = new CartItem();
-                item.ProductID = produceId;
+                 item.Product = product;
                 item.Quantity = quantity;
                 var list = new List<CartItem>();
+                list.Add(item);
                 Session[CartSession] = list;
             }
 
