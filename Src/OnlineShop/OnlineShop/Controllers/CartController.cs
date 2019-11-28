@@ -100,5 +100,18 @@ namespace OnlineShop.Controllers
                 status = true
             });
         }
+
+        public ActionResult Payment()
+        {
+            var cart = Session[Common.CommonConstants.CartSession];
+            var list = new List<CartItem>();
+            if (cart != null)
+            {
+
+                list = (List<CartItem>)cart;
+            }
+
+            return View(list);
+        }
     }
 }
