@@ -358,3 +358,6 @@ D:\hoc\ASP.net\BaoTriPhanMem\OnlineShop\Src\OnlineShop\OnlineShop\obj\Debug\Onli
 D:\hoc\ASP.net\BaoTriPhanMem\OnlineShop\Src\OnlineShop\OnlineShop\obj\Debug\OnlineShop.csproj.CopyComplete
 D:\hoc\ASP.net\BaoTriPhanMem\OnlineShop\Src\OnlineShop\OnlineShop\obj\Debug\OnlineShop.dll
 D:\hoc\ASP.net\BaoTriPhanMem\OnlineShop\Src\OnlineShop\OnlineShop\obj\Debug\OnlineShop.pdb
+D:\hoc\ASP.net\oad\OnlineShop\OnlineShop\Src\OnlineShop\OnlineShop\bin\AutoConfig.exe
+D:\hoc\ASP.net\oad\OnlineShop\OnlineShop\Src\OnlineShop\OnlineShop\bin\AutoConfig.pdb
+D:\hoc\ASP.net\oad\OnlineShop\OnlineShop\Src\OnlineShop\OnlineShop\bin\AutoConfig.exe.config

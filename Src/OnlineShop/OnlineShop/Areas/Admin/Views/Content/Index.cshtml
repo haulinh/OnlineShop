@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Model.ViewModel.ContentViewModel>
+﻿@model IEnumerable<Model.EntityFramework.Content>
 
 @{
     ViewBag.Title = "Index";
@@ -104,18 +104,17 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>@item.content.Name</td>
-                                <td>              
-                                    @foreach (var item2 in item.tag)
-                                    {
-                                        @item2.Name
-                                    }
-                                </td>
-                                <td>
-                                    <a href="/Admin/Tag/Edit/@item.content.ID" class="btn btn-success btn-circle btn-sm">Sửa </a>
-                                </td>
-                            </tr>
+                        <tr id="row_@item.ID">
+
+                            <td>@item.Name</td>
+                            <td>@item.Image</td>
+                            <td>@item.CreatedDate</td>
+                            <td><a href="#" class="btn-active" data-id="@item.ID">@Html.Raw(item.Status ? "<strong>Kích hoạt</strong>" : "Khoá")</a></td>
+                            <td>
+                                <a href="/Admin/Content/Edit/@item.ID">Sửa</a>
+                                
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>
