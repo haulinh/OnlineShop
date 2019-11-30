@@ -48,7 +48,13 @@ namespace OnlineShop.Controllers
             return PartialView(list);
         }
 
+        [ChildActionOnly]
+        public ActionResult ProductCategory()
+        {
+            var model = new ProductCategoryDao().ListAll();
+            return PartialView(model);
+        }
 
-   
+        
     }
 }

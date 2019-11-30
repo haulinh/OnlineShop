@@ -62,5 +62,10 @@ namespace Model.Dao
         {
             return db.ProductCategories.Find(id);
         }
+        public List<ProductCategory> ListAll()
+        {
+            return db.ProductCategories.Where(x => x.Status == true).OrderBy(x => x.DisplayOrder).ToList();
+        }
+
     }
 }

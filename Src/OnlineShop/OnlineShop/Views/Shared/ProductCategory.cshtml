@@ -1,0 +1,86 @@
+﻿@model List<Model.EntityFramework.ProductCategory>
+
+<ul class="nav navbar-nav departments-menu animate-dropdown">
+    <li class="nav-item dropdown ">
+
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="departments-menu-toggle">Danh mục sản phẩm</a>
+        <ul id="menu-vertical-menu" class="dropdown-menu yamm departments-menu-dropdown">
+            <li class="highlight menu-item animate-dropdown active"><a title="Value of the Day" href="product-category.html">Value of the Day</a></li>
+            <li class="highlight menu-item animate-dropdown"><a title="Top 100 Offers" href="home-v3.html">Top 100 Offers</a></li>
+            <li class="highlight menu-item animate-dropdown"><a title="New Arrivals" href="home-v3-full-color-background.html">New Arrivals</a></li>
+
+            @foreach (var item in Model.Where(x => x.ParentID == null))
+            {
+                var child = Model.Where(x => x.ParentID == item.ID);
+                if (child.Count() == 0)
+                {
+                    <li class="menu-item animate-dropdown"><a title="@item.Name" href="product-category.html">@item.Name</a></li>
+                }
+                else
+                {
+                    <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown menu-item-2584 dropdown">
+                        <a title="Computers &amp; Accessories" href="product-category.html" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">@item.Name</a>
+                        <ul role="menu" class=" dropdown-menu">
+                            <li class="menu-item animate-dropdown menu-item-object-static_block">
+                                <div class="yamm-content">
+                                    <div class="vc_row row wpb_row vc_row-fluid bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
+                                        <div class="wpb_column vc_column_container vc_col-sm-12 col-sm-12">
+                                            <div class="vc_column-inner ">
+                                                <div class="wpb_wrapper">
+                                                    <div class="wpb_single_image wpb_content_element vc_align_left">
+                                                        <figure class="wpb_wrapper vc_figure">
+                                                            <div class="vc_single_image-wrapper   vc_box_border_grey"><img width="540" height="460" src="/assets/client/images/megamenu-2.png" class="vc_single_image-img attachment-full" alt="megamenu-2" /></div>
+                                                        </figure>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="vc_row row wpb_row vc_row-fluid">
+                                        <div class="wpb_column vc_column_container vc_col-sm-6 col-sm-6">
+                                            <div class="vc_column-inner ">
+                                                <div class="wpb_wrapper">
+                                                    <div class="wpb_text_column wpb_content_element ">
+                                                        <div class="wpb_wrapper">
+                                                            <ul>
+                                                                <li class="nav-title">@item.Name</li>
+                                                                @foreach (var sitem in child)
+                                                                {
+                                                                    <li><a href="#">@sitem.Name</a></li>
+                                                                }                            
+                                                                <li class="nav-divider"></li>
+                                                                <li><a href="#"><span class="nav-text">All Electronics</span><span class="nav-subtext">Discover more products</span></a></li>
+                                                            </ul>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wpb_column vc_column_container vc_col-sm-6 col-sm-6">
+                                            <div class="vc_column-inner ">
+                                                <div class="wpb_wrapper">
+                                                    <div class="wpb_text_column wpb_content_element ">
+                                                        <div class="wpb_wrapper">
+                                                            <ul>
+                                                                <li class="nav-title">Office &amp; Stationery</li>
+                                                                <li><a href="#">All Office &amp; Stationery</a></li>
+                                                                <li><a href="#">Pens &amp; Writing</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                }
+
+            }
+
+        </ul>
+    </li>
+</ul>
