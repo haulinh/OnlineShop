@@ -2,76 +2,169 @@
 
 @{
     ViewBag.Title = "Index";
-     ViewBag.Header = "right-sidebar blog-grid"; 
+    ViewBag.Header = "right-sidebar blog-grid";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="content">
-    <div class="content_top">
-        <div class="heading">
-            <h3>Tin tức</h3>
-        </div>
-        <div class="see">
 
-        </div>
-        <div class="clear"></div>
-    </div>
-    @foreach (var item in Model)
-    {
-        <div class="image group">
-            <div class="grid images_3_of_1">
-                <img src="@item.Image" alt="" />
-            </div>
-            <div class="grid news_desc">
-                <h3><a href="/tin-tuc/@item.MetaTitle-@item.ID">@item.Name </a></h3>
-                <h4>Posted on @item.CreatedDate by <span><a href="#">@item.CreatedBy</a></span></h4>
-                @item.Description
-            </div>
-        </div>
-    }
-
-
-    @if (ViewBag.TotalPage > 1)
-    {
-        var pageDisplay = (int)ViewBag.MaxPage;
-        int totalPage = (int)ViewBag.TotalPage;
-        int currentPage = ((int)ViewBag.Page);
-
-        // Create numeric links
-        var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
-        var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
-
-        var link = "/tin-tuc";
-        <nav>
-            <ul class="pagination">
-                @if (currentPage > ViewBag.First)
+<div id="content" class="site-content" tabindex="-1">
+    <div class="container">
+        <nav class="woocommerce-breadcrumb"><a href="home.html">Home</a><span class="delimiter"><i class="fa fa-angle-right"></i></span>Tin tức</nav>
+        <div id="primary" class="content-area">
+            <main id="main" class="site-main">
+                @foreach (var item in Model)
                 {
-                    <li><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i></a></li>
+                    <article class="post format-standard hentry">
+
+                        <div class="media-attachment"><a href="blog-single.html"><img width="870" height="460" src=@item.Image class="wp-post-image" alt="8"></a></div>
+                        <div class="content-body">
+                            <header class="entry-header">
+                                <h1 class="entry-title" itemprop="name headline"><a href="blog-single.html" rel="bookmark">@item.MetaTitle</a></h1>
+                                <div class="entry-meta">
+                                    <span class="cat-links"><a href="blog-single.html" rel="category tag">@item.Tags</a></span>
+                                    <span class="posted-on"><a href="blog-single.html" rel="bookmark"><time class="entry-date published" datetime="2016-03-01T07:40:25+00:00">@item.CreatedDate</time> <time class="updated" datetime="2016-03-04T18:46:11+00:00" itemprop="datePublished">@item.ModifiedDate</time></a></span>
+                                </div>
+                            </header><!-- .entry-header -->
+
+                            <div class="entry-content" itemprop="articleBody">
+                                <p>@item.Description</p>
+                            </div><!-- .post-excerpt -->
+
+                            <div class="post-readmore"><a href="blog-single.html" class="btn btn-primary">Read More</a></div>
+                            <span class="comments-link"><a href="blog-single.html#comments">Leave a comment</a></span>
+                        </div>
+
+                    </article><!-- #post-## -->
+                }
+
+                @if (ViewBag.TotalPage > 1)
+                {
+                    var pageDisplay = (int)ViewBag.MaxPage;
+                    int totalPage = (int)ViewBag.TotalPage;
+                    int currentPage = ((int)ViewBag.Page);
+
+                    // Create numeric links
+                    var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+                    var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+                    var link = "/tin-tuc";
+                    <nav>
+                        <ul class="pagination">
+                            @if (currentPage > ViewBag.First)
+                            {
+                                <li><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i></a></li>
+                                <li>
+                                    <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev"><i class="fa fa-angle-left"></i></a>
+                                </li>
+
+                            }
+                            @for (int i = startPageIndex; i <= endPageIndex; i++)
+                            {
+                                if (currentPage == i)
+                                {
+
+                                    <li> <a href="@link?page=@i" class="active" title="Trang @i">@i</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="@link?page=@i" title="Trang @i" class="pos">@i</a></li>
+                                }
+                            }
+                            @if (currentPage < totalPage)
+                            {
+                                <li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau"><i class="fa fa-angle-right"></i></a></li>
+                                <li> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối"><i class="fa fa-angle-double-right"></i></a></li>
+                            }
+
+                        </ul>
+                    </nav>
+
+                }
+            </main><!-- #main -->
+        </div>
+        <div id="sidebar" class="sidebar-blog" role="complementary">
+            <aside id="search-2" class="widget widget_search">
+                <form role="search" method="get" class="search-form" action="#">
+                    <label>
+                        <span class="screen-reader-text">Search for:</span>
+                        <input type="search" class="search-field" placeholder="Search …" value="" name="s">
+                    </label>
+                    <input type="submit" class="search-submit" value="Search">
+                </form>
+            </aside>
+            <aside class="widget widget_text">
+                <h3 class="widget-title">About Blog</h3>
+                <div class="textwidget">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, erat in malesuada aliquam, est erat faucibus purus, eget viverra nulla sem vitae neque. Quisque id sodales libero.</div>
+            </aside>
+            <aside class="widget widget_categories">
+                <h3 class="widget-title">Categories</h3>
+                <ul>
+                    <li class="cat-item"><a href="#"><span class="no-child"></span>Design</a></li>
+                    <li class="cat-item"><a href="#"><span class="no-child"></span>Events</a></li>
+                    <li class="cat-item"><a href="#"><span class="no-child"></span>Links &amp; Quotes</a></li>
+                    <li class="cat-item"><a href="#"><span class="no-child"></span>News</a></li>
+                    <li class="cat-item"><a href="#"><span class="no-child"></span>Social</a></li>
+                    <li class="cat-item"><a href="#"><span class="no-child"></span>Technology</a></li>
+                    <li class="cat-item"><a href="#"><span class="no-child"></span>Uncategorized</a></li>
+                    <li class="cat-item"><a href="#"><span class="no-child"></span>Videos</a></li>
+                </ul>
+            </aside>
+            <aside class="widget electro_recent_posts_widget">
+                <h3 class="widget-title">Recent Posts</h3>
+                <ul>
                     <li>
-                        <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev"><i class="fa fa-angle-left"></i></a>
+                        <a class="post-thumbnail" href="blog-single.html"><img width="150" height="150" src="assets/images/blog/blog-s-1.jpg" class="wp-post-image" alt="1"></a>
+                        <div class="post-content">
+                            <a class="post-name" href="blog-single.html">Robot Wars – Post with Gallery</a>
+                            <span class="post-date">March 4, 2016</span>
+                        </div>
                     </li>
-
-                }
-                @for (int i = startPageIndex; i <= endPageIndex; i++)
-                {
-                    if (currentPage == i)
-                    {
-
-                        <li> <a href="@link?page=@i" class="active" title="Trang @i">@i</a></li>
-                    }
-                    else
-                    {
-                        <li><a href="@link?page=@i" title="Trang @i" class="pos">@i</a></li>
-                    }
-                }
-                @if (currentPage < totalPage)
-                {
-                    <li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau"><i class="fa fa-angle-right"></i></a></li>
-                    <li> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối"><i class="fa fa-angle-double-right"></i></a></li>
-                }
-
-            </ul>
-        </nav>
-
-    }
+                    <li>
+                        <a class="post-thumbnail" href="blog-single.html"><img width="150" height="150" src="assets/images/blog/blog-s-2.jpg" class="wp-post-image" alt="6"></a>
+                        <div class="post-content">
+                            <a class="post-name" href="blog-single.html">Robot Wars – Now Closed – Post with Audio</a>
+                            <span class="post-date">March 3, 2016</span>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="post-thumbnail" href="blog-single.html"><img width="150" height="150" src="assets/images/blog/blog-s-3.jpg" class="wp-post-image" alt="video-format"></a>
+                        <div class="post-content">
+                            <a class="post-name" href="blog-single.html">Robot Wars – Now Closed – Post with Video</a>
+                            <span class="post-date">March 3, 2016</span>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="post-thumbnail" href="blog-single.html"><div class="electro-img-placeholder"><img src="http://placehold.it/150x150/DDD/DDD/" alt=""><i class="fa fa-paragraph"></i></div></a>
+                        <div class="post-content">
+                            <a class="post-name" href="blog-single.html">Announcement – Post without Image</a>
+                            <span class="post-date">March 2, 2016</span>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="post-thumbnail" href="blog-single.html"><img width="150" height="150" src="assets/images/blog/blog-s-4.jpg" class="wp-post-image" alt="8"></a>
+                        <div class="post-content">
+                            <a class="post-name" href="blog-single.html">Robot Wars – Now Closed</a>
+                            <span class="post-date">March 1, 2016</span>
+                        </div>
+                    </li>
+                </ul>
+            </aside>
+            <aside id="tag_cloud-2" class="widget widget_tag_cloud">
+                <h3 class="widget-title">Tags Clouds</h3>
+                <div class="tagcloud">
+                    <a href="#" class="" title="10 topics" style="font-size: 22pt;">amazon like</a>
+                    <a href="#" class="" title="10 topics" style="font-size: 22pt;">Awesome</a>
+                    <a href="#" class="" title="10 topics" style="font-size: 22pt;">bootstrap</a>
+                    <a href="#" class="" title="10 topics" style="font-size: 22pt;">buy it</a>
+                    <a href="#" class="" title="10 topics" style="font-size: 22pt;">clean design</a>
+                    <a href="#" class="" title="2 topics" style="font-size: 11.405405405405pt;">electronics</a>
+                    <a href="#" class="" title="10 topics" style="font-size: 22pt;">theme</a>
+                    <a href="#" class="" title="1 topic" style="font-size: 8pt;">video post format</a>
+                    <a href="#" class="" title="10 topics" style="font-size: 22pt;">woocommerce</a>
+                    <a href="#" class="" title="10 topics" style="font-size: 22pt;">wordpress</a>
+                </div>
+            </aside>
+        </div>
+    </div>
 </div>
+

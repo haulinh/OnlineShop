@@ -59,8 +59,6 @@ namespace OnlineShop.Areas.Admin.Controllers
             {
                 var session = (UserLogin)Session[CommonConstants.USER_SESSTION];
                 model.CreatedBy = session.UserName;
-                var culture = Session[CommonConstants.CurrentCulture];
-                model.Language = culture.ToString();
                 new ContentDao().Create(model);
                 return RedirectToAction("Index");
             }
