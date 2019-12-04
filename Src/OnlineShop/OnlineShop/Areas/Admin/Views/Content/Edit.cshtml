@@ -23,7 +23,7 @@
     </script>
 }
 
-@using (Html.BeginForm("Edit", "Account", FormMethod.Post, new { @class = "kt-form kt-form--label-right" }))
+@using (Html.BeginForm("Edit", "Content", FormMethod.Post, new { @class = "kt-form kt-form--label-right" }))
 {
     @Html.AntiForgeryToken()
     <div class="row">
@@ -159,7 +159,7 @@
                                 @*<button class="btn btn-secondary" onclick="history.back()">
                                         Cancel
                                     </button>*@
-                                @Html.ActionLink("Cancel", "Index", "Account", null, new { @class = "btn btn-secondary" })
+                                @Html.ActionLink("Cancel", "Index", "Content", null, new { @class = "btn btn-secondary" })
 
                             </div>
                         </div>
