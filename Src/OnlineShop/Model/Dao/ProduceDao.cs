@@ -103,5 +103,14 @@ namespace Model.Dao
         {
             return db.Products.Find(id);
         }
+
+
+        public long Insert(Product entity)
+        {
+            db.Products.Add(entity);
+            db.SaveChanges();
+            return entity.ID;
+        }
+
     }
 }

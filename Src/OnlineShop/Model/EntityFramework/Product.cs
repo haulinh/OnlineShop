@@ -1,7 +1,8 @@
-namespace Model.EntityFramework
+﻿namespace Model.EntityFramework
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -11,16 +12,19 @@ namespace Model.EntityFramework
     {
         public long ID { get; set; }
 
-        [StringLength(250)]
+        [StringLength(250, ErrorMessage = "Tên sản phẩm không vượt quá 250 ký tự"), MinLength(1, ErrorMessage = "Độ dài tối thiểu 1 ký tự")]
+        [DisplayName("Tên sản phẩm")]
         public string Name { get; set; }
 
         [StringLength(10)]
+        [DisplayName("Mã sản phẩm")]
         public string Code { get; set; }
 
         [StringLength(250)]
         public string MetaTitle { get; set; }
 
         [StringLength(500)]
+        [DisplayName("Mô tả")]
         public string Description { get; set; }
 
         [StringLength(250)]
@@ -30,6 +34,8 @@ namespace Model.EntityFramework
         public string MoreImages { get; set; }
 
 
+
+        [DisplayName("Giá gốc")]
         [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
 
         [DataType(DataType.Currency)]
@@ -40,17 +46,29 @@ namespace Model.EntityFramework
         [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
 
         [DataType(DataType.Currency)]
+        [DisplayName("Giá khuyến mãi")]
         public decimal? PromotionPrice { get; set; }
 
+
+        [DisplayName("Bao gồm VAT")]
         public bool? IncludedVAT { get; set; }
 
+
+
+        [DisplayName("Số lượng")]
         public int Quantity { get; set; }
 
+
+        [DisplayName("Loại sản phẩm")]
         public long? CategoryID { get; set; }
 
+
+        [DisplayName("Bài Giới thiệu")]
         [Column(TypeName = "ntext")]
         public string Detail { get; set; }
 
+
+        [DisplayName("Bảo hành")]
         public int? Warranty { get; set; }
 
         public DateTime? CreatedDate { get; set; }

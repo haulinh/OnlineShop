@@ -10,7 +10,7 @@ using OnlineShop.Common;
 
 namespace OnlineShop.Areas.Admin.Controllers
 {
-    public class ContentController : BaseController
+    public class ContentController : Controller
     {
         // GET: Admin/Content
         public ActionResult Index(string searchString, int page = 1, int pageSize = 10)

@@ -1,4 +1,5 @@
 ﻿using Model.Dao;
+using Model.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,42 @@ namespace OnlineShop.Areas.Admin.Controllers
             var listProduct = dao.GetListProduct();
             return View(listProduct);
         }
+
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+
+            return View();
+        }
+
+        public ActionResult Create(Product user)
+        {
+            var dao = new ProductDao();
+
+            if (ModelState.IsValid)
+            {
+ 
+                    long id = dao.Insert(user);
+                    if (id > 0)
+                    {
+
+                        // chuyển hướng trang về admin/User/index
+                        var result = dao.GetListProduct();
+                        return RedirectToAction("Index", "Product", result);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Thêm không thành công");
+                    }
+                
+    
+
+            }
+
+            return View("Create");
+        }
+
+
     }
 }
