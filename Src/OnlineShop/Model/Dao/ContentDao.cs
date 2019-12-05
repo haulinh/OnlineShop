@@ -142,6 +142,13 @@ namespace Model.Dao
             return str2;
         }
 
+        public List<Content> ListNewContent(int top)
+        {
+            return db.Contents.OrderByDescending(x => x.CreatedDate).Take(top).ToList();
+        }
+
+
+
         public long Edit(Content content)
         {
             //Xử lý alias

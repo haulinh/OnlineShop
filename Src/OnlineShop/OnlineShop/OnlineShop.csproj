@@ -153,6 +153,7 @@
     <Compile Include="Common\HaveCredentialAttribute.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -2072,12 +2073,12 @@
     <Content Include="Views\Cart\Payment.cshtml" />
     <Content Include="Views\Content\Index.cshtml" />
     <Content Include="Views\Shared\ProductCategory.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="assets\admin\plugins\general\ion-rangeslider\img\" />
-    <Folder Include="Views\Produce\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

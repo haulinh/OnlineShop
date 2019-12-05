@@ -15,6 +15,9 @@ namespace OnlineShop.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            var dao = new ProductDao();
+            ViewBag.NewProducts = dao.ListNewProduct(5);
+            ViewBag.Contents = new ContentDao().ListNewContent(5);
             return View();
         }
 
