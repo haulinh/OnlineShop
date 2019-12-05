@@ -2075,6 +2075,7 @@
     <Content Include="Views\Content\Index.cshtml" />
     <Content Include="Views\Shared\ProductCategory.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Content\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
