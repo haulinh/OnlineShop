@@ -59,7 +59,7 @@
         public int Quantity { get; set; }
 
 
-        [DisplayName("Loại sản phẩm")]
+        [DisplayName("Loại sản phẩm")]  
         public long? CategoryID { get; set; }
 
 

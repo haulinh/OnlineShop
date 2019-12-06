@@ -5,18 +5,41 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
 }
 
+
+@section jsFooter{
+    <script>
+
+        $("#txtPromotionPrice").change(function () {
+            var val = $(this).val();
+              var price = $(txtPrice).val();
+            if (parseInt(val) > parseInt(price)) {
+                $(this).val("0");
+                $('#errorBox').empty();
+               $('#errorBox').append(' <a class="text-danger">Giá khuyến mãi không được vượt quá giá gốc</a>')
+            } else if (parseInt(val) == parseInt(price)) {
+                  $('#errorBox').empty();
+                  $('#errorBox').append(' <a class="text-danger">Giảm 100% bạn chắc chứ</a>')
+            }
+        });
+
+
+    </script>
+}
+
+
+
 <style>
-    .imageHolder{
-            border: 1px solid #e2e5ec;
-            height:200px;
-            flex-direction:column;
-            justify-content:center;
-     
+    .imageHolder {
+        border: 1px solid #e2e5ec;
+        height: 200px;
+        flex-direction: column;
+        justify-content: center;
     }
-    .titleHolder{
-          border: 1px solid #e2e5ec;
-          padding-top:10px;
-          padding-bottom:10px;
+
+    .titleHolder {
+        border: 1px solid #e2e5ec;
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 </style>
 
@@ -49,6 +72,7 @@
                                 <div class="col-lg-9 col-xl-6">
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 </div>
+                               
                             </div>
                             <div class="row">
                                 <label class="col-xl-3"></label>
@@ -98,7 +122,7 @@
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
                                         @*        <input type="text" class="form-control" placeholder="Nhập số điện thoại" aria-describedby="basic-addon1">*@
 
-                                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @step = "1000", @Value = "0" } })
+                                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @step = "1000", @Value = "0", @id = "txtPrice" }, id = "txtPrice"  })
 
                                         @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
                                     </div>
@@ -110,9 +134,11 @@
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
-                                        @Html.EditorFor(model => model.PromotionPrice, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @step = "1000", @Value = "0" } })
+                                        @Html.EditorFor(model => model.PromotionPrice, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @step = "1000", @Value = "0", @id = "txtPromotionPrice" }, id = "txtPromotionPrice" })
                                         @Html.ValidationMessageFor(model => model.PromotionPrice, "", new { @class = "text-danger" })
+                                        <div id="errorBox">
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +156,7 @@
                                 @Html.LabelFor(model => model.IncludedVAT, htmlAttributes: new { @class = "col-xl-3 col-lg-3 col-form-label" })
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="col-9" style="margin-top:10px">
-                                        @Html.CheckBoxFor(model => model.IncludedVAT.Value,  new { @class = "checkbox " })
+                                        @Html.CheckBoxFor(model => model.IncludedVAT.Value, new { @class = "checkbox " })
                                         <a>Đã bao gồm 10% VAT</a>
                                         @Html.ValidationMessageFor(model => model.IncludedVAT, "", new { @class = "text-danger" })
                                     </div>
@@ -145,7 +171,7 @@
                             <div class="col-lg-3 col-xl-3">
                             </div>
                             <div class="col-lg-9 col-xl-9">
-                                <button type="submit" class="btn btn-success">Submit</button>&nbsp;
+                                <button type="submit" id="submitProject" class="btn btn-success">Submit</button>&nbsp;
                                 @*<button class="btn btn-secondary" onclick="history.back()">
                                         Cancel
                                     </button>*@
