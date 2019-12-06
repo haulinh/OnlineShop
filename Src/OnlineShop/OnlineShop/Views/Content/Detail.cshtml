@@ -40,7 +40,7 @@
                                           }
                                       }
                                   </ul>
-
+                            </span>
                             <span class="posted-on"><a href="#" rel="bookmark"><time class="entry-date published" datetime="2016-03-04T07:34:20+00:00">@Model.CreatedDate</time> <time class="updated" datetime="2016-03-04T18:46:11+00:00" itemprop="datePublished">@Model.ModifiedDate</time></a></span>
                         </div>
                     </header><!-- .entry-header -->
@@ -180,14 +180,13 @@
             <aside class="widget widget_categories">
                 <h3 class="widget-title">Categories</h3>
                 <ul>
-                    <li class="cat-item"><a href="#"><span class="no-child"></span>Design</a></li>
-                    <li class="cat-item"><a href="#"><span class="no-child"></span>Events</a></li>
-                    <li class="cat-item"><a href="#"><span class="no-child"></span>Links &amp; Quotes</a></li>
-                    <li class="cat-item"><a href="#"><span class="no-child"></span>News</a></li>
-                    <li class="cat-item"><a href="#"><span class="no-child"></span>Social</a></li>
-                    <li class="cat-item"><a href="#"><span class="no-child"></span>Technology</a></li>
-                    <li class="cat-item"><a href="#"><span class="no-child"></span>Uncategorized</a></li>
-                    <li class="cat-item"><a href="#"><span class="no-child"></span>Videos</a></li>
+                    @{
+                        var categories = (List<Model.EntityFramework.Category>)ViewBag.category;
+                        foreach (var category in categories)
+                        {
+                            <li><a href="/Category/@category.ID">@category.Name</a></li>
+                        }
+                    }
                 </ul>
             </aside>
             <aside class="widget electro_recent_posts_widget">

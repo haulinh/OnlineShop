@@ -99,25 +99,20 @@
             <aside class="widget widget_categories">
                 <h3 class="widget-title">Categories</h3>
                 <ul>
-                    <li class="cat-item"><a href="#"><span class="no-child"></span>Design</a></li>
-                    <li class="cat-item"><a href="#"><span class="no-child"></span>Events</a></li>
-                    <li class="cat-item"><a href="#"><span class="no-child"></span>Links &amp; Quotes</a></li>
-                    <li class="cat-item"><a href="#"><span class="no-child"></span>News</a></li>
-                    <li class="cat-item"><a href="#"><span class="no-child"></span>Social</a></li>
-                    <li class="cat-item"><a href="#"><span class="no-child"></span>Technology</a></li>
-                    <li class="cat-item"><a href="#"><span class="no-child"></span>Uncategorized</a></li>
-                    <li class="cat-item"><a href="#"><span class="no-child"></span>Videos</a></li>
+                    @{
+                        var categories = (List<Model.EntityFramework.Category>)ViewBag.category;
+                        foreach (var category in categories)
+                        {
+                            <li><a href="/Category/@category.ID">@category.Name</a></li>
+                        }
+                    }
                 </ul>
             </aside>
             <aside class="widget electro_recent_posts_widget">
                 <h3 class="widget-title">Recent Posts</h3>
                 <ul>
                     <li>
-                        <a class="post-thumbnail" href="blog-single.html"><img width="150" height="150" src="assets/images/blog/blog-s-1.jpg" class="wp-post-image" alt="1"></a>
-                        <div class="post-content">
-                            <a class="post-name" href="blog-single.html">Robot Wars – Post with Gallery</a>
-                            <span class="post-date">March 4, 2016</span>
-                        </div>
+                       
                     </li>
                     <li>
                         <a class="post-thumbnail" href="blog-single.html"><img width="150" height="150" src="assets/images/blog/blog-s-2.jpg" class="wp-post-image" alt="6"></a>

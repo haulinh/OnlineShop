@@ -63,7 +63,10 @@
     <Compile Include="Dao\CategoriesDao.cs" />
     <Compile Include="Dao\ContactDao.cs" />
     <Compile Include="Dao\ContentDao.cs" />
+    <Compile Include="Dao\Footer.cs" />
     <Compile Include="Dao\MenuDao.cs" />
+    <Compile Include="Dao\OrderDao.cs" />
+    <Compile Include="Dao\OrderDetailDao.cs" />
     <Compile Include="Dao\PostDao.cs" />
     <Compile Include="Dao\ProduceDao.cs" />
     <Compile Include="Dao\ProductCategoryDao.cs" />

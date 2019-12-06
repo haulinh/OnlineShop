@@ -16,6 +16,7 @@ namespace OnlineShop.Controllers
 
             ViewBag.Total = totalRecord;
             ViewBag.Page = page;
+            ViewBag.category = new CategoriesDao().ListAll();
 
             int maxPage = 5;
             int totalPage = 0;
@@ -27,13 +28,14 @@ namespace OnlineShop.Controllers
             ViewBag.Last = totalPage;
             ViewBag.Next = page + 1;
             ViewBag.Prev = page - 1;
+       
             return View(model);
         }
 
         public ActionResult Detail(long id)
         {
             var model = new ContentDao().GetByID(id);
-
+            ViewBag.category = new CategoriesDao().ListAll();
             ViewBag.Tags = new ContentDao().ListTag(id);
             return View(model);
         }
