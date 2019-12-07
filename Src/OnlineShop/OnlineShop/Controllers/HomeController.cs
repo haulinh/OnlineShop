@@ -18,6 +18,7 @@ namespace OnlineShop.Controllers
             var dao = new ProductDao();
             ViewBag.NewProducts = dao.ListNewProduct(5);
             ViewBag.Contents = new ContentDao().ListNewContent(5);
+            ViewBag.PromotionProducts= dao.ListPromotionProduct(5);
             return View();
         }
 

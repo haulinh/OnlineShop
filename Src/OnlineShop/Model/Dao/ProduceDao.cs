@@ -19,6 +19,24 @@ namespace Model.Dao
         {
             return db.Products.OrderByDescending(x => x.CreatedDate).Take(top).ToList();
         }
+
+
+        public List<ProductViewModel> ListPromotionProduct(int top)
+        {
+            List<Product> products = db.Products.Where(x => x.PromotionPrice != 0 && x.Status == true).OrderByDescending(x => x.CreatedDate).Take(top).ToList();
+            List<ProductCategory> groups = db.ProductCategories.ToList();
+            var userViewModel = from u in products
+                                join g in groups
+                                on u.CategoryID equals g.ID
+                                select new ProductViewModel
+                                {
+                                    product = u,
+                                    category = g,
+                                };
+
+            return userViewModel.OrderBy(x => x.product.CreatedDate).ToList();
+
+        }
         public List<string> ListName(string keyword)
         {
             return db.Products.Where(x => x.Name.Contains(keyword)).Select(x => x.Name).ToList();
