@@ -14,6 +14,7 @@
 
         [StringLength(250, ErrorMessage = "Tên sản phẩm không vượt quá 250 ký tự"), MinLength(1, ErrorMessage = "Độ dài tối thiểu 1 ký tự")]
         [DisplayName("Tên sản phẩm")]
+        [Required(ErrorMessage = "Tên sản phẩm không được để trống")]
         public string Name { get; set; }
 
         [StringLength(10)]
@@ -21,6 +22,7 @@
         public string Code { get; set; }
 
         [StringLength(250)]
+        [Required(ErrorMessage = "Meta title không được để trống")]
         public string MetaTitle { get; set; }
 
         [StringLength(500)]
@@ -59,8 +61,9 @@
         public int Quantity { get; set; }
 
 
-        [DisplayName("Loại sản phẩm")]  
-        public long? CategoryID { get; set; }
+        [DisplayName("Loại sản phẩm")]
+        [Required(ErrorMessage = "Loại sản phẩm không được để trống")]
+        public long CategoryID { get; set; }
 
 
         [DisplayName("Bài Giới thiệu")]

@@ -67,5 +67,10 @@ namespace Model.Dao
             return db.ProductCategories.Where(x => x.Status == true).OrderBy(x => x.DisplayOrder).ToList();
         }
 
+        public List<ProductCategory> ListChildCaterogys()
+        {
+            return db.ProductCategories.Where(x => x.Status == true && x.ParentID!=null).OrderBy(x => x.ID).ToList();
+        }
+
     }
 }

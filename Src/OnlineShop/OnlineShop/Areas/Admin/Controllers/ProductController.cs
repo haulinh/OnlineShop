@@ -22,14 +22,15 @@ namespace OnlineShop.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-
+            ViewBagCategory();
             return View();
         }
 
         public ActionResult Create(Product user)
         {
             var dao = new ProductDao();
-
+            user.Status = true;
+            ViewBagCategory();
             if (ModelState.IsValid)
             {
  
@@ -45,14 +46,26 @@ namespace OnlineShop.Areas.Admin.Controllers
                     {
                         ModelState.AddModelError("", "Thêm không thành công");
                     }
-                
-    
 
+
+
+            }
+            else
+            {
+                ModelState.AddModelError("", "Form lỗi");
             }
 
             return View("Create");
         }
 
+        void ViewBagCategory()
+        {
+            
+            var dao= new ProductCategoryDao();
+            SelectList a= new SelectList(dao.ListChildCaterogys(), "ID", "Name", null);
+            ViewBag.CategoryID = new SelectList(dao.ListChildCaterogys(), "ID", "Name",null);
+       
+        }
 
     }
 }
