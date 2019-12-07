@@ -192,57 +192,35 @@
             <aside class="widget electro_recent_posts_widget">
                 <h3 class="widget-title">Recent Posts</h3>
                 <ul>
-                    <li>
-                        <a class="post-thumbnail" href="blog-single.html"><img width="150" height="150" src="assets/images/blog/blog-s-1.jpg" class="wp-post-image" alt="1"></a>
-                        <div class="post-content">
-                            <a class="post-name" href="blog-single.html">Robot Wars – Post with Gallery</a>
-                            <span class="post-date">March 4, 2016</span>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="post-thumbnail" href="blog-single.html"><img width="150" height="150" src="assets/images/blog/blog-s-2.jpg" class="wp-post-image" alt="6"></a>
-                        <div class="post-content">
-                            <a class="post-name" href="blog-single.html">Robot Wars – Now Closed – Post with Audio</a>
-                            <span class="post-date">March 3, 2016</span>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="post-thumbnail" href="blog-single.html"><img width="150" height="150" src="assets/images/blog/blog-s-3.jpg" class="wp-post-image" alt="video-format"></a>
-                        <div class="post-content">
-                            <a class="post-name" href="blog-single.html">Robot Wars – Now Closed – Post with Video</a>
-                            <span class="post-date">March 3, 2016</span>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="post-thumbnail" href="blog-single.html"><div class="electro-img-placeholder"><img src="http://placehold.it/150x150/DDD/DDD/" alt=""><i class="fa fa-paragraph"></i></div></a>
-                        <div class="post-content">
-                            <a class="post-name" href="blog-single.html">Announcement – Post without Image</a>
-                            <span class="post-date">March 2, 2016</span>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="post-thumbnail" href="blog-single.html"><img width="150" height="150" src="assets/images/blog/blog-s-4.jpg" class="wp-post-image" alt="8"></a>
-                        <div class="post-content">
-                            <a class="post-name" href="blog-single.html">Robot Wars – Now Closed</a>
-                            <span class="post-date">March 1, 2016</span>
-                        </div>
-                    </li>
+                    @{
+                        var recentpost = (List<Model.EntityFramework.Content>)ViewBag.recentpost;
+                        foreach (var category in recentpost)
+                        {
+                            <li>
+                                <a class="post-thumbnail" href="/Content/Detail/@category.ID"><img width="150" height="150" src=@category.Image class="wp-post-image" alt="1"></a>
+                                <div class="post-content">
+                                    <a class="post-name" href="/Content/Detail/@category.ID">@category.Name</a>
+                                    <span class="post-date">@category.CreatedDate</span>
+                                </div>
+                            </li>
+                        }
+                    }
                 </ul>
             </aside>
             <aside id="tag_cloud-2" class="widget widget_tag_cloud">
                 <h3 class="widget-title">Tags Clouds</h3>
-                <div class="tagcloud">
-                    <a href="#" class="" title="10 topics" style="font-size: 22pt;">amazon like</a>
-                    <a href="#" class="" title="10 topics" style="font-size: 22pt;">Awesome</a>
-                    <a href="#" class="" title="10 topics" style="font-size: 22pt;">bootstrap</a>
-                    <a href="#" class="" title="10 topics" style="font-size: 22pt;">buy it</a>
-                    <a href="#" class="" title="10 topics" style="font-size: 22pt;">clean design</a>
-                    <a href="#" class="" title="2 topics" style="font-size: 11.405405405405pt;">electronics</a>
-                    <a href="#" class="" title="10 topics" style="font-size: 22pt;">theme</a>
-                    <a href="#" class="" title="1 topic" style="font-size: 8pt;">video post format</a>
-                    <a href="#" class="" title="10 topics" style="font-size: 22pt;">woocommerce</a>
-                    <a href="#" class="" title="10 topics" style="font-size: 22pt;">wordpress</a>
-                </div>
+   
+                    <div class="tagcloud">
+                        @{
+                            var tag = (List<Model.EntityFramework.Tag>)ViewBag.tag;
+                            foreach (var item in tag)
+                            {
+                                <a href="/Content/Tag/@item.ID" class="" title="10 topics" style="font-size: 22pt;">@item.Name</a>
+                            }
+
+                        }
+                    </div>
+
             </aside>
         </div>
     </div><!-- .container -->
