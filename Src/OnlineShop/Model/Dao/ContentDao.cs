@@ -30,12 +30,15 @@ namespace Model.Dao
 
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
-        /// <summary>
-        /// List all content for client
-        /// </summary>
-        /// <param name="page"></param>
-        /// <param name="pageSize"></param>
-        /// <returns></returns>
+
+        public List<Content> ListRecentPost()
+        {
+            var model = (from a in db.Contents
+                         orderby a.CreatedDate descending
+                         select a).Take(5);
+
+            return model.ToList();
+        }
         public IEnumerable<Content> ListAllPaging(int page, int pageSize)
         {
             IQueryable<Content> model = db.Contents;
@@ -226,6 +229,22 @@ namespace Model.Dao
                              Name = x.Name
                          });
             return model.ToList();
+        }
+
+        public List<Tag> ListAllTag()
+        {
+            var content = db.Contents;
+            List<Tag> model = new List<Tag>();
+            foreach(var item in content)
+            {
+                List<Tag> x = new List<Tag>();
+                x = ListTag(item.ID);
+                foreach(var tag in x)
+                {
+                    model.Add(tag);
+                }
+            }
+            return model.Distinct().ToList();
         }
     }
 }

@@ -17,6 +17,8 @@ namespace OnlineShop.Controllers
             ViewBag.Total = totalRecord;
             ViewBag.Page = page;
             ViewBag.category = new CategoriesDao().ListAll();
+            ViewBag.recentpost = new ContentDao().ListRecentPost();
+            ViewBag.tag = new ContentDao().ListAllTag();
 
             int maxPage = 5;
             int totalPage = 0;
@@ -37,6 +39,8 @@ namespace OnlineShop.Controllers
             var model = new ContentDao().GetByID(id);
             ViewBag.category = new CategoriesDao().ListAll();
             ViewBag.Tags = new ContentDao().ListTag(id);
+            ViewBag.recentpost = new ContentDao().ListRecentPost();
+            ViewBag.tag = new ContentDao().ListAllTag();
             return View(model);
         }
 
