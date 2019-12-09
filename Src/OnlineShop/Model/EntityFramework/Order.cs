@@ -28,5 +28,9 @@ namespace Model.EntityFramework
         public string ShipEmail { get; set; }
 
         public int? Status { get; set; }
+
+        [StringLength(250)]
+        public string Note { get; set; }
+
     }
 }

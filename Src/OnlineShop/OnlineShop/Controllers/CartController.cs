@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using OnlineShop.Common;
 using System.Web.Script.Serialization;
+using Model.EntityFramework;
 
 namespace OnlineShop.Controllers
 {
@@ -101,6 +102,7 @@ namespace OnlineShop.Controllers
             });
         }
 
+        [HttpGet]
         public ActionResult Payment()
         {
             var cart = Session[Common.CommonConstants.CartSession];
@@ -113,5 +115,43 @@ namespace OnlineShop.Controllers
 
             return View(list);
         }
+
+        [HttpPost]
+        public ActionResult Payment(string shipName,string phone,string address,string email,string note)
+        {
+            var order = new Order();
+            order.CreatedDate = DateTime.Now;
+            order.ShipName = shipName;
+            order.ShipEmail = email;
+            order.ShipMobile = phone;
+            order.ShipAddress = address;
+            order.Note = note;
+            try
+            {
+                var id = new OrderDao().Insert(order);
+                var detailDao = new OrderDetailDao();
+                var cart = (List<CartItem>)Session[Common.CommonConstants.CartSession];
+                foreach (var item in cart)
+                {
+                    var orderDetail = new OrderDetail();
+                    orderDetail.ProductID = item.Product.ID;
+                    orderDetail.OrderID = id;
+                    orderDetail.Price = item.Product.Price;
+                    orderDetail.Quantity = item.Quantity;
+                    detailDao.Insert(orderDetail);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+           
+         
+            return Redirect("/hoan-thanh");
+        }
+
+
     }
 }

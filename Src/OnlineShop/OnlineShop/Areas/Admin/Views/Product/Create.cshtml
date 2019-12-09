@@ -7,6 +7,8 @@
 
 
 @section jsFooter{
+    <script src="/assets/admin/js/pages/crud/forms/widgets/bootstrap-select.js" type="text/javascript"></script>
+    <script src="/assets/admin/js/pages/crud/forms/widgets/bootstrap-datepicker.js" type="text/javascript"></script>
     <script>
 
         $("#txtPromotionPrice").change(function () {
@@ -29,7 +31,7 @@
             $("#txtMetaTitle").val(formatMeta);
         });
 
-      
+
 
         $('#btnSelectImage').on('click', function (e) {
             e.preventDefault();
@@ -42,9 +44,9 @@
             finder.popup();
 
         })
-          var count = 1;
+        var count = 1;
         $('#btnSelectMoreImage').on('click', function (e) {
-          
+
             e.preventDefault();
             var finder = new CKFinder();
             finder.selectActionFunction = function (url) {
@@ -53,9 +55,9 @@
                     if (val != '') {
                         $('#txtMoreImage').val(val + '\n' + url);
                     } else {
-                          $('#txtMoreImage').val(url);
+                        $('#txtMoreImage').val(url);
                     }
-                   
+
                     $('#divMoreImage').append('<img style = "  margin-left: 5px;" width="150" height="150" src="' + url + '" /> ');
                     count++;
                 }
@@ -82,9 +84,7 @@
         border: 1px solid #e2e5ec;
         height: 200px;
         flex-direction: row;
-      
         justify-content: center;
-       
     }
 
     .titleHolder {
@@ -165,8 +165,8 @@
                             <div class="form-group row">
                                 @Html.LabelFor(model => model.CategoryID, htmlAttributes: new { @class = "col-xl-3 col-lg-3 col-form-label" })
                                 <div class="col-lg-9 col-xl-6">
-                                    @Html.DropDownListFor(model => model.CategoryID,null, htmlAttributes: new { @class = "form-control" })
-         
+                                    @Html.DropDownListFor(model => model.CategoryID, null, "---Chọn loại sản phẩm---", new { @class = "form-control kt-selectpicker", @data_live_search = "true" })
+
                                     @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -267,6 +267,16 @@
                                         @Html.CheckBoxFor(model => model.IncludedVAT.Value, new { @class = "checkbox " })
                                         <a>Đã bao gồm 10% VAT</a>
                                         @Html.ValidationMessageFor(model => model.IncludedVAT, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-group-last row">
+                                @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "col-xl-3 col-lg-3 col-form-label" })
+                                <div class="col-lg-9 col-xl-6">
+                                    <div class="input-group">
+                                        @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control ", @id = "kt_datepicker_3_modal" }, @id = "kt_datepicker_3_modal" })
+                                        @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
