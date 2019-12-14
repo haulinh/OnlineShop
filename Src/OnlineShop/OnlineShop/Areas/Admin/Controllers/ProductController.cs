@@ -11,8 +11,9 @@ namespace OnlineShop.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         // GET: Admin/Product
-        public ActionResult Index()
+        public ActionResult Index(int? CategoryID)
         {
+            SetViewBagAllCategory();
             var dao = new ProductDao();
             var listProduct = dao.GetListProduct();
             return View(listProduct);
@@ -33,19 +34,19 @@ namespace OnlineShop.Areas.Admin.Controllers
             ViewBagCategory();
             if (ModelState.IsValid)
             {
- 
-                    long id = dao.Insert(user);
-                    if (id > 0)
-                    {
 
-                        // chuyển hướng trang về admin/User/index
-                        var result = dao.GetListProduct();
-                        return RedirectToAction("Index", "Product", result);
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Thêm không thành công");
-                    }
+                long id = dao.Insert(user);
+                if (id > 0)
+                {
+
+                    // chuyển hướng trang về admin/User/index
+                    var result = dao.GetListProduct();
+                    return RedirectToAction("Index", "Product", result);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thêm không thành công");
+                }
 
 
 
@@ -60,11 +61,25 @@ namespace OnlineShop.Areas.Admin.Controllers
 
         void ViewBagCategory()
         {
-            
-            var dao= new ProductCategoryDao();
-            SelectList a= new SelectList(dao.ListChildCaterogys(), "ID", "Name", null);
-            ViewBag.CategoryID = new SelectList(dao.ListChildCaterogys(), "ID", "Name",null);
-       
+
+            var dao = new ProductCategoryDao();
+            SelectList a = new SelectList(dao.ListChildCaterogys(), "ID", "Name", null);
+            ViewBag.CategoryID = new SelectList(dao.ListChildCaterogys(), "ID", "Name", null);
+
+        }
+
+        void SetViewBagAllCategory()
+        {
+            var dao = new ProductCategoryDao();
+            ViewBag.AllCategory = dao.ListAll();
+            ViewBag.Status = new SelectList(new[]
+           {
+                                    new { ID="true", Status="Đã kích hoạt" },
+                                    new { ID="false", Status="Khóa" },
+                                }, "ID", "Status", true);
+
+
+
         }
 
     }

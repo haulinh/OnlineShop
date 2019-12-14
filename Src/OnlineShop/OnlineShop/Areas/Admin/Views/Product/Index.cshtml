@@ -1,13 +1,14 @@
 ﻿@model IEnumerable<Model.ViewModel.ProductViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
 }
 
 @section jsFooter
     {
-
+    <script src="/assets/admin/js/pages/crud/forms/widgets/bootstrap-select.js" type="text/javascript"></script>
+    <script src="/assets/admin/js/pages/crud/forms/widgets/bootstrap-datepicker.js" type="text/javascript"></script>
     <script src="assets/admin/js/pages/crud/datatables/extensions/buttons.js" type="text/javascript"></script>
     @*<script src="~/assets/admin/js/Controllers/accounts.js"></script>*@
 }
@@ -40,7 +41,7 @@
                                 <i class="flaticon2-plus"></i> Add New
                             </button>*@
 
-                        @Html.ActionLink("Thêm tài khoản", "Create", "Product", null, new { @class = "flaticon2-plus btn btn-brand btn-icon-sm" })
+                        @Html.ActionLink("Thêm Sản phẩm", "Create", "Product", null, new { @class = "flaticon2-plus btn btn-brand btn-icon-sm" })
 
 
                     </div>
@@ -50,28 +51,28 @@
 
 
         <div class="kt-portlet__body">
-            @using (Html.BeginForm("Index", "Account", FormMethod.Get, new { @class = "kt-form kt-form--fit kt-margin-b-20" }))
+            @using (Html.BeginForm("Index", "Product", FormMethod.Get, new { @class = "kt-form kt-form--fit kt-margin-b-20" }))
             {
 
                 <!--begin: Search Form -->
 
                 <div class="row kt-margin-b-20">
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-                        <label>Tên đăng nhập:</label>
-                        <input name="userName" type="text" class="form-control kt-input" placeholder="Nhận tên đăng nhập" data-col-index="0">
+                        <label>Mã sản phẩm:</label>
+                        <input type="text" class="form-control kt-input" placeholder="Nhận mã sản phẩm" data-col-index="0">
                     </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-                        <label>Họ tên:</label>
-                        <input name="name" type="text" class="form-control kt-input" placeholder="Nhập họ tên" data-col-index="1">
+                        <label>Tên sản phẩm:</label>
+                        <input name="name" type="text" class="form-control kt-input" placeholder="Nhận tên sản phẩm" data-col-index="1">
                     </div>
 
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-                        <label>Số điện thoại:</label>
-                        <input name="sdt" type="text" class="form-control kt-input" placeholder="E.g: 37000-300" data-col-index="1">
+                        <label>Loại sản phẩm:</label>
+                        @Html.DropDownList("CategoryID", new SelectList(ViewBag.AllCategory, "ID", "Name"), "---Chọn loại sản phẩm---", new { @class = "form-control kt-selectpicker", @data_live_search = "true" })
                     </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-                        <label>Email:</label>
-                        <input name="email" type="email" class="form-control kt-input" placeholder="E.g: 37000-300" data-col-index="1">
+                        <label>Trạng thái:</label>
+                        @Html.DropDownList("status", (SelectList)ViewBag.Status, "--Chọn trạng thái--", htmlAttributes: new { @class = "form-control kt-input" })
                     </div>
 
                 </div>
@@ -79,7 +80,7 @@
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Ngày tạo:</label>
                         <div class="input-daterange input-group" id="kt_datepicker">
-                            <input type="date" class="form-control kt-input" name="start" placeholder="From" data-col-index="5" />
+                            <input type="date" class="form-control kt-input" placeholder="From" data-col-index="5" />
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="la la-ellipsis-h"></i></span>
                             </div>
@@ -87,11 +88,15 @@
                         </div>
                     </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-                        @*<label>Trạng thái:</label>
-                            @Html.DropDownList("status", (SelectList)ViewBag.Status, "--Chọn trạng thái--", htmlAttributes: new { @class = "form-control kt-input" })*@
-                        @*<select class="form-control kt-input" data-col-index="6">
-                                <option value="">Select</option>
-                            </select>*@
+                        <label>Option:</label>
+                        <div class="form-control kt-input">
+                            <label class="kt-checkbox kt-checkbox--bold kt-checkbox--brand ">
+                                <input class="form-control kt-input" type="checkbox"> Tìm liên tiếp nhiều thuộc tính
+                                <span></span>
+                            </label>
+                        </div>
+                     
+
                     </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Type:</label>
@@ -144,7 +149,7 @@
 
                             <td class="sorting_1" tabindex="0">
                                 <div class="kt-user-card-v2">
-                                    <div class="kt-user-card-v2__pic" >
+                                    <div class="kt-user-card-v2__pic">
                                         <img src=@item.product.Image class="m-img-rounded kt-marginless" alt="photo">
                                     </div>
                                     <div class="kt-user-card-v2__details">
@@ -157,9 +162,9 @@
 
 
                             <td>
-                        @*        @Html.DisplayFor(x => item.product.Price)*@
+                                @*        @Html.DisplayFor(x => item.product.Price)*@
 
-                               @Convert.ToDecimal(item.product.Price).ToString("#,##0")
+                                @Convert.ToDecimal(item.product.Price).ToString("#,##0")
                                 @*@item.product.Price*@
                             </td>
                             <td>    @Convert.ToDecimal(item.product.PromotionPrice).ToString("#,##0")</td>
