@@ -1,0 +1,110 @@
+﻿
+@model Model.ViewModel.InvoiceViewModel
+
+@{
+    ViewBag.Title = "Chi tiết hóa đơn";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+@Session cssHeader{
+<link href="~/assets/admin/css/pages/invoices/invoice-2.css" rel="stylesheet" />
+}
+<!-- begin:: Content -->
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+    <div class="kt-portlet">
+        <div class="kt-portlet__body kt-portlet__body--fit">
+            <div class="kt-invoice-2">
+                <div class="kt-invoice__head">
+                    <div class="kt-invoice__container">
+                        <div class="kt-invoice__brand">
+                            <h1 class="kt-invoice__title">HÓA ĐƠN</h1>
+                            <div href="#" class="kt-invoice__logo">
+                                <a href="#"><img src="/assets/admin/media/company-logos/logo_client_color.png"></a>
+                                <span class="kt-invoice__desc">
+                                    <span>Cecilia Chapman, 711-2880 Nulla St, Mankato</span>
+                                    <span>Mississippi 96522</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="kt-invoice__items">
+                            <div class="kt-invoice__item">
+                                <span class="kt-invoice__subtitle">Ngày mua hàng</span>
+                                <span class="kt-invoice__text">@Model.order.CreatedDate</span>
+                            </div>
+                            <div class="kt-invoice__item">
+                                <span class="kt-invoice__subtitle">Số hóa đơn</span>
+                                <span class="kt-invoice__text">HD @Model.order.ID</span>
+                            </div>
+                            <div class="kt-invoice__item">
+                                <span class="kt-invoice__subtitle">Địa chỉ giao hàng</span>
+                                <span class="kt-invoice__text">@Model.order.ShipAddress</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-invoice__body">
+                    <div class="kt-invoice__container">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Giá sản phẩm</th>
+                                        <th>Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.orderDetails)
+                                    {
+                                       
+                                        var money = @item.product.Price.Value * @item.orderDetail.Quantity.Value;
+                                        <tr>
+                                            <td>@item.product.Name</td>
+                                            <td>@item.orderDetail.Quantity</td>
+                                            <td> @Convert.ToDecimal(item.product.Price).ToString("#,##0")</td>
+                                            <td class="kt-font-danger kt-font-lg"> @Convert.ToDecimal(money).ToString("#,##0")</td>
+                                        </tr>
+                                    }
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-invoice__footer">
+                    <div class="kt-invoice__container">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Khách hàng</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Email</th>
+                                        <th>Số tiền thanh toán</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@Model.order.ShipName</td>
+                                        <td>@Model.order.ShipMobile</td>
+                                        <td>@Model.order.ShipEmail</td>
+                                        <td class="kt-font-danger kt-font-xl kt-font-boldest">@Convert.ToDecimal((Model.orderDetails.Sum(x => x.product.Price * x.orderDetail.Quantity))).ToString("#,##0") </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-invoice__actions">
+                    <div class="kt-invoice__container">
+                        <button type="button" class="btn btn-label-brand btn-bold" onclick="window.print();">Download Invoice</button>
+                        <button type="button" class="btn btn-brand btn-bold" onclick="window.print();">Print Invoice</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- end:: Content -->
