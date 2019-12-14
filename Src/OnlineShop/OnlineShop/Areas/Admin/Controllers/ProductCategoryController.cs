@@ -16,9 +16,20 @@ namespace OnlineShop.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Index(string parentName,string childName)
         {
+            SetViewBagAllCategory();
+            var dao = new ProductCategoryDao();
+            var listProductCategory = dao.ListAll();
+            return View(listProductCategory);
+        }
+
+
+
+        [HttpGet]
+        public ActionResult TreeMode(string parentName, string childName)
+        {
             List<TreeViewNode> nodes = new List<TreeViewNode>();
             var dao = new ProductCategoryDao();
-            var entities = dao.GetListProductCategory(parentName,childName);
+            var entities = dao.GetListProductCategory(parentName, childName);
 
 
             //Loop and add the Parent Nodes.
@@ -44,12 +55,70 @@ namespace OnlineShop.Areas.Admin.Controllers
             ViewBag.Json = (new JavaScriptSerializer()).Serialize(nodes);
             return View();
         }
-
-        [HttpPost]
-        public ActionResult Index(string selectedItems)
+        void SetViewBagAllCategory()
         {
-            List<TreeViewNode> items = (new JavaScriptSerializer()).Deserialize<List<TreeViewNode>>(selectedItems);
-            return RedirectToAction("Index");
+            var dao = new ProductCategoryDao();
+            ViewBag.AllCategory = dao.ListParentCategorys();
+            ViewBag.Status = new SelectList(new[]
+           {
+                                    new { ID="true", Status="Đã kích hoạt" },
+                                    new { ID="false", Status="Khóa" },
+                                }, "ID", "Status", true);
+
+
+
         }
+
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            ViewBagCategory();
+            ProductCategory productCategory = new ProductCategory();
+            productCategory.Status = false;
+            productCategory.ShowOnHome = true;
+            return View(productCategory);
+        }
+
+        public ActionResult Create(ProductCategory user)
+        {
+            var dao = new ProductCategoryDao();
+            user.Status = true;
+            ViewBagCategory();
+            if (ModelState.IsValid)
+            {
+
+                long id = dao.Insert(user);
+                if (id > 0)
+                {
+
+                    // chuyển hướng trang về admin/User/index
+                    var result = dao.ListAll();
+                    return RedirectToAction("Index", "ProductCategory", result);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thêm không thành công");
+                }
+
+
+
+            }
+            else
+            {
+                ModelState.AddModelError("", "Form lỗi");
+            }
+
+            return View("Create");
+        }
+        void ViewBagCategory()
+        {
+
+            var dao = new ProductCategoryDao();
+            SelectList a = new SelectList(dao.ListParentCategorys(), "ID", "Name", null);
+            ViewBag.CategoryID = new SelectList(dao.ListParentCategorys(), "ID", "Name", null);
+
+        }
+
     }
 }

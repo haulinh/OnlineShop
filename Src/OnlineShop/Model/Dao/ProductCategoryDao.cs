@@ -62,14 +62,30 @@ namespace Model.Dao
         {
             return db.ProductCategories.Find(id);
         }
+
+        public long Insert(ProductCategory entity)
+        {
+            entity.CreatedDate = DateTime.Now;
+            db.ProductCategories.Add(entity);
+            db.SaveChanges();
+            return entity.ID;
+        }
+
+
         public List<ProductCategory> ListAll()
         {
             return db.ProductCategories.Where(x => x.Status == true).OrderBy(x => x.DisplayOrder).ToList();
         }
 
+        public List<ProductCategory> ListParentCategorys()
+        {
+            return db.ProductCategories.Where(x => x.Status == true && x.ParentID == null).OrderBy(x => x.CreatedDate).ToList();
+        }
+
+
         public List<ProductCategory> ListChildCaterogys()
         {
-            return db.ProductCategories.Where(x => x.Status == true && x.ParentID!=null).OrderBy(x => x.ID).ToList();
+            return db.ProductCategories.Where(x => x.Status == true && x.ParentID!=null).OrderBy(x => x.CreatedDate).ToList();
         }
 
     }
