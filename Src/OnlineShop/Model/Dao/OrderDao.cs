@@ -37,14 +37,13 @@ namespace Model.Dao
                                     on d.ProductID equals p.ID
                                     select new OrderDetailViewModel
                                     {
-                                        orderDetail=d,
-                                        product=p,
+                                        orderDetail = d,
+                                        product = p,
                                     }
                                     ).ToList(),
                                 };
 
-            return userViewModel.OrderBy(x => x.order.CreatedDate).ToList();
-
+            return userViewModel.OrderByDescending(x=>x.order.CreatedDate).ToList();
         }
 
 

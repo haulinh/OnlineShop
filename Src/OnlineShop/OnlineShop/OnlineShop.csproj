@@ -2032,6 +2032,7 @@
     <Content Include="Areas\Admin\Views\ProductCategory\TreeMode.cshtml" />
     <Content Include="Areas\Admin\Views\ProductCategory\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Invoice\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\Invoice\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
