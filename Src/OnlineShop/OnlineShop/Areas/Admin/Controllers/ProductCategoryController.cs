@@ -14,11 +14,11 @@ namespace OnlineShop.Areas.Admin.Controllers
     {
         // GET: Admin/ProductCategory
         [HttpGet]
-        public ActionResult Index(string parentName,string childName)
+        public ActionResult Index(string name="",long? parrentId=null,bool? status=null)
         {
             SetViewBagAllCategory();
             var dao = new ProductCategoryDao();
-            var listProductCategory = dao.ListAll();
+            var listProductCategory = dao.ListAllForManager(name,parrentId,status);
             return View(listProductCategory);
         }
 

@@ -69,7 +69,7 @@
 
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Lọc danh mục cha:</label>
-                        @Html.DropDownList("CategoryID", new SelectList(ViewBag.AllCategory, "ID", "Name"), "---Chọn loại sản phẩm---", new { @class = "form-control kt-selectpicker", @data_live_search = "true" })
+                        @Html.DropDownList("parrentId", new SelectList(ViewBag.AllCategory, "ID", "Name"), "---Chọn loại sản phẩm---", new { @class = "form-control kt-selectpicker", @data_live_search = "true" })
                     </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Trạng thái:</label>

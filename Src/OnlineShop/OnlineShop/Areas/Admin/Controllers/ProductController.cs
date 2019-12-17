@@ -11,11 +11,11 @@ namespace OnlineShop.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         // GET: Admin/Product
-        public ActionResult Index(int? CategoryID)
+        public ActionResult Index(string name = "", long? masp =null,bool? status=null,int? CategoryID=null)
         {
             SetViewBagAllCategory();
             var dao = new ProductDao();
-            var listProduct = dao.GetListProduct();
+            var listProduct = dao.GetListProduct(name,masp,status,CategoryID);
             return View(listProduct);
         }
 
@@ -31,10 +31,11 @@ namespace OnlineShop.Areas.Admin.Controllers
         {
             var dao = new ProductDao();
             user.Status = true;
+            var listProduct = dao.GetListProduct();
             ViewBagCategory();
             if (ModelState.IsValid)
             {
- 
+                    user.MetaTitle += listProduct.Count();
                     long id = dao.Insert(user);
                     if (id > 0)
                     {

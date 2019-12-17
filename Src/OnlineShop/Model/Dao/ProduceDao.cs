@@ -43,7 +43,7 @@ namespace Model.Dao
         }
 
 
-        public List<ProductViewModel> GetListProduct()
+        public List<ProductViewModel> GetListProduct(string name = "", long? masp = null, bool? status = null, int? CategoryID = null)
         {
             List<Product> users = db.Products.ToList();
             List<ProductCategory> groups = db.ProductCategories.ToList();
@@ -55,6 +55,48 @@ namespace Model.Dao
                                     product = u,
                                     category = g,
                                 };
+
+            if (!String.IsNullOrEmpty(name))
+            {
+                userViewModel=userViewModel.Where(x => x.product.Name.Contains(name));
+            }
+
+            if (masp!=null)
+            {
+                userViewModel = userViewModel.Where(x => x.product.ID==masp);
+            }
+
+
+
+            if (status != null)
+            {
+                userViewModel = userViewModel.Where(x => x.product.Status == status);
+            }
+
+            
+            if (CategoryID != null)
+            {
+                var cateDao = new ProductCategoryDao();
+                var cate = cateDao.ViewDetail(CategoryID.Value);
+                if(cate.ParentID!=null)
+                {
+                    userViewModel = userViewModel.Where(x => x.category.ID == CategoryID);
+                }
+                else
+                {
+
+                    userViewModel = userViewModel.Where(x => x.category.ParentID == CategoryID);
+           
+
+                }
+
+
+              
+            }
+
+
+
+
 
             return userViewModel.OrderBy(x => x.product.CreatedDate).ToList();
 

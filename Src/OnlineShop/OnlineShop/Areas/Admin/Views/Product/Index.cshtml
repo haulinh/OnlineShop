@@ -59,7 +59,7 @@
                 <div class="row kt-margin-b-20">
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Mã sản phẩm:</label>
-                        <input type="text" class="form-control kt-input" placeholder="Nhận mã sản phẩm" data-col-index="0">
+                        <input name="masp" type="text" class="form-control kt-input" placeholder="Nhận mã sản phẩm" data-col-index="0">
                     </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Tên sản phẩm:</label>
@@ -95,16 +95,17 @@
                                 <span></span>
                             </label>
                         </div>
-                     
+
 
                     </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-                        <label>Type:</label>
-                        @*@Html.DropDownList("userGroup", new SelectList(ViewBag.UserGroups, "ID", "Name  "), "--Chọn nhóm --", htmlAttributes: new { @class = "form-control kt-input" })*@
-                        @*<select class="form-control kt-input" data-col-index="7">
-                                <option value="">Select</option>
-                            </select>*@
-                    </div>
+                        <label>Số lượng</label>
+                        <div class="form-control kt-input">
+                            <label>0</label>
+                            <input type="range" min="0" max="100" value="10" />
+                            <label>100</label>
+                        </div>
+                    </div>  
                 </div>
                 <div class="kt-separator kt-separator--md kt-separator--dashed"></div>
                 <div class="row">
@@ -116,7 +117,7 @@
                             </span>
                         </button>
                         &nbsp;&nbsp;
-                        <a href="Admin/Account/Index" class="btn btn-secondary btn-secondary--icon">
+                        <a href="Admin/Product/Index" class="btn btn-secondary btn-secondary--icon">
                             <i class="la la-close"></i>
                             <span>Reset</span>
                         </a>

@@ -74,8 +74,39 @@ namespace Model.Dao
 
         public List<ProductCategory> ListAll()
         {
+
             return db.ProductCategories.Where(x => x.Status == true).OrderBy(x => x.DisplayOrder).ToList();
         }
+
+
+        public List<ProductCategory> ListAllForManager(string name = "", long? parrentId = null, bool? status = null)
+        {
+            var cate = db.ProductCategories.ToList();
+
+            if (!String.IsNullOrEmpty(name))
+            {
+                cate = cate.Where(x => x.Name.Contains(name)).ToList();
+            }
+
+            if (parrentId!=null)
+            {
+                cate = cate.Where(x => x.ParentID==parrentId).ToList();
+            }
+
+            if (status != null)
+            {
+                cate = cate.Where(x => x.Status == status).ToList();
+            }
+
+
+
+
+            return cate.ToList();
+        }
+
+
+
+
 
         public List<ProductCategory> ListParentCategorys()
         {
