@@ -3,7 +3,7 @@
     <a href="cart.html" class="nav-link" data-toggle="dropdown">
         <i class="ec ec-shopping-bag"></i>
         <span class="cart-items-count count">@Model.Count()</span>
-        <span class="cart-items-total-price total-price"><span class="amount">&#36;@(Model.Sum(x=>x.Product.Price*x.Quantity))</span></span>
+        <span class="cart-items-total-price total-price"><span class="amount">@(Model.Sum(x=>x.Product.Price*x.Quantity))</span></span>
     </a>
     <ul class="dropdown-menu dropdown-menu-mini-cart">
         <li>
@@ -19,7 +19,7 @@
                                 <img class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" src="@item.Product.Image" alt="">@item.Product.Name&nbsp;
                             </a>
 
-                            <span class="quantity">@item.Quantity × <span class="amount">@item.Product.Price</span></span>
+                            <span class="quantity">@item.Quantity × <span class="amount"> @Convert.ToDecimal(@item.Product.Price).ToString("#,##0")</span></span>
                         </li>
 
                     }

@@ -135,7 +135,7 @@
 
                         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 
-                            <p class="price"><span class="electro-price"><ins><span class="amount">&#36;@Model.PromotionPrice</span></ins> <del><span class="amount">&#36;@Model.Price</span></del></span></p>
+                            <p class="price"><span class="electro-price"><ins><span class="amount">@Convert.ToDecimal(Model.PromotionPrice).ToString("#,##0")</span></ins> <del><span class="amount">@Convert.ToDecimal(Model.Price).ToString("#,##0")</span></del></span></p>
 
                             <meta itemprop="price" content="1215" />
                             <meta itemprop="priceCurrency" content="VND" />

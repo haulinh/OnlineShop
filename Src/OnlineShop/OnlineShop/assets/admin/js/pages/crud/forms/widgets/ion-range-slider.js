@@ -4,6 +4,9 @@ var KTIONRangeSlider = function () {
     
     // Private functions
     var demos = function () {
+        var yourValue = '@ViewBag.minQ';
+        var min = parseFloat($("#minQ").val());
+        var max = parseFloat($("#maxQ").val());
         // basic demo
         $('#kt_slider_1').ionRangeSlider();
 
@@ -20,9 +23,9 @@ var KTIONRangeSlider = function () {
             grid: true,
             min: 0,
             max: 1000,
-            from: 200,
-            to: 800,
-            prefix: "$"
+            from: min,
+            to: max,
+            prefix: ""
         });
 
         // range & step

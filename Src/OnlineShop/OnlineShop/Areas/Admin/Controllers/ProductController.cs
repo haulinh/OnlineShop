@@ -11,11 +11,27 @@ namespace OnlineShop.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         // GET: Admin/Product
-        public ActionResult Index(string name = "", long? masp =null,bool? status=null,int? CategoryID=null)
+        public ActionResult Index(string name = "", long? masp =null,bool? status=null,int? CategoryID=null,string rank="")
         {
             SetViewBagAllCategory();
+            int? minQ=0;
+            int? maxQ=1000;
+
+            if (!String.IsNullOrEmpty(rank))
+            {
+                var items = rank.Split(';');
+                minQ = Convert.ToInt32(items[0]);
+                maxQ = Convert.ToInt32(items[1]);
+                var quantity = new int[2];
+                quantity[0] = minQ.Value;
+                quantity[1] = maxQ.Value;
+
+                
+            }
+            ViewBag.minQ = minQ.Value;
+            ViewBag.maxQ = maxQ.Value;
             var dao = new ProductDao();
-            var listProduct = dao.GetListProduct(name,masp,status,CategoryID);
+            var listProduct = dao.GetListProduct(name,masp,status,CategoryID,minQ,maxQ);
             return View(listProduct);
         }
 
@@ -36,6 +52,7 @@ namespace OnlineShop.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                     user.MetaTitle += listProduct.Count();
+          
                     long id = dao.Insert(user);
                     if (id > 0)
                     {

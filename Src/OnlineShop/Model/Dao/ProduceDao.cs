@@ -43,8 +43,14 @@ namespace Model.Dao
         }
 
 
-        public List<ProductViewModel> GetListProduct(string name = "", long? masp = null, bool? status = null, int? CategoryID = null)
+        public int CountProduct()
         {
+            return db.Products.Count();
+        }
+
+        public List<ProductViewModel> GetListProduct(string name = "", long? masp = null, bool? status = null, int? CategoryID = null,int? minQ=null,int? maxQ=null)
+        {
+
             List<Product> users = db.Products.ToList();
             List<ProductCategory> groups = db.ProductCategories.ToList();
             var userViewModel = from u in users
@@ -94,6 +100,10 @@ namespace Model.Dao
               
             }
 
+            if (minQ!=null && maxQ!=null)
+            {
+                userViewModel = userViewModel.Where(x => x.product.Quantity >=minQ && x.product.Quantity<=maxQ);
+            }
 
 
 

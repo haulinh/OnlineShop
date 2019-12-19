@@ -119,8 +119,8 @@
                                                                 <div class="price-add-to-cart">
                                                                     <span class="price">
                                                                         <span class="electro-price">
-                                                                            <ins><span class="amount">@item.product.PromotionPrice</span></ins>
-                                                                            <del><span class="amount">@item.product.Price</span></del>
+                                                                            <ins><span class="amount"> @Convert.ToDecimal(@item.product.PromotionPrice).ToString("#,##0")</span></ins>
+                                                                            <del><span class="amount">@Convert.ToDecimal(@item.product.Price).ToString("#,##0") </span></del>
                                                                             <span class="amount"> </span>
                                                                         </span>
                                                                     </span>
@@ -1452,11 +1452,11 @@
                             </a>
                             @if (item.PromotionPrice != 0 && item.PromotionPrice != null)
                             {
-                                <span class="electro-price"><ins><span class="amount">&#36;@item.PromotionPrice</span></ins> <del><span class="amount">&#36;@item.Price</span></del></span>
+                                <span class="electro-price"><ins><span class="amount">@Convert.ToDecimal(@item.PromotionPrice).ToString("#,##0")</span></ins> <del><span class="amount">@Convert.ToDecimal(@item.Price).ToString("#,##0")</span></del></span>
                             }
                             else
                             {
-                                <span class="electro-price"><ins><span class="amount">&#36;@item.Price</span></ins> <del></del></span>
+                                <span class="electro-price"><ins><span class="amount">@Convert.ToDecimal(@item.Price).ToString("#,##0")</span></ins> <del></del></span>
                             }
 
 

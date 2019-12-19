@@ -1,14 +1,14 @@
-﻿@model IEnumerable<Model.ViewModel.ProductViewModel>
+﻿
+
+@model IEnumerable<Model.EntityFramework.Slide>
 
 @{
-    ViewBag.Title = "Sản phẩm";
+    ViewBag.Title = "Slide";
     Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
 }
 
 @section jsFooter
     {
-    <script src="/assets/admin/js/pages/crud/forms/widgets/ion-range-slider.js" type="text/javascript"></script>
-
     <script src="/assets/admin/js/pages/crud/forms/widgets/bootstrap-select.js" type="text/javascript"></script>
     <script src="/assets/admin/js/pages/crud/forms/widgets/bootstrap-datepicker.js" type="text/javascript"></script>
     <script src="assets/admin/js/pages/crud/datatables/extensions/buttons.js" type="text/javascript"></script>
@@ -31,8 +31,12 @@
                     <i class="kt-font-brand flaticon2-line-chart"></i>
                 </span>
                 <h3 class="kt-portlet__head-title">
-                    Quản lý Sản phẩm
+                    Quản lý danh mục sản phẩm    ----
                 </h3>
+                <a href="Admin/ProductCategory/TreeMode" class="btn btn-secondary btn-secondary--icon">
+                    <i class="la la-tree"></i>
+                    <span>Chế độ cây</span>
+                </a>
             </div>
             <div class="kt-portlet__head-toolbar">
                 <div class="kt-portlet__head-wrapper">
@@ -43,7 +47,7 @@
                                 <i class="flaticon2-plus"></i> Add New
                             </button>*@
 
-                        @Html.ActionLink("Thêm Sản phẩm", "Create", "Product", null, new { @class = "flaticon2-plus btn btn-brand btn-icon-sm" })
+                        @Html.ActionLink("Thêm Loại Sản phẩm", "Create", "ProductCategory", null, new { @class = "flaticon2-plus btn btn-brand btn-icon-sm" })
 
 
                     </div>
@@ -53,24 +57,21 @@
 
 
         <div class="kt-portlet__body">
-            @using (Html.BeginForm("Index", "Product", FormMethod.Get, new { @class = "kt-form kt-form--fit kt-margin-b-20" }))
+            @using (Html.BeginForm("Index", "ProductCategory", FormMethod.Get, new { @class = "kt-form kt-form--fit kt-margin-b-20" }))
             {
 
                 <!--begin: Search Form -->
 
                 <div class="row kt-margin-b-20">
+
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-                        <label>Mã sản phẩm:</label>
-                        <input name="masp" type="text" class="form-control kt-input" placeholder="Nhận mã sản phẩm" data-col-index="0">
-                    </div>
-                    <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-                        <label>Tên sản phẩm:</label>
-                        <input name="name" type="text" class="form-control kt-input" placeholder="Nhận tên sản phẩm" data-col-index="1">
+                        <label>Tên danh mục:</label>
+                        <input name="name" type="text" class="form-control kt-input" placeholder="Nhận tên danh mục" data-col-index="1">
                     </div>
 
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-                        <label>Loại sản phẩm:</label>
-                        @Html.DropDownList("CategoryID", new SelectList(ViewBag.AllCategory, "ID", "Name"), "---Chọn loại sản phẩm---", new { @class = "form-control kt-selectpicker", @data_live_search = "true" })
+                        <label>Lọc danh mục cha:</label>
+                        @Html.DropDownList("parrentId", new SelectList(ViewBag.AllCategory, "ID", "Name"), "---Chọn loại sản phẩm---", new { @class = "form-control kt-selectpicker", @data_live_search = "true" })
                     </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Trạng thái:</label>
@@ -101,13 +102,11 @@
 
                     </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-                        <label>Số lượng</label>
-                        <div class="col-lg-8 col-md-9 col-sm-12">
-                                @Html.Hidden("minQ", (int)ViewBag.minQ)
-                                @Html.Hidden("maxQ", (int)ViewBag.maxQ)
-                                <input class="form-control kt-input" name="rank" type="hidden" id="kt_slider_3" />
-                    
-                        </div>
+                        <label>Type:</label>
+                        @*@Html.DropDownList("userGroup", new SelectList(ViewBag.UserGroups, "ID", "Name  "), "--Chọn nhóm --", htmlAttributes: new { @class = "form-control kt-input" })*@
+                        @*<select class="form-control kt-input" data-col-index="7">
+                                <option value="">Select</option>
+                            </select>*@
                     </div>
                 </div>
                 <div class="kt-separator kt-separator--md kt-separator--dashed"></div>
@@ -120,13 +119,14 @@
                             </span>
                         </button>
                         &nbsp;&nbsp;
-                        <a href="Admin/Product/Index" class="btn btn-secondary btn-secondary--icon">
+                        <a href="Admin/ProductCategory/Index" class="btn btn-secondary btn-secondary--icon">
                             <i class="la la-close"></i>
                             <span>Reset</span>
                         </a>
 
 
                     </div>
+
                 </div>
             }
 
@@ -135,66 +135,71 @@
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th>STT</th>
-                        <th>Tên Sản phẩm</th>
-
-                        <th>Giá</th>
-                        <th>Giá khuyến mãi</th>
-                        <th>Số lượng</th>
+                        <th>Tên danh mục</th>
+                        <th>Danh mục cha</th>
+                        <th>Ngày tạo</th>
+                        <th>Người tạo</th>
                         <th>Status</th>
-                        <th>Loại sản phẩm</th>
+                        <th>Hiển thị trang chủ</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
+                        long ParrentID = 0;
+                        if (@item.ParentID.HasValue) { ParrentID = item.ParentID.Value; }
                         <tr>
                             <td>1</td>
-                            <td>1</td>
-                            <td class="sorting_1" tabindex="0">
-                                <div class="kt-user-card-v2">
-                                    <div class="kt-user-card-v2__pic">
-                                        <img src=@item.product.Image class="m-img-rounded kt-marginless" alt="photo">
-                                    </div>
-                                    <div class="kt-user-card-v2__details">
-                                        <span class="kt-user-card-v2__name">@item.product.Name</span>
-                                        @*  <a href="#" class="kt-user-card-v2__email kt-link">Ruecker, Leffler and Abshire</a>*@
-                                    </div>
-                                </div>
+                            <td>
+                                @item.Name
                             </td>
 
-
-
                             <td>
-                                @*        @Html.DisplayFor(x => item.product.Price)*@
+                                @{
+                                    var parent = Model.FirstOrDefault(x => x.ID == ParrentID);
+                                }
+                                @if (parent != null)
+                                {
+                                    <a> @parent.Name</a>
+                                }
+                                else
+                                {
+                                    <span class="kt-badge kt-badge--info kt-badge--inline kt-badge--pill">Không có</span>
 
-                                @Convert.ToDecimal(item.product.Price).ToString("#,##0")
-                                @*@item.product.Price*@
-                            </td>
-                            <td>    @Convert.ToDecimal(item.product.PromotionPrice).ToString("#,##0")</td>
-                            <td>@item.product.Quantity</td>
-
-
-
-                            <td>
-                                <span class="kt-badge kt-badge--brand kt-badge--inline kt-badge--pill">@item.product.Status</span>
+                                }
 
                             </td>
-                            <td>@item.category.Name</td>
+                            <td> @item.CreatedDate.Value.ToString("dd/MM/yyyy")</td>
+                            <td> @item.CreatedBy</td>
+                            <td> @item.Status</td>
 
+                            @if (item.ShowOnHome != null && item.ShowOnHome.Value)
+                            {
+                                <td>
+                                    <span class="kt-badge kt-badge--brand kt-badge--inline kt-badge--pill">Hiển thị</span>
+
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill">Đã Ẩn</span>
+
+                                </td>
+                            }
 
                             <td>
-                                <a href="/Admin/Account/ViewDetail/@item.product.ID" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Xem chi tiết">
+                                <a href="/Admin/Account/ViewDetail/" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Xem chi tiết">
                                     <i class="la la-eye"></i>
                                 </a>
 
 
-                                <a href="/Admin/Account/Edit/@item.product.ID" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Chỉnh sửa">
+                                <a href="/Admin/Account/Edit/" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Chỉnh sửa">
                                     <i class="la la-edit"></i>
                                 </a>
 
-                                <a title="Kích hoạt" data-id="@item.product.ID" class="btn-active btn btn-sm btn-clean btn-icon btn-icon-md">
+                                <a title="Kích hoạt" data-id="" class="btn-active btn btn-sm btn-clean btn-icon btn-icon-md">
                                     <i class="la la-check"></i>
                                 </a>
                             </td>
@@ -204,13 +209,12 @@
                 <tfoot>
                     <tr>
                         <th>STT</th>
-                        <th>Tên Sản phẩm</th>
-
-                        <th>Giá</th>
-                        <th>Giá khuyến mãi</th>
-                        <th>Số lượng</th>
+                        <th>Tên danh mục</th>
+                        <th>Danh mục cha</th>
+                        <th>Ngày tạo</th>
+                        <th>Người tạo</th>
                         <th>Status</th>
-                        <th>Loại sản phẩm</th>
+                        <th>Hiển thị trang chủ</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>
