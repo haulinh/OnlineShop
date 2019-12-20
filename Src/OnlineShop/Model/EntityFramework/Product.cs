@@ -42,6 +42,14 @@
 
         [DataType(DataType.Currency)]
 
+        public decimal? OrginalPrice { get; set; }
+
+
+        [DisplayName("Giá bán")]
+        [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
+
+        [DataType(DataType.Currency)]
+
         public decimal? Price { get; set; }
 
 

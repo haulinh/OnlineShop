@@ -119,5 +119,12 @@ namespace Model.Dao
             return db.ProductCategories.Where(x => x.Status == true && x.ParentID!=null).OrderBy(x => x.CreatedDate).ToList();
         }
 
+
+        public ProductCategory Detail(long id)
+        {
+            return db.ProductCategories.Find(id);
+
+        }
+
     }
 }

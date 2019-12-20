@@ -11,6 +11,7 @@
 
             @foreach (var item in Model.Where(x => x.ParentID == null))
             {
+                 var link ="/san-pham/" +item.MetaTitle + "-" + item.ID;
                 var child = Model.Where(x => x.ParentID == item.ID);
                 if (child.Count() == 0)
                 {
@@ -19,7 +20,7 @@
                 else
                 {
                     <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown menu-item-2584 dropdown">
-                        <a title="Computers &amp; Accessories" href="product-category.html" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">@item.Name</a>
+                        <a href="@link"  class="dropdown-toggle" >A @item.Name</a>
                         <ul role="menu" class=" dropdown-menu">
                             <li class="menu-item animate-dropdown menu-item-object-static_block">
                                 <div class="yamm-content">
@@ -46,10 +47,11 @@
                                                                 <li class="nav-title">@item.Name</li>
                                                                 @foreach (var sitem in child)
                                                                 {
-                                                                    <li><a href="#">@sitem.Name</a></li>
+                                                                        var slink ="/san-pham/" +item.MetaTitle + "-" + sitem.ID;
+                                                                    <li><a href="@slink">@sitem.Name</a></li>
                                                                 }                            
                                                                 <li class="nav-divider"></li>
-                                                                <li><a href="#"><span class="nav-text">All Electronics</span><span class="nav-subtext">Discover more products</span></a></li>
+                                                                <li><a href="@link"><span class="nav-text">All Electronics</span><span class="nav-subtext">Discover more products</span></a></li>
                                                             </ul>
 
                                                         </div>

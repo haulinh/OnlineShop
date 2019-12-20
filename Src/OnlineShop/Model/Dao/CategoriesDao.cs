@@ -28,7 +28,7 @@ namespace Model.Dao
         {
             return db.Categories.OrderBy(x => x.ID).ToList();
         }
-        public Category CategoryDetail(int ID)
+        public Category CategoryDetail(long ID)
         {
             return db.Categories.Find(ID);
         }

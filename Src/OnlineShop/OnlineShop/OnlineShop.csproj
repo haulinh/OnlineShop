@@ -151,6 +151,7 @@
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\SlideController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StatisticalController.cs" />
     <Compile Include="Areas\Admin\Controllers\TagController.cs" />
     <Compile Include="Areas\Admin\Controllers\TestController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserGroupController.cs" />
@@ -2088,6 +2089,7 @@
     <Content Include="Views\Shared\ProductCategory.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Content\Detail.cshtml" />
+    <Content Include="Views\Product\Category.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2095,6 +2097,7 @@
     <Folder Include="Areas\Admin\Views\Contact\" />
     <Folder Include="Areas\Admin\Views\Footer\" />
     <Folder Include="Areas\Admin\Views\Menu\" />
+    <Folder Include="Areas\Admin\Views\Statistical\" />
     <Folder Include="assets\admin\plugins\general\ion-rangeslider\img\" />
   </ItemGroup>
   <ItemGroup>

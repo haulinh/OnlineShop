@@ -138,8 +138,12 @@ namespace Model.EntityFramework
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<Product>()
-                .Property(e => e.CreatedBy)
-                .IsUnicode(false);
+               .Property(e => e.OrginalPrice)
+               .HasPrecision(18, 0);
+
+            modelBuilder.Entity<Product>()
+                    .Property(e => e.CreatedBy)
+                    .IsUnicode(false);
 
             modelBuilder.Entity<Product>()
                 .Property(e => e.ModifiedBy)

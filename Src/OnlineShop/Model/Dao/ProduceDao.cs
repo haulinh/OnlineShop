@@ -15,6 +15,34 @@ namespace Model.Dao
             db = new OnlineShopDbContext();
         }
 
+        public List<ProductViewModel> ListByCategoryId(long categoryID, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
+        {
+            totalRecord = db.Products.Where(x => x.CategoryID == categoryID).Count();
+            List<Product> products = db.Products.ToList();
+            List<ProductCategory> groups = db.ProductCategories.ToList();
+            var cate = db.Categories.Find(categoryID);
+            if (cate.ParentID!=null)
+            {
+                groups = groups.Where(x => x.ID == categoryID).ToList();
+            }
+            else
+            {
+                groups = groups.Where(x => x.ParentID == categoryID).ToList();
+            }
+
+           
+            var model = from u in products
+                                join g in groups
+                                on u.CategoryID equals g.ID
+                                select new ProductViewModel
+                                {
+                                    product = u,
+                                    category = g,
+                                };
+            model.OrderByDescending(x => x.product.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            return model.ToList();
+        }
+
         public List<Product> ListNewProduct(int top)
         {
             return db.Products.OrderByDescending(x => x.CreatedDate).Take(top).ToList();

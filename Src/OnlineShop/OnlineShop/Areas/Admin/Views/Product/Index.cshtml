@@ -17,13 +17,7 @@
 
 <!-- begin:: Content -->
 <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
-    <div class="alert alert-light alert-elevate" role="alert">
-        <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
-        <div class="alert-text">
-            A common UI paradigm to use with interactive tables is to present buttons that will trigger some action.
-            See official documentation <a class="kt-link kt-font-bold" href="https://datatables.net/extensions/buttons/" target="_blank">here</a>.
-        </div>
-    </div>
+
     <div class="kt-portlet">
         <div class="kt-portlet__head kt-portlet__head--lg">
             <div class="kt-portlet__head-label">
@@ -103,10 +97,10 @@
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Số lượng</label>
                         <div class="col-lg-8 col-md-9 col-sm-12">
-                                @Html.Hidden("minQ", (int)ViewBag.minQ)
-                                @Html.Hidden("maxQ", (int)ViewBag.maxQ)
-                                <input class="form-control kt-input" name="rank" type="hidden" id="kt_slider_3" />
-                    
+                            @Html.Hidden("minQ", (int)ViewBag.minQ)
+                            @Html.Hidden("maxQ", (int)ViewBag.maxQ)
+                            <input class="form-control kt-input" name="rank" type="hidden" id="kt_slider_3" />
+
                         </div>
                     </div>
                 </div>
@@ -135,11 +129,9 @@
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th>STT</th>
                         <th>Tên Sản phẩm</th>
-
-                        <th>Giá</th>
-                        <th>Giá khuyến mãi</th>
+                        <th>Thông tin giá</th>
+                        <th>Ngày tạo</th>
                         <th>Số lượng</th>
                         <th>Status</th>
                         <th>Loại sản phẩm</th>
@@ -150,7 +142,6 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>1</td>
                             <td>1</td>
                             <td class="sorting_1" tabindex="0">
                                 <div class="kt-user-card-v2">
@@ -168,8 +159,25 @@
 
                             <td>
                                 @*        @Html.DisplayFor(x => item.product.Price)*@
+                                <ul>
 
-                                @Convert.ToDecimal(item.product.Price).ToString("#,##0")
+                                    Giá Gốc
+                                    <li style="color:blue">
+                                        @Convert.ToDecimal(item.product.Price).ToString("#,##0")
+                                    </li>
+                                    Giá bán
+                                    <li style="color:blue">
+                                        @Convert.ToDecimal(item.product.Price).ToString("#,##0")
+                                    </li>
+                                    Giá Khuyến mãi
+                                    <li style="color:blue">
+                                        @Convert.ToDecimal(item.product.PromotionPrice).ToString("#,##0")
+                                    </li>
+                                </ul>
+                
+                                <ul>
+                                </ul>
+
                                 @*@item.product.Price*@
                             </td>
                             <td>    @Convert.ToDecimal(item.product.PromotionPrice).ToString("#,##0")</td>
