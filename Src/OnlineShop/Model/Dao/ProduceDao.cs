@@ -15,13 +15,13 @@ namespace Model.Dao
             db = new OnlineShopDbContext();
         }
 
-        public List<ProductViewModel> ListByCategoryId(long categoryID, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
+        public List<ProductViewModel> ListByCategoryId(long categoryID, ref int totalRecord, int pageIndex = 1, int pageSize = 2,bool orderPriceIncreate=false)
         {
-            totalRecord = db.Products.Where(x => x.CategoryID == categoryID).Count();
+         
             List<Product> products = db.Products.ToList();
             List<ProductCategory> groups = db.ProductCategories.ToList();
-            var cate = db.Categories.Find(categoryID);
-            if (cate.ParentID!=null)
+            var cate = db.ProductCategories.FirstOrDefault(x=>x.ID==categoryID);
+                if (cate.ParentID!=null)
             {
                 groups = groups.Where(x => x.ID == categoryID).ToList();
             }
@@ -39,7 +39,13 @@ namespace Model.Dao
                                     product = u,
                                     category = g,
                                 };
-            model.OrderByDescending(x => x.product.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+
+            totalRecord =model.Count();
+            model= model.OrderByDescending(x => x.product.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            if (orderPriceIncreate)
+            {
+                model = model.OrderByDescending(x => x.product.Price).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            }
             return model.ToList();
         }
 

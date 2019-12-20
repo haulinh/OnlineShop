@@ -21,14 +21,22 @@ namespace OnlineShop.Controllers
             ViewBag.Category = new ProductCategoryDao().ViewDetail(product.CategoryID);
             return View(product);
         }
-
-        public ActionResult Category(long cateId, int page = 1, int pageSize = 1)
+            
+        public ActionResult Category(long cateId, int page = 1, int pageSize = 15, int orderby=-1)
         {
             var category = new ProductCategoryDao().Detail(cateId);
             ViewBag.Category = category;
 
+
+            bool orderPriceIncreate = false;
+            if (orderby==1)
+            {
+                orderPriceIncreate = true;
+            }
+
+
             int totalRecord = 0;
-            var model = new ProductDao().ListByCategoryId(cateId, ref totalRecord, page, pageSize);
+            var model = new ProductDao().ListByCategoryId(cateId, ref totalRecord, page, pageSize,orderPriceIncreate);
 
             ViewBag.Total = totalRecord;
             ViewBag.Page = page;
@@ -36,14 +44,19 @@ namespace OnlineShop.Controllers
             int maxPage = 5;
             int totalPage = 0;
 
+            int a = totalRecord % pageSize;
             totalPage = (int)Math.Ceiling((double)(totalRecord / pageSize));
+            if (a!=0)
+            {
+                totalPage++;
+            }
             ViewBag.TotalPage = totalPage;
             ViewBag.MaxPage = maxPage;
             ViewBag.First = 1;
             ViewBag.Last = totalPage;
             ViewBag.Next = page + 1;
             ViewBag.Prev = page - 1;
-
+            ViewBag.PageSize = pageSize;
             return View(model);
         }
 
