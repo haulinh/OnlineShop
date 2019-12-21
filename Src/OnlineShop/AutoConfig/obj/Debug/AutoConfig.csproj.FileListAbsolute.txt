@@ -31,7 +31,6 @@ D:\hoc\ASP.net\oad\OnlineShop\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\Aut
 D:\hoc\ASP.net\oad\OnlineShop\Src\OnlineShop\AutoConfig\bin\Debug\AutoConfig.exe.config
 D:\hoc\ASP.net\oad\OnlineShop\Src\OnlineShop\AutoConfig\bin\Debug\AutoConfig.exe
 D:\hoc\ASP.net\oad\OnlineShop\Src\OnlineShop\AutoConfig\bin\Debug\AutoConfig.pdb
-D:\hoc\ASP.net\oad\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.csprojAssemblyReference.cache
 D:\hoc\ASP.net\oad\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.Form1.resources
 D:\hoc\ASP.net\oad\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.Properties.Resources.resources
 D:\hoc\ASP.net\oad\OnlineShop\Src\OnlineShop\AutoConfig\obj\Debug\AutoConfig.csproj.GenerateResource.cache

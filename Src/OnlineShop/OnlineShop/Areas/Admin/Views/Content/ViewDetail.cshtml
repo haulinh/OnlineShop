@@ -1,0 +1,168 @@
+﻿@model Model.EntityFramework.Content
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section jsFooter{
+    <script>
+         var count = 1;
+
+        $('#btnSelectImage').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+
+            finder.selectActionFunction = function (url) {
+
+                if (count > 1) {
+                    return;
+                }
+                $('#txtImage').val(url);
+                $('#divImage').append('<img class="abc" src="' + url + '" />');
+                count++;
+            };
+            finder.popup();
+
+        })
+        var editor = CKEDITOR.replace('txtContent', {
+            customConfig: '/assets/admin/js/plugins/ckeditor/config.js',
+        });
+    </script>
+}
+
+<form class="kt-form kt-form--label-right">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="kt-portlet">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">Chi tiết tin tức<small></small></h3>
+                    </div>
+                    <div class="kt-portlet__head-toolbar">
+                        <div class="kt-portlet__head-wrapper">
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="kt-portlet__body">
+                    <div class="kt-section kt-section--first">
+                        <div class="kt-section__body">
+                            <div class="row">
+                                <label class="col-xl-3"></label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <h3 class="kt-section__title kt-section__title-sm">Thông tin tin tức</h3>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-xl-3 col-lg-3 col-form-label" })
+                                <div class="col-lg-9 col-xl-6">
+                                    @*<input class="form-control" type="text" placeholder="Nhập tên đăng nhập">*@
+                                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @disabled = "disabled", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @*<label class="col-xl-3 col-lg-3 col-form-label">Mật khẩu</label>*@
+                                @Html.LabelFor(model => model.MetaTitle, htmlAttributes: new { @class = "col-xl-3 col-lg-3 col-form-label" })
+                                <div class="col-lg-9 col-xl-6">
+                                    @*<input class="form-control" type="password" placeholder="Nhập mật khẩu">*@
+                                    @Html.TextBoxFor(model => model.MetaTitle, new { @class = "form-control", @disabled = "disabled", @readonly = "readonly" })
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @*<label class="col-xl-3 col-lg-3 col-form-label">Mật khẩu</label>*@
+                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "col-xl-3 col-lg-3 col-form-label" })
+                                <div class="col-lg-9 col-xl-6">
+                                    @*<input class="form-control" type="password" placeholder="Nhập mật khẩu">*@
+                                    @Html.TextBoxFor(model => model.Description, new { @class = "form-control", @disabled = "disabled", @readonly = "readonly" })
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @*<label class="col-xl-3 col-lg-3 col-form-label">Mật khẩu</label>*@
+                                @Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "col-xl-3 col-lg-3 col-form-label" })
+                                <div class="col-lg-9 col-xl-6">
+                                    @*<input class="form-control" type="password" placeholder="Nhập mật khẩu">*@
+                                    @Html.TextAreaFor(model => model.Detail, new { @class = "form-control", @disabled = "disabled", @readonly = "readonly" })
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @*<label class="col-xl-3 col-lg-3 col-form-label">Mật khẩu</label>*@
+                                @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "col-xl-3 col-lg-3 col-form-label" })
+                                <div class="col-lg-9 col-xl-6">
+                                    @Html.TextBoxFor(model => model.Image, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", @id = "txtImage", @readonly = "readonly" }, id = "txtImage" })
+                                    @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @*<label class="col-xl-3 col-lg-3 col-form-label">Mật khẩu</label>*@
+                                @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "col-xl-3 col-lg-3 col-form-label" })
+                                <div class="col-lg-9 col-xl-6">
+                                    @*<input class="form-control" type="password" placeholder="Nhập mật khẩu">*@
+                                    @Html.TextAreaFor(model => model.CreatedDate, new { @class = "form-control", @disabled = "disabled", @readonly = "readonly" })
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @*<label class="col-xl-3 col-lg-3 col-form-label">Mật khẩu</label>*@
+                                @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "col-xl-3 col-lg-3 col-form-label" })
+                                <div class="col-lg-9 col-xl-6">
+                                    @*<input class="form-control" type="password" placeholder="Nhập mật khẩu">*@
+                                    @Html.TextAreaFor(model => model.CreatedBy, new { @class = "form-control", @disabled = "disabled", @readonly = "readonly" })
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @*<label class="col-xl-3 col-lg-3 col-form-label">Mật khẩu</label>*@
+                                @Html.LabelFor(model => model.ModifiedDate, htmlAttributes: new { @class = "col-xl-3 col-lg-3 col-form-label" })
+                                <div class="col-lg-9 col-xl-6">
+                                    @*<input class="form-control" type="password" placeholder="Nhập mật khẩu">*@
+                                    @Html.TextAreaFor(model => model.ModifiedDate, new { @class = "form-control", @disabled = "disabled", @readonly = "readonly" })
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @*<label class="col-xl-3 col-lg-3 col-form-label">Mật khẩu</label>*@
+                                @Html.LabelFor(model => model.ModifiedBy, htmlAttributes: new { @class = "col-xl-3 col-lg-3 col-form-label" })
+                                <div class="col-lg-9 col-xl-6">
+                                    @*<input class="form-control" type="password" placeholder="Nhập mật khẩu">*@
+                                    @Html.TextAreaFor(model => model.ModifiedBy, new { @class = "form-control", @disabled = "disabled", @readonly = "readonly" })
+
+                                </div>
+                            </div>    <div class="form-group row">
+                                @*<label class="col-xl-3 col-lg-3 col-form-label">Mật khẩu</label>*@
+                                @Html.LabelFor(model => model.ViewCount, htmlAttributes: new { @class = "col-xl-3 col-lg-3 col-form-label" })
+                                <div class="col-lg-9 col-xl-6">
+                                    @*<input class="form-control" type="password" placeholder="Nhập mật khẩu">*@
+                                    @Html.TextAreaFor(model => model.ViewCount, new { @class = "form-control", @disabled = "disabled", @readonly = "readonly" })
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-portlet__foot">
+                <div class="kt-form__actions">
+                    <div class="row">
+                        <div class="col-lg-3 col-xl-3">
+                        </div>
+                        <div class="col-lg-9 col-xl-9">
+
+                            @Html.ActionLink("Cancel", "Index", "Account", null, new { @class = "btn btn-secondary" })
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+</form>

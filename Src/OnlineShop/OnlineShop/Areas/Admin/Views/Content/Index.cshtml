@@ -107,8 +107,18 @@
                             <td>@item.CreatedDate</td>
                             <td><a href="#" class="btn-active" data-id="@item.ID">@Html.Raw(item.Status ? "<strong>Kích hoạt</strong>" : "Khoá")</a></td>
                             <td>
-                                <a href="/Admin/Content/Edit/@item.ID">Sửa</a>
-                                
+                                <a href="/Admin/Content/ViewDetail/@item.ID" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Xem chi tiết">
+                                    <i class="la la-eye"></i>
+                                </a>
+
+
+                                <a href="/Admin/Content/Edit/@item.ID" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Chỉnh sửa">
+                                    <i class="la la-edit"></i>
+                                </a>
+
+                                <a title="Kích hoạt" data-id="@item.ID" class="btn-active btn btn-sm btn-clean btn-icon btn-icon-md">
+                                    <i class="la la-check"></i>
+                                </a>
                             </td>
                         </tr>
                         }

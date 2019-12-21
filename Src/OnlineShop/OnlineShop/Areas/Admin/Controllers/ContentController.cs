@@ -72,5 +72,14 @@ namespace OnlineShop.Areas.Admin.Controllers
             var dao = new CategoriesDao();
             ViewBag.CategoryID = new SelectList(dao.ListAll(), "ID", "Name", selectedId);
         }
+
+        [HttpGet]
+        [HaveCredential(RoleID = "VIEW_USER")]
+        public ActionResult ViewDetail(long id)
+        {
+
+            var account = new ContentDao().GetByID(id);
+            return View(account);
+        }
     }
 }
