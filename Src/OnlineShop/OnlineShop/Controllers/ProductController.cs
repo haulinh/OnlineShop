@@ -27,16 +27,12 @@ namespace OnlineShop.Controllers
             var category = new ProductCategoryDao().Detail(cateId);
             ViewBag.Category = category;
 
+            ViewBag.Option = orderby;
 
-            bool orderPriceIncreate = false;
-            if (orderby==1)
-            {
-                orderPriceIncreate = true;
-            }
 
 
             int totalRecord = 0;
-            var model = new ProductDao().ListByCategoryId(cateId, ref totalRecord, page, pageSize,orderPriceIncreate);
+            var model = new ProductDao().ListByCategoryId(cateId, ref totalRecord, page, pageSize, orderby);
 
             ViewBag.Total = totalRecord;
             ViewBag.Page = page;

@@ -20,6 +20,12 @@ namespace OnlineShop.Areas.Admin.Controllers
             SetUserGroupViewBag();
             SetStatusViewBag();
             var dao = new UserDao();
+
+            ViewBag.UserName = userName;
+            ViewBag.Name = name;
+            ViewBag.SDT = sdt;
+            ViewBag.Emai = email;
+
             var listUser = dao.GetListUsers(userName, name, sdt, email, status, userGroup);
             return View(listUser);
         }

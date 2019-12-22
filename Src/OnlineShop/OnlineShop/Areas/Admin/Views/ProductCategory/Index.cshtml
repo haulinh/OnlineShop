@@ -58,7 +58,7 @@
 
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Tên danh mục:</label>
-                        <input name="name" type="text" class="form-control kt-input" placeholder="Nhận tên danh mục" data-col-index="1">
+                        <input value="ViewBag.Name" name="name" type="text" class="form-control kt-input" placeholder="Nhận tên danh mục" data-col-index="1">
                     </div>
 
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
@@ -182,12 +182,12 @@
                         }
 
                         <td>
-                            <a href="/Admin/Account/ViewDetail/" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Xem chi tiết">
+                            <a href="/Admin/ProductCategory/ViewDetail/@item.ID" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Xem chi tiết">
                                 <i class="la la-eye"></i>
                             </a>
 
 
-                            <a href="/Admin/Account/Edit/" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Chỉnh sửa">
+                            <a href="/Admin/ProductCategory/Edit/@item.ID" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Chỉnh sửa">
                                 <i class="la la-edit"></i>
                             </a>
 

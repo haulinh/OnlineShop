@@ -55,11 +55,11 @@
                 <div class="row kt-margin-b-20">
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Mã sản phẩm:</label>
-                        <input name="masp" type="text" class="form-control kt-input" placeholder="Nhận mã sản phẩm" data-col-index="0">
+                        <input value="@ViewBag.Masp"  name="masp" type="text" class="form-control kt-input" placeholder="Nhận mã sản phẩm" data-col-index="0">
                     </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Tên sản phẩm:</label>
-                        <input name="name" type="text" class="form-control kt-input" placeholder="Nhận tên sản phẩm" data-col-index="1">
+                        <input value="@ViewBag.Name" name="name" type="text" class="form-control kt-input" placeholder="Nhận tên sản phẩm" data-col-index="1">
                     </div>
 
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
@@ -83,23 +83,24 @@
                             <input type="date" class="form-control kt-input" name="end" placeholder="To" data-col-index="5" />
                         </div>
                     </div>
-                    <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-                        <label>Option:</label>
-                        <div class="form-control kt-input">
-                            <label class="kt-checkbox kt-checkbox--bold kt-checkbox--brand ">
-                                <input class="form-control kt-input" type="checkbox"> Tìm liên tiếp nhiều thuộc tính
-                                <span></span>
-                            </label>
-                        </div>
 
-
-                    </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Số lượng</label>
                         <div class="col-lg-8 col-md-9 col-sm-12">
                             @Html.Hidden("minQ", (int)ViewBag.minQ)
                             @Html.Hidden("maxQ", (int)ViewBag.maxQ)
                             <input class="form-control kt-input" name="rank" type="hidden" id="kt_slider_3" />
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-9 kt-margin-b-10-tablet-and-mobile">
+                        <label>Số lượng</label>
+                        <div class="col-lg-8 col-md-9 col-sm-12">
+                            @Html.Hidden("minQ", (int)ViewBag.minQ)
+                            @Html.Hidden("maxQ", (int)ViewBag.maxQ)
+                            <input class="form-control kt-input" name="rank" type="hidden" id="kt_slider_4" />
 
                         </div>
                     </div>
@@ -193,12 +194,12 @@
 
 
                             <td>
-                                <a href="/Admin/Account/ViewDetail/@item.product.ID" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Xem chi tiết">
+                                <a href="/Admin/Product/ViewDetail/@item.product.ID" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Xem chi tiết">
                                     <i class="la la-eye"></i>
                                 </a>
 
 
-                                <a href="/Admin/Account/Edit/@item.product.ID" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Chỉnh sửa">
+                                <a href="/Admin/Product/Edit/@item.product.ID" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Chỉnh sửa">
                                     <i class="la la-edit"></i>
                                 </a>
 

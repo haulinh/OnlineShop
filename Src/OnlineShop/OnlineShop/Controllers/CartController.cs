@@ -136,7 +136,15 @@ namespace OnlineShop.Controllers
                     var orderDetail = new OrderDetail();
                     orderDetail.ProductID = item.Product.ID;
                     orderDetail.OrderID = id;
-                    orderDetail.Price = item.Product.Price;
+                    if (item.Product.PromotionPrice == 0)
+                    {
+                        orderDetail.Price = item.Product.Price;
+                    }
+                    else
+                    {
+                        orderDetail.Price = item.Product.PromotionPrice;
+                    }
+                   
                     orderDetail.Quantity = item.Quantity;
                     detailDao.Insert(orderDetail);
                 }

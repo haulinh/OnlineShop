@@ -30,6 +30,9 @@ namespace OnlineShop.Areas.Admin.Controllers
             }
             ViewBag.minQ = minQ.Value;
             ViewBag.maxQ = maxQ.Value;
+            ViewBag.Name = name;
+            ViewBag.Masp = masp;
+
             var dao = new ProductDao();
             var listProduct = dao.GetListProduct(name,masp,status,CategoryID,minQ,maxQ);
             return View(listProduct);
@@ -76,6 +79,41 @@ namespace OnlineShop.Areas.Admin.Controllers
 
             return View("Create");
         }
+
+        public ActionResult Edit(long id)
+        {
+            ViewBagCategory();
+            var product = new ProductDao().ViewDetail(id);
+            product.IncludedVAT = true;
+            return View(product);
+        }
+
+
+        [HttpPost]
+        public ActionResult Edit(Product product)
+        {
+            ViewBagCategory();
+            var dao = new ProductDao();
+            var model = dao.GetListProduct();
+            if (ModelState.IsValid)
+            {
+
+                var result = dao.Update(product);
+
+                if (result)
+                {
+                    return RedirectToAction("Index", "Product", model);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Cập nhật không thành công");
+                }
+            }
+            return View("Edit");
+        }
+
+
+
 
         void ViewBagCategory()
         {

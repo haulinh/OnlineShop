@@ -32,18 +32,26 @@
 
                     </ul>
                     <form class="woocommerce-ordering" method="get">
-                        <select name="orderby"  onchange="this.form.submit()" class="orderby">
-                            <option value="-1" selected='selected'>Mặt định</option>
+
+                        <select name="orderby" onchange=" this.form.submit()" class="orderby">
+                            <option value="-1" selected="selected">Mặt định</option>
                             <option value="1">Giá từ cao đến thấp</option>
                             <option value="2">Giá từ thấp đến cao</option>
                         </select>
+
+
+
                     </form>
+
+
+
                     <form class="form-electro-wc-ppp">
                         <select name="pageSize" onchange="this.form.submit()" class="electro-wc-wppp-select c-select">
                             <option value="15" selected='selected'>Hiển thị 15</option>
-                            <option value="30" >Hiển thị 30</option>
+                            <option value="30">Hiển thị 30</option>
                             <option value="9999">Tất cả</option>
-                        </select></form>
+                        </select>
+                    </form>
                     <nav class="electro-advanced-pagination">
                         <form method="post" class="form-adv-pagination"><input id="goto-page" size="2" min="1" max="2" step="1" type="number" class="form-control" value="1" /></form> of 2<a class="next page-numbers" href="#">&rarr;</a>
                         <script>
@@ -103,8 +111,17 @@
                                             <div class="price-add-to-cart">
                                                 <span class="price">
                                                     <span class="electro-price">
-                                                        <ins><span class="amount">@Convert.ToDecimal(@item.product.PromotionPrice).ToString("#,##0")</span></ins>
-                                                        <del><span class="amount">@Convert.ToDecimal(@item.product.Price).ToString("#,##0")</span></del>
+                                                        @if (item.product.PromotionPrice == 0)
+                                                        {
+                                                            <ins><span class="amount">@Convert.ToDecimal(@item.product.Price).ToString("#,##0")</span></ins>
+                                                        }
+
+                                                        else
+                                                        {
+                                                            <ins><span class="amount">@Convert.ToDecimal(@item.product.PromotionPrice).ToString("#,##0")</span></ins>
+                                                            <del><span class="amount">@Convert.ToDecimal(@item.product.Price).ToString("#,##0")</span></del>
+                                                        }
+
                                                     </span>
                                                 </span>
                                                 <a rel="nofollow" href="single-product.html" class="button add_to_cart_button">Thêm vào giỏ hàng</a>
@@ -124,8 +141,8 @@
                             }
 
                             <!--Phân trang-->
-                          
-                          @{
+
+                            @{
                                 var pageDisplay = (int)ViewBag.MaxPage;
                                 int totalPage = (int)ViewBag.TotalPage;
                                 int currentPage = ((int)ViewBag.Page);
@@ -167,7 +184,7 @@
                                 </nav>
 
                             }
-                          
+
                         </ul>
                     </div>
 
@@ -192,8 +209,8 @@
                                                         <span class="loop-product-categories"><a rel="tag" href="#">@item.category.Name</a></span><a href="single-product.html">
                                                             <h3>@item.product.Name</h3>
                                                             @*<div class="product-rating">
-                                                        <div title="Rated 4 out of 5" class="star-rating"><span style="width:80%"><strong class="rating">4</strong> out of 5</span></div> (3)
-                                                    </div>*@
+                                                                    <div title="Rated 4 out of 5" class="star-rating"><span style="width:80%"><strong class="rating">4</strong> out of 5</span></div> (3)
+                                                                </div>*@
                                                             <div class="product-short-description">
                                                                 <ul style="padding-left: 18px;">
                                                                     @item.product.Description
@@ -245,10 +262,10 @@
                 </div>
                 <div class="shop-control-bar-bottom">
                     <form class="form-electro-wc-ppp">
-                        <select  class="electro-wc-wppp-select c-select" onchange="this.form.submit()" name="pageSize">
+                        <select class="electro-wc-wppp-select c-select" onchange="this.form.submit()" name="pageSize">
                             <option selected="selected" value="15">Hiển thị 15</option>
-                            <option    value="30">Hiển thị 30</option>
-                            <option    value="-1">Hiển thị tất cả</option>
+                            <option value="30">Hiển thị 30</option>
+                            <option value="-1">Hiển thị tất cả</option>
                         </select>
                     </form>
                     <p class="woocommerce-result-count">Hiển thị @ViewBag.PageSize trong số @ViewBag.Total sản phẩm</p>
@@ -262,7 +279,7 @@
                 </div>
 
                 <div class="clear"></div>
-          
+
             </main><!-- #main -->
         </div><!-- #primary -->
 

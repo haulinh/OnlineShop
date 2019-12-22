@@ -1,4 +1,5 @@
 ﻿using Model.EntityFramework;
+using Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,12 +64,44 @@ namespace Model.Dao
             return db.ProductCategories.Find(id);
         }
 
+
+      
+
+
+
+
         public long Insert(ProductCategory entity)
         {
             entity.CreatedDate = DateTime.Now;
             db.ProductCategories.Add(entity);
             db.SaveChanges();
             return entity.ID;
+        }
+
+        public bool Update(ProductCategory entity)
+        {
+            try
+            {
+                var user = db.ProductCategories.Find(entity.ID);
+                if (!string.IsNullOrEmpty(entity.Name))
+                {
+                    user.Name = entity.Name;
+                }
+                user.DisplayOrder = entity.DisplayOrder;
+                user.ParentID = entity.ParentID;
+                user.Status = entity.Status;
+                user.ShowOnHome = entity.ShowOnHome;
+      
+                user.ModifiedDate = DateTime.Now;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //logging
+                return false;
+            }
+
         }
 
 

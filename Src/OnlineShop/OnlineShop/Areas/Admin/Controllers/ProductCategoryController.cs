@@ -17,6 +17,10 @@ namespace OnlineShop.Areas.Admin.Controllers
         public ActionResult Index(string name="",long? parrentId=null,bool? status=null)
         {
             SetViewBagAllCategory();
+
+
+            ViewBag.Name = name;
+
             var dao = new ProductCategoryDao();
             var listProductCategory = dao.ListAllForManager(name,parrentId,status);
             return View(listProductCategory);
@@ -111,6 +115,43 @@ namespace OnlineShop.Areas.Admin.Controllers
 
             return View("Create");
         }
+
+
+        public ActionResult Edit(long id)
+        {
+            ViewBagCategory();
+            var product = new ProductCategoryDao().ViewDetail(id);
+            return View(product);
+        }
+
+
+        [HttpPost]
+        public ActionResult Edit(ProductCategory product)
+        {
+            ViewBagCategory();
+            var dao = new ProductCategoryDao();
+          
+            if (ModelState.IsValid)
+            {
+
+                var result = dao.Update(product);
+
+                if (result)
+                {
+                    var model = dao.ListAll();
+                    return RedirectToAction("Index", "Product", model);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Cập nhật không thành công");
+                }
+            }
+            return View("Edit");
+        }
+
+
+
+
         void ViewBagCategory()
         {
 

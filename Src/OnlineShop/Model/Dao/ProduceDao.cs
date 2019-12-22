@@ -15,7 +15,7 @@ namespace Model.Dao
             db = new OnlineShopDbContext();
         }
 
-        public List<ProductViewModel> ListByCategoryId(long categoryID, ref int totalRecord, int pageIndex = 1, int pageSize = 2,bool orderPriceIncreate=false)
+        public List<ProductViewModel> ListByCategoryId(long categoryID, ref int totalRecord, int pageIndex = 1, int pageSize = 2, int oderBy=-1)
         {
          
             List<Product> products = db.Products.ToList();
@@ -42,9 +42,15 @@ namespace Model.Dao
 
             totalRecord =model.Count();
             model= model.OrderByDescending(x => x.product.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize);
-            if (orderPriceIncreate)
+            if (oderBy==1)
             {
-                model = model.OrderByDescending(x => x.product.Price).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                decimal? value = 0;
+                model = model.OrderByDescending(x => value=x.product.PromotionPrice!=0? x.product.PromotionPrice: x.product.Price).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            }
+            if (oderBy == 2)
+            {
+                decimal? value = 0;
+                model = model.OrderBy(x => value = x.product.PromotionPrice != 0 ? x.product.PromotionPrice : x.product.Price).Skip((pageIndex - 1) * pageSize).Take(pageSize);
             }
             return model.ToList();
         }
@@ -216,6 +222,37 @@ namespace Model.Dao
             db.SaveChanges();
             return entity.ID;
         }
+
+        public bool Update(Product entity)
+        {
+            try
+            {
+                var user = db.Products.Find(entity.ID);
+                if (!string.IsNullOrEmpty(entity.Name))
+                {
+                    user.Name = entity.Name;
+                }
+                user.TopHot = entity.TopHot;
+                user.Price = entity.Price;
+                user.PromotionPrice = entity.PromotionPrice;
+                user.Image = entity.Image;
+                user.MoreImages = entity.MoreImages;
+                user.OrginalPrice = user.OrginalPrice;
+                user.Quantity = user.Quantity;
+                user.Warranty = user.Warranty;
+                user.ModifiedBy = entity.ModifiedBy;
+                user.ModifiedDate = DateTime.Now;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //logging
+                return false;
+            }
+
+        }
+
 
     }
 }

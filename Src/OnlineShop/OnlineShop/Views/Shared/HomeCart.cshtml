@@ -3,7 +3,13 @@
     <a href="cart.html" class="nav-link" data-toggle="dropdown">
         <i class="ec ec-shopping-bag"></i>
         <span class="cart-items-count count">@Model.Count()</span>
-        <span class="cart-items-total-price total-price"><span class="amount">@(Model.Sum(x=>x.Product.Price*x.Quantity))</span></span>
+        <span class="cart-items-total-price total-price"><span class="amount">
+        @{decimal? price = 0;}
+   
+        @Convert.ToDecimal( (Model.Sum(x => price=x.Product.PromotionPrice==0?x.Product.Price:x.Product.PromotionPrice * x.Quantity))).ToString("#,##0")
+  
+
+</span></span>
     </a>
     <ul class="dropdown-menu dropdown-menu-mini-cart">
         <li>
@@ -19,13 +25,30 @@
                                 <img class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" src="@item.Product.Image" alt="">@item.Product.Name&nbsp;
                             </a>
 
-                            <span class="quantity">@item.Quantity × <span class="amount"> @Convert.ToDecimal(@item.Product.Price).ToString("#,##0")</span></span>
-                        </li>
+                            <span class="quantity">
+                                @item.Quantity × <span class="amount">
 
-                    }
+                                @if (item.Product.PromotionPrice == 0)
+                                {
+                                    @Convert.ToDecimal(@item.Product.Price).ToString("#,##0")
+                                }
+                                else
+                                {
+                                    @Convert.ToDecimal(@item.Product.PromotionPrice).ToString("#,##0")
+                                }
 
 
-                
+
+
+
+                            </span>
+                        </span>
+                    </li>
+
+                }
+
+
+
 
                 </ul><!-- end product list -->
 
@@ -35,7 +58,11 @@
 
                 <p class="buttons">
                     <a class="button wc-forward" href="/gio-hang">Giỏ hàng</a>
-                    <a class="button checkout wc-forward" href="checkout.html">Checkout</a>
+                    @if (Model.Count > 0)
+                    {
+                        <a class="button checkout wc-forward" href="checkout.html">Thanh toán</a>
+                    }
+
                 </p>
 
 

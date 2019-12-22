@@ -52,20 +52,20 @@
                 <div class="row kt-margin-b-20">
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Tên đăng nhập:</label>
-                        <input name="userName" type="text" class="form-control kt-input" placeholder="Nhận tên đăng nhập" data-col-index="0">
+                        <input value="@ViewBag.UserName" name="userName" type="text" class="form-control kt-input" placeholder="Nhận tên đăng nhập" data-col-index="0">
                     </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Họ tên:</label>
-                        <input name="name" type="text" class="form-control kt-input" placeholder="Nhập họ tên" data-col-index="1">
+                        <input value="@ViewBag.Name" name="name" type="text" class="form-control kt-input" placeholder="Nhập họ tên" data-col-index="1">
                     </div>
 
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Số điện thoại:</label>
-                        <input name="sdt" type="text" class="form-control kt-input" placeholder="E.g: 37000-300" data-col-index="1">
+                        <input value="@ViewBag.SDT"  name="sdt" type="text" class="form-control kt-input" placeholder="E.g: 37000-300" data-col-index="1">
                     </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Email:</label>
-                        <input name="email" type="email" class="form-control kt-input" placeholder="E.g: 37000-300" data-col-index="1">
+                        <input value="@ViewBag.email" name="email" type="email" class="form-control kt-input" placeholder="E.g: 37000-300" data-col-index="1">
                     </div>
                     @*<div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                             <label>Agent:</label>
