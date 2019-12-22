@@ -8,7 +8,7 @@ using Model.EntityFramework;
 
 namespace OnlineShop.Areas.Admin.Controllers
 {
-    public class CategoryController : Controller
+    public class ContentCategoryController : Controller
     {
         // GET: Admin/Category
         public ActionResult Index()
