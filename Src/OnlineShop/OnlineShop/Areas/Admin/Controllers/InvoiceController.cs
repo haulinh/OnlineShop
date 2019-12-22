@@ -22,5 +22,21 @@ namespace OnlineShop.Areas.Admin.Controllers
           
             return View(model);
         }
+
+
+        void SetStatusViewBag()
+        {
+            ViewBag.Status = new SelectList(new[]
+    {
+                                    new { ID="1", Status="Chờ duyệt" },
+                                    new { ID="2", Status="Đã duyệt" },
+                                    new { ID="3", Status="Vận chuyển " },
+                                    new { ID="4", Status="Thành công" },
+                                    new { ID="5", Status="Hủy đơn" },
+                                }, "ID", "Status", true);
+
+        }
+
+
     }
 }
