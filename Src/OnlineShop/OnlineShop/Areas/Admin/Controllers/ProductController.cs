@@ -46,21 +46,25 @@ namespace OnlineShop.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult Create(Product user)
+        public ActionResult Create(Product product)
         {
             var dao = new ProductDao();
-            user.Status = true;
+            product.Status = true;
+            product.MetaTitle = product.MetaTitle.Replace('/', '-');
+            product.MetaTitle = product.MetaTitle.Replace('.', '-');
+            product.MetaTitle = product.MetaTitle.Replace(',', '-');
+            product.MetaTitle = product.MetaTitle.Replace('\'', '-');
             var listProduct = dao.GetListProduct();
             ViewBagCategory();
             if (ModelState.IsValid)
             {
-                    user.MetaTitle += listProduct.Count();
+                    product.MetaTitle += listProduct.Count();
           
-                    long id = dao.Insert(user);
+                    long id = dao.Insert(product);
                     if (id > 0)
                     {
 
-                        // chuyển hướng trang về admin/User/index
+                        // chuyển hướng trang về admin/product/index
                         var result = dao.GetListProduct();
                         return RedirectToAction("Index", "Product", result);
                     }

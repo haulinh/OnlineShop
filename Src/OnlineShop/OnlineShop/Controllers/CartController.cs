@@ -128,9 +128,14 @@ namespace OnlineShop.Controllers
             order.Note = note;
             try
             {
+                var cart = (List<CartItem>)Session[Common.CommonConstants.CartSession];
+                if (cart==null ||cart.Count<1)
+                {
+                    return Redirect("/hoan-thanh");
+                }
                 var id = new OrderDao().Insert(order);
                 var detailDao = new OrderDetailDao();
-                var cart = (List<CartItem>)Session[Common.CommonConstants.CartSession];
+            
                 foreach (var item in cart)
                 {
                     var orderDetail = new OrderDetail();
@@ -152,7 +157,7 @@ namespace OnlineShop.Controllers
             }
             catch (Exception ex)
             {
-
+               
                 throw;
             }
            

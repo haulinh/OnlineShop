@@ -8,6 +8,69 @@
 }
 
 
+@section jsFooter{
+
+    <script>
+
+        jQuery("#txtName").change(function () {
+            var val = jQuery(this).val();
+            jQuery('#errorBoxName').empty();
+            if (val == ""   )
+            
+            jQuery('#errorBoxName').append(' <a class="text-danger">Họ tên không thể để trống</a>')
+        });
+
+        jQuery("#txtPhone").change(function () {
+            var val = jQuery(this).val();
+             jQuery('#errorBoxPhone').empty();
+            if (val.length < 10 || val.length > 11) {
+           
+              jQuery('#errorBoxPhone').append(' <a class="text-danger">Bạn hãy kiểm tra lại lại định dạng số điện thoại</a>')
+            }
+              
+        });
+
+        
+        jQuery('#btnsubmit').on('click', function (e) {
+
+            var name = jQuery("#txtName").val();
+            jQuery('#errorBoxName').empty();
+            jQuery('#errorBoxAddress').empty();
+            jQuery('#errorBoxPhone').empty();
+            if (name == "") {
+                e.preventDefault();
+                e.returnValue = false;
+                jQuery('#errorBoxName').append(' <a class="text-danger">Họ tên không thể để trống</a>')
+            }
+           var address = jQuery("#txtAddress").val(); 
+            if (address == "") {
+                e.preventDefault();
+                e.returnValue = false;
+                jQuery('#errorBoxAddress').append(' <a class="text-danger">Địa chỉ không thể để trống</a>')
+            }
+
+              var phone = jQuery("#txtPhone").val(); 
+            if (phone == "") {
+                e.preventDefault();
+                e.returnValue = false;
+                jQuery('#errorBoxPhone').append(' <a class="text-danger">Số điện thoại không thể để trống</a>')
+            }
+
+            var val = jQuery("#txtPhone").val();
+            if (val.length < 10 || val.length > 11) {
+               jQuery('#errorBoxPhone').empty();
+              jQuery('#errorBoxPhone').append(' <a class="text-danger">Bạn hãy kiểm tra lại lại định dạng số điện thoại</a>')
+            }
+            
+        })
+
+
+
+    </script>
+}
+
+
+
 
 <div id="content" class="site-content" tabindex="-1">
     <div class="container">
@@ -19,24 +82,25 @@
                 <article class="page type-page status-publish hentry">
                     <header class="entry-header"><h1 itemprop="name" class="entry-title">Thanh toán</h1></header><!-- .entry-header -->
 
-                    @using (Html.BeginForm("Payment", "Cart", FormMethod.Post, new { @class = "checkout woocommerce-checkout"}))
+                    @using (Html.BeginForm("Payment", "Cart", FormMethod.Post, new { @class = "checkout woocommerce-checkout" }))
                     {
 
-                        <div  class="col2-set">
+                        <div class="col2-set">
                             <div class="col-1">
                                 <div class="woocommerce-billing-fields">
 
                                     <h3>Thông tin khách hàng</h3>
 
 
-                                    <p id="billing_company_field" class="form-row form-row form-row-wide"><label class="" for="billing_company">Họ Tên</label><input name="shipName" type="text"  class="input-text "></p>
+                                    <p id="billing_company_field" class="form-row form-row form-row-wide"><label class="" for="billing_company">Họ Tên</label><input id="txtName" name="shipName" type="text" class="txtName input-text "></p>
+                                    <div id="errorBoxName"></div>
 
                                     <p id="billing_email_field" class="form-row form-row form-row-first validate-required validate-email"><label class="" for="billing_email">Email Address <abbr title="required" class="required">*</abbr></label><input name="email" type="email" value="" placeholder="" class="input-text "></p>
 
-                                    <p id="billing_phone_field" class="form-row form-row form-row-last validate-required validate-phone"><label class="" for="billing_phone">Số điện thoại <abbr title="required" class="required">*</abbr></label><input name="phone" type="tel" value="" placeholder=""   class="input-text "></p><div class="clear"></div>
-
-                                    <p id="billing_country_field" class="form-row form-row form-row-wide validate-required validate-email"><label class="" for="billing_country">Địa chỉ <abbr title="required" class="required">*</abbr></label><input name="address" type="text" value="" placeholder=""   class="input-text "></p><div class="clear"></div>
-
+                                    <p id="billing_phone_field" class="form-row form-row form-row-last validate-required validate-phone"><label class="" for="billing_phone">Số điện thoại <abbr title="required" class="required">*</abbr></label><input id="txtPhone" name="phone" type="tel" value="" placeholder="" class="input-text "></p><div class="clear"></div>
+                                    <div id="errorBoxPhone"></div>
+                                    <p id="billing_country_field" class="form-row form-row form-row-wide validate-required validate-email"><label class="" for="billing_country">Địa chỉ <abbr title="required" class="required">*</abbr></label><input id="txtAddress" name="address" type="text" value="" placeholder="" class="input-text "></p><div class="clear"></div>
+                                    <div id="errorBoxAddress"></div>
 
 
                                 </div>
@@ -48,7 +112,7 @@
                                     <h3 id="ship-to-different-address">
                                     </h3>
 
-                                    <p id="order_comments_field" class="form-row form-row notes"><label class="" for="order_comments">Ghi chú</label><textarea name="note" cols="5" rows="2" placeholder="Ghi chú thêm tại đây"  class="input-text"></textarea></p>
+                                    <p id="order_comments_field" class="form-row form-row notes"><label class="" for="order_comments">Ghi chú</label><textarea name="note" cols="5" rows="2" placeholder="Ghi chú thêm tại đây" class="input-text"></textarea></p>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +136,21 @@
                                                 <strong class="product-quantity">× @item.Quantity</strong>
                                             </td>
                                             <td class="product-total">
-                                                <span class="amount">@(item.Product.Price.GetValueOrDefault(0) * item.Quantity)</span>
+
+
+                                                <span class="amount">
+
+                                                    @if (@item.Product.PromotionPrice == 0)
+                                                    {
+                                                        @Convert.ToDecimal((item.Product.Price.GetValueOrDefault(0) * item.Quantity)).ToString("#,##0")
+                                                    }
+                                                    else
+                                                    {
+                                                        @Convert.ToDecimal((item.Product.PromotionPrice.GetValueOrDefault(0) * item.Quantity)).ToString("#,##0")
+                                                    }
+
+
+                                                </span>
                                             </td>
                                         </tr>
                                     }
@@ -86,7 +164,16 @@
 
                                     <tr class="order-total">
                                         <th>Tổng tiền</th>
-                                        <td><strong><span class="amount">@(Model.Sum(x => x.Product.Price * x.Quantity))</span></strong> </td>
+                                        <td>
+                                            <strong>
+                                                <span class="amount">
+                                                    @{decimal? price = 0;}
+
+                                                    @Convert.ToDecimal((Model.Sum(x => price = x.Product.PromotionPrice == 0 ? x.Product.Price : x.Product.PromotionPrice * x.Quantity))).ToString("#,##0")
+
+                                                </span>
+                                            </strong>
+                                        </td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -100,7 +187,7 @@
 
                                     </p>
 
-                                    <button type="submit"  class="button alt btn-primary">Xác nhận</button>
+                                    <button type="submit" id="btnsubmit" class="button alt btn-primary">Xác nhận</button>
                                 </div>
                             </div>
                         </div>
