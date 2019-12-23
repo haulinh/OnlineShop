@@ -61,6 +61,51 @@ namespace Model.Dao
         }
 
 
+        public List<ProductViewModel> ListHotProduct(int top)
+        {
+            List<Product> products = db.Products.ToList();
+            List<ProductCategory> groups = db.ProductCategories.ToList();
+            var model = from u in products
+                        join g in groups
+                        on u.CategoryID equals g.ID
+                        select new ProductViewModel
+                        {
+                            product = u,
+                            category = g,
+                        };
+            return model.OrderByDescending(x => x.product.CreatedDate).Take(top).ToList();
+        }
+
+        public List<ProductViewModel> ListBestSellingProduct(int top)
+        {
+            List<Product> products = db.Products.ToList();
+            List<OrderDetail> od = db.OrderDetails.ToList();
+
+
+
+          
+            var productss = od.GroupBy(p => p.ProductID).OrderByDescending(pi => pi.Sum(pii => pii.Quantity)).Select(p => p.Key).ToList();
+            List<ProductCategory> groups = db.ProductCategories.ToList();
+            var model = from  p in productss
+                         join u in products
+                        on p equals u.ID
+                        join g in groups
+                        on u.CategoryID equals g.ID
+                       
+                        select new ProductViewModel
+                        {
+                            product = u,
+                            category = g,
+                        };
+            return model.ToList();
+
+
+
+
+        }
+
+
+
         public List<ProductViewModel> ListPromotionProduct(int top)
         {
             List<Product> products = db.Products.Where(x => x.PromotionPrice != 0 && x.Status == true).OrderByDescending(x => x.CreatedDate).Take(top).ToList();

@@ -16,6 +16,7 @@ namespace OnlineShop.Controllers
         public ActionResult Index()
         {
             var dao = new ProductDao();
+            ViewBag.BestSell= dao.ListBestSellingProduct(10);
             ViewBag.NewProducts = dao.ListNewProduct(5);
             ViewBag.Contents = new ContentDao().ListNewContent(5);
             ViewBag.PromotionProducts= dao.ListPromotionProduct(5);
