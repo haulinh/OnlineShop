@@ -73,7 +73,7 @@ namespace Model.Dao
                             product = u,
                             category = g,
                         };
-            return model.OrderByDescending(x => x.product.CreatedDate).Take(top).ToList();
+            return model.Where(x=>x.product.Status==true && x.product.IsHot==true).OrderByDescending(x => x.product.CreatedDate).Take(top).ToList();
         }
 
         public List<ProductViewModel> ListBestSellingProduct(int top)

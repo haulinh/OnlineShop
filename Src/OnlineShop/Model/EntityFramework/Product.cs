@@ -100,6 +100,9 @@
 
         public bool? Status { get; set; }
 
+
+        [DisplayName("Sản phẩm hot")]
+        public bool? IsHot { get; set; }
         public DateTime? TopHot { get; set; }
 
         public int? ViewCount { get; set; }
