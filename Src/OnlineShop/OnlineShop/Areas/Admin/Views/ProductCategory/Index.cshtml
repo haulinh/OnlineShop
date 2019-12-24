@@ -58,7 +58,7 @@
 
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Tên danh mục:</label>
-                        <input value="ViewBag.Name" name="name" type="text" class="form-control kt-input" placeholder="Nhận tên danh mục" data-col-index="1">
+                        <input value="@ViewBag.Name" name="name" type="text" class="form-control kt-input" placeholder="Nhận tên danh mục" data-col-index="1">
                     </div>
 
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
@@ -71,36 +71,7 @@
                     </div>
 
                 </div>
-                <div class="row kt-margin-b-20">
-                    <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-                        <label>Ngày tạo:</label>
-                        <div class="input-daterange input-group" id="kt_datepicker">
-                            <input type="date" class="form-control kt-input" placeholder="From" data-col-index="5" />
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="la la-ellipsis-h"></i></span>
-                            </div>
-                            <input type="date" class="form-control kt-input" name="end" placeholder="To" data-col-index="5" />
-                        </div>
-                    </div>
-                    <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-                        <label>Option:</label>
-                        <div class="form-control kt-input">
-                            <label class="kt-checkbox kt-checkbox--bold kt-checkbox--brand ">
-                                <input class="form-control kt-input" type="checkbox"> Tìm liên tiếp nhiều thuộc tính
-                                <span></span>
-                            </label>
-                        </div>
-
-
-                    </div>
-                    <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-                        <label>Type:</label>
-                        @*@Html.DropDownList("userGroup", new SelectList(ViewBag.UserGroups, "ID", "Name  "), "--Chọn nhóm --", htmlAttributes: new { @class = "form-control kt-input" })*@
-                        @*<select class="form-control kt-input" data-col-index="7">
-                                <option value="">Select</option>
-                            </select>*@
-                    </div>
-                </div>
+             
                 <div class="kt-separator kt-separator--md kt-separator--dashed"></div>
                 <div class="row">
                     <div class="col-lg-12">

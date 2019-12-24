@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/client/css/owl-carousel.css" media="all" />
     <link rel="stylesheet" type="text/css" href="/assets/client/css/style.css" media="all" />
     <link rel="stylesheet" type="text/css" href="/assets/client/css/colors/yellow.css" media="all" />
-
+    <link href="/assets/client/css/jquery-ui.css" rel="stylesheet" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,700italic,800,800italic,600italic,400italic,300italic' rel='stylesheet' type='text/css'>
 
     <link rel="shortcut icon" href="/assets/client/images/fav-icon.png">
@@ -105,10 +105,10 @@
             <div class="container">
                 @* Danh mục sản phẩm *@
                 @{ Html.RenderAction("ProductCategory", "Home");}
-                <form class="navbar-search" method="get" action="/">
+                <form class="navbar-search" method="get" action="/tim-kiem">
                     <label class="sr-only screen-reader-text" for="search">Search for:</label>
                     <div class="input-group">
-                        <input type="text" id="search" class="form-control search-field" dir="ltr" value="" name="s" placeholder="Tìm kiếm sản phẩm" />
+                        <input  type="text" id="txtKeyWord" onfocus="this.value=''" class="form-control search-field" dir="ltr" value="" name="keyWord" placeholder="Tìm kiếm sản phẩm" />
                         <div class="input-group-addon search-categories">
                             <select name='product_cat' id='product_cat' class='postform resizeselect'>
                                 <option value='0' selected='selected'>All Categories</option>
@@ -354,6 +354,8 @@
     <script type="text/javascript" src="/assets/client/js/jquery.easing.min.js"></script>
     <script type="text/javascript" src="/assets/client/js/jquery.waypoints.min.js"></script>
     <script type="text/javascript" src="/assets/client/js/electro.js"></script>
+    <script src="/assets/client/js/jquery-ui.js"></script>
+    <script src="/assets/client/js/Controller/baseController.js"></script>
     @RenderSection("jsFooter", required: false)
 
 </body>

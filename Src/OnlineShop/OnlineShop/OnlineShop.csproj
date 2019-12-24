@@ -1627,6 +1627,7 @@
     <Content Include="assets\client\css\font-awesome.min.css" />
     <Content Include="assets\client\css\font-electro.css" />
     <Content Include="assets\client\css\font-electro.min.css" />
+    <Content Include="assets\client\css\jquery-ui.css" />
     <Content Include="assets\client\css\owl-carousel.css" />
     <Content Include="assets\client\css\owl-carousel.min.css" />
     <Content Include="assets\client\css\rtl.css" />
@@ -1779,9 +1780,11 @@
     <Content Include="assets\client\js\bootstrap-hover-dropdown.min.js" />
     <Content Include="assets\client\js\bootstrap.min.js" />
     <Content Include="assets\client\js\Controller\cartController.js" />
+    <Content Include="assets\client\js\Controller\baseController.js" />
     <Content Include="assets\client\js\echo.min.js" />
     <Content Include="assets\client\js\electro.js" />
     <Content Include="assets\client\js\electro.min.js" />
+    <Content Include="assets\client\js\jquery-ui.js" />
     <Content Include="assets\client\js\jquery.easing.min.js" />
     <Content Include="assets\client\js\jquery.jplayer.min.js" />
     <Content Include="assets\client\js\jquery.min.js" />

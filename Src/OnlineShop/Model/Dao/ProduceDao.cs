@@ -55,6 +55,37 @@ namespace Model.Dao
             return model.ToList();
         }
 
+
+        public List<ProductViewModel> Search(string keyWord, ref int totalRecord, int pageIndex = 1, int pageSize = 2, int oderBy = -1)
+        {
+
+            List<Product> products = db.Products.Where(x=>x.Name.Contains(keyWord)).ToList();
+            List<ProductCategory> groups = db.ProductCategories.ToList();
+     
+            var model = from u in products
+                        join g in groups
+                        on u.CategoryID equals g.ID
+                        select new ProductViewModel
+                        {
+                            product = u,
+                            category = g,
+                        };
+
+            totalRecord = model.Count();
+            model = model.OrderByDescending(x => x.product.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            if (oderBy == 1)
+            {
+                decimal? value = 0;
+                model = model.OrderByDescending(x => value = x.product.PromotionPrice != 0 ? x.product.PromotionPrice : x.product.Price).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            }
+            if (oderBy == 2)
+            {
+                decimal? value = 0;
+                model = model.OrderBy(x => value = x.product.PromotionPrice != 0 ? x.product.PromotionPrice : x.product.Price).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            }
+            return model.ToList();
+        }
+
         public List<Product> ListNewProduct(int top)
         {
             return db.Products.OrderByDescending(x => x.CreatedDate).Take(top).ToList();
@@ -110,7 +141,7 @@ namespace Model.Dao
         {
             List<Product> products = db.Products.Where(x => x.PromotionPrice != 0 && x.Status == true).OrderByDescending(x => x.CreatedDate).Take(top).ToList();
             List<ProductCategory> groups = db.ProductCategories.ToList();
-            var userViewModel = from u in products
+            var productViewModel = from u in products
                                 join g in groups
                                 on u.CategoryID equals g.ID
                                 select new ProductViewModel
@@ -119,7 +150,7 @@ namespace Model.Dao
                                     category = g,
                                 };
 
-            return userViewModel.OrderBy(x => x.product.CreatedDate).ToList();
+            return productViewModel.OrderBy(x => x.product.CreatedDate).ToList();
 
         }
         public List<string> ListName(string keyword)
@@ -136,9 +167,9 @@ namespace Model.Dao
         public List<ProductViewModel> GetListProduct(string name = "", long? masp = null, bool? status = null, int? CategoryID = null,int? minQ=null,int? maxQ=null)
         {
 
-            List<Product> users = db.Products.ToList();
+            List<Product> products = db.Products.ToList();
             List<ProductCategory> groups = db.ProductCategories.ToList();
-            var userViewModel = from u in users
+            var productViewModel = from u in products
                                 join g in groups
                                 on u.CategoryID equals g.ID 
                                 select new ProductViewModel
@@ -149,19 +180,19 @@ namespace Model.Dao
 
             if (!String.IsNullOrEmpty(name))
             {
-                userViewModel=userViewModel.Where(x => x.product.Name.Contains(name));
+                productViewModel=productViewModel.Where(x => x.product.Name.Contains(name));
             }
 
             if (masp!=null)
             {
-                userViewModel = userViewModel.Where(x => x.product.ID==masp);
+                productViewModel = productViewModel.Where(x => x.product.ID==masp);
             }
 
 
 
             if (status != null)
             {
-                userViewModel = userViewModel.Where(x => x.product.Status == status);
+                productViewModel = productViewModel.Where(x => x.product.Status == status);
             }
 
             
@@ -171,12 +202,12 @@ namespace Model.Dao
                 var cate = cateDao.ViewDetail(CategoryID.Value);
                 if(cate.ParentID!=null)
                 {
-                    userViewModel = userViewModel.Where(x => x.category.ID == CategoryID);
+                    productViewModel = productViewModel.Where(x => x.category.ID == CategoryID);
                 }
                 else
                 {
 
-                    userViewModel = userViewModel.Where(x => x.category.ParentID == CategoryID);
+                    productViewModel = productViewModel.Where(x => x.category.ParentID == CategoryID);
            
 
                 }
@@ -187,13 +218,13 @@ namespace Model.Dao
 
             if (minQ!=null && maxQ!=null)
             {
-                userViewModel = userViewModel.Where(x => x.product.Quantity >=minQ && x.product.Quantity<=maxQ);
+                productViewModel = productViewModel.Where(x => x.product.Quantity >=minQ && x.product.Quantity<=maxQ);
             }
 
 
 
 
-            return userViewModel.OrderBy(x => x.product.CreatedDate).ToList();
+            return productViewModel.OrderBy(x => x.product.CreatedDate).ToList();
 
         }
 
@@ -272,21 +303,22 @@ namespace Model.Dao
         {
             try
             {
-                var user = db.Products.Find(entity.ID);
+                var product = db.Products.Find(entity.ID);
                 if (!string.IsNullOrEmpty(entity.Name))
                 {
-                    user.Name = entity.Name;
+                    product.Name = entity.Name;
                 }
-                user.TopHot = entity.TopHot;
-                user.Price = entity.Price;
-                user.PromotionPrice = entity.PromotionPrice;
-                user.Image = entity.Image;
-                user.MoreImages = entity.MoreImages;
-                user.OrginalPrice = user.OrginalPrice;
-                user.Quantity = user.Quantity;
-                user.Warranty = user.Warranty;
-                user.ModifiedBy = entity.ModifiedBy;
-                user.ModifiedDate = DateTime.Now;
+                product.TopHot = entity.TopHot;
+                product.Price = entity.Price;
+                product.PromotionPrice = entity.PromotionPrice;
+                product.Image = entity.Image;
+                product.MoreImages = entity.MoreImages;
+                product.OrginalPrice = product.OrginalPrice;
+                product.Quantity = product.Quantity;
+                product.CategoryID = entity.CategoryID;
+                product.Warranty = product.Warranty;
+                product.ModifiedBy = entity.ModifiedBy;
+                product.ModifiedDate = DateTime.Now;
                 db.SaveChanges();
                 return true;
             }
