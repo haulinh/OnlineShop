@@ -49,18 +49,19 @@ namespace OnlineShop.Areas.Admin.Controllers
         public ActionResult Create(Product product)
         {
             var dao = new ProductDao();
-            product.Status = true;
-            product.MetaTitle = product.MetaTitle.Replace('/', '-');
-            product.MetaTitle = product.MetaTitle.Replace('.', '-');
-            product.MetaTitle = product.MetaTitle.Replace(',', '-');
-            product.MetaTitle = product.MetaTitle.Replace('\'', '-');
+         
             var listProduct = dao.GetListProduct();
             ViewBagCategory();
             if (ModelState.IsValid)
             {
-                    product.MetaTitle += listProduct.Count();
-          
-                    long id = dao.Insert(product);
+                product.MetaTitle = product.MetaTitle.Replace('/', '-');
+                product.MetaTitle = product.MetaTitle.Replace('.', '-');
+                product.MetaTitle = product.MetaTitle.Replace(',', '-');
+                product.MetaTitle = product.MetaTitle.Replace('\'', '-');
+                product.MetaTitle += listProduct.Count();
+                product.Status = true;
+             
+                long id = dao.Insert(product);
                     if (id > 0)
                     {
 
