@@ -75,6 +75,9 @@ namespace OnlineShop.Controllers
 
          
             ViewBag.Option = orderby;
+            ViewBag.KeyWord = keyWord;
+            var category = new ProductCategoryDao().Detail(1);
+            ViewBag.Category = category;
 
 
 

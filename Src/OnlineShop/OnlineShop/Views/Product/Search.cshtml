@@ -1,7 +1,7 @@
 ﻿@model List<Model.ViewModel.ProductViewModel>
 
 @{
-    ViewBag.Title = "Danh mục sản phẩm";
+    ViewBag.Title = "Kết quả tìm kiếm";
     ViewBag.Header = "hfeed site";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var category = (Model.EntityFramework.ProductCategory)ViewBag.Category;
@@ -11,7 +11,7 @@
 <div id="content" class="site-content" tabindex="-1">
     <div class="container">
 
-        <nav class="woocommerce-breadcrumb"><a href="home.html">Home</a><span class="delimiter"><i class="fa fa-angle-right"></i></span>@category.Name</nav>
+        <nav class="woocommerce-breadcrumb"><a href="home.html">Home</a><span class="delimiter"><i class="fa fa-angle-right"></i></span>Tìm kiếm</nav>
 
         <div id="primary" class="content-area">
             <main id="main" class="site-main">
@@ -20,7 +20,7 @@
                 </section>
 
                 <header class="page-header">
-                    <h1 class="page-title">@category.Name</h1>
+                    <h1 class="page-title">Từ khóa tìm kiếm: @ViewBag.KeyWord</h1>
                     <p class="woocommerce-result-count">Hiển thị @ViewBag.PageSize trong số @ViewBag.Total sản phẩm</p>
                 </header>
 
